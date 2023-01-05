@@ -76,21 +76,19 @@
     <div class="Dashboard_container">
       <div class="charts_container">
         <div class="pie_charts_container">
-          <div id="pi_chart_1" class="pi_chart">               
-              <div class="vehicle_title">TOTAL INSPECTION</div>
-              <div echarts [options]="option1"
-              style="display: flex; align-items: center;justify-content: center;"
-              ></div>               
+          <div class="pi_chart">
+            <div class="vehicle_title">TOTAL INSPECTION</div>
+            <div echarts [options]="option1" id="pi_chart_1" style="height:500px;padding:10px"></div>
           </div>
-          <div id="pi_chart_2" class="pi_chart" >
-              <div class="vehicle_title">INNOVA</div>
-              <div echarts [options]="option2"  ></div>               
+          <div class="pi_chart">
+            <div class="vehicle_title">INNOVA</div>
+            <div echarts [options]="option2" id="pi_chart_2" style="height:500px;padding:10px"></div>
           </div>
-          <div id="pi_chart_3" class="pi_chart">
-              <div class="vehicle_title">FORTUNER</div>
-              <div echarts [options]="option3" ></div>
+          <div class="pi_chart">
+            <div class="vehicle_title">FORTUNER</div>
+            <div echarts [options]="option3" id="pi_chart_3" style="height:500px;padding:10px "></div>
           </div>
-      </div>
+        </div>
         <div class="detail_container">
           <div class="container">
             <div class="content">
@@ -111,8 +109,7 @@
       </div>
       <div class="graph_container">
         <div class="bar_graph_container">
-          <div echarts id="bar_graph" [options]="option4"
-            style="height:100%; width: 100%;padding:10px;"></div>
+          <div echarts id="bar_graph" [options]="option4" style="height:100%; width: 100%;padding:10px;"></div>
         </div>
         <div class="line_graph_container">
           <div echarts id="line_graph" style="height:100%; width: 100%; padding:10px;"></div>
@@ -183,7 +180,7 @@
 
     async function dataFetcher() {
       //  fetching data
-      const response= await fetch('http://localhost:5500/senddata/', {
+      const response = await fetch('http://localhost:5500/senddata/', {
         method: 'GET',
         headers: {
           'Content-type': 'application/json'
@@ -192,9 +189,9 @@
       })
 
       const data = await response.json()
-      console.log('response: ',response)
+      console.log('response: ', response)
 
-      console.log('data: ',data )
+      console.log('data: ', data)
 
       document.getElementById('TotalVehicle').innerHTML = data.total_no_of_vehicle
       document.getElementById('TotalChecks').innerHTML = data.total_no_of_inspections
@@ -231,7 +228,7 @@
           trigger: 'item'
         },
         legend: {
-          top: '5%',
+          top: '3%',
           left: 'center'
         },
         series: [
@@ -280,14 +277,14 @@
           trigger: 'item'
         },
         legend: {
-          top: '-3%',
+          top: '3%',
           left: 'center'
         },
         series: [
           {
             name: 'Total Inspection',
             type: 'pie',
-            radius: ['30%', '60%'],
+            radius: ['40%', '70%'],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
@@ -329,14 +326,14 @@
           trigger: 'item'
         },
         legend: {
-          top: '-3%',
+          top: '3%',
           left: 'center'
         },
         series: [
           {
             name: 'Total Inspection',
             type: 'pie',
-            radius: ['30%', '60%'],
+            radius: ['40%', '70%'],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
@@ -643,8 +640,8 @@
           }
         },
         grid: {
-          left: '15%',
-          right: '1%',
+          left: '5%',
+          right: '5%',
           bottom: '3%',
           containLabel: true
         },
