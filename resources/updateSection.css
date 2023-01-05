@@ -13,8 +13,8 @@
   body {
     width: 100%;
     height: 100vh;
-    background-color: #222831;
-    color: #eeeeee;
+    background-color: #71C9CE;
+    /* color: #eeeeee; */
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     margin-bottom: 2%;
@@ -31,8 +31,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #393e46;
-    color: #f0e3e3;
+    /* background-color: #393e46; */
+    background-color: #A6E3E9;
+    /* color: #f0e3e3; */
     position: relative;
   }
   .logo_container {
@@ -45,7 +46,7 @@
     align-items: center;
   }
   .admin {
-    color: #00adb5;
+    color: #0f676b;
     margin-right: 8%;
     text-align: center;
     line-height: initial;
@@ -144,7 +145,7 @@
 .charts_container {
   display: flex;
   width: 100%;
-  height: 40vh;
+  height: 45vh;
 }
 .pie_charts_container{
   width: 80%;
@@ -158,16 +159,33 @@
   width: 33%;
   display: flex;
   flex-direction: column;
-  background-color: #898a9e;
+  /* background-color: #898a9e; */
   /* background-color: rgb(210, 214, 228); */
+  background-color: #E3FDFD;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transition: all 0.5s ease-in-out;
 }
+.Individual_chart_container{
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  background-color: #E3FDFD;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transition: all 0.5s ease-in-out;
+}
+#pi_chart_3{
+  width: 100%;
+}
+#pi_chart_3{
+  width: 100%;
+}
 .pi_chart:hover{
   transform: scale(0.98);
   transition: all 0.3s ease-in-out;
-  background-color: #7479ac;
+  /* background-color: #7479ac; */
+  background-color: #CBF1F5;
 }
 .vehicle_title{
   text-align: center;
@@ -189,9 +207,11 @@
 .container {
   border-radius: 10px;
   height: 25%;
+  width: 100%;
   margin: 1%;
   padding: 1%;
-  background-color: #7479ac;
+  /* background-color: #7479ac; */
+  background-color: #CBF1F5;
   display: flex;
   color: #574513;
   text-align: center;
@@ -201,10 +221,12 @@
 }
 .container:hover {
   transform: scale(0.98);
-  background-color: #898a9e;
+  /* background-color: #898a9e; */
+  background-color: #E3FDFD;
   transition: all 0.3s ease-in-out;
 }
 .content{
+  width: 100%;
   font-weight: 700;
   font-size: larger;
 }
@@ -213,7 +235,7 @@
 .graph_container {
   display: flex;
   width: 100%;
-  height:49vh ;
+  height:44vh ;
   gap: 0.5rem;
   justify-content: space-between;
 }
@@ -225,7 +247,8 @@
   width: 100%;
   margin: 1%;
   /* background-color: rgb(210, 214, 228); */
-  background-color: #898a9e;
+  /* background-color: #898a9e; */
+  background-color: #E3FDFD;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transition: all 0.5s ease-in-out;
@@ -238,7 +261,8 @@
   align-items: center;
   flex-direction: column;
   /* background-color: rgb(210, 214, 228); */
-  background-color: #898a9e;
+  /* background-color: #898a9e; */
+  background-color: #E3FDFD;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transition: all 0.5s ease-in-out;
@@ -246,12 +270,14 @@
 .bar_graph_container:hover{
   transform: scale(0.99);
   transition: all 0.3s ease-in-out;
-  background-color: #7479ac;
+  /* background-color: #7479ac; */
+  background-color: #CBF1F5;
 }
 .line_graph_container:hover{
   transform: scale(0.99);
   transition: all 0.3s ease-in-out;
-  background-color: #7479ac;
+  /* background-color: #7479ac; */
+  background-color: #CBF1F5;
 }
 
 /*  !  Admin acces popup */
