@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="icon" href="diagram.png" type="image/icon type" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="../resources/tailwind.config.js"></script> -->
+  </head>
+  <body style="background-color: #222831">
+    <section
+      class="h-full flex justify-center items-center gradient-form md:h-screen"
+    >
+      <div class="container py-12 px-6 h-full">
+        <div
+          class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800"
+        >
+          <div class="xl:w-10/12">
+            <div
+              style="background: linear-gradient(to right, #4ca1af, #2c3e50)"
+              class="block shadow-lg rounded-lg"
+            >
+              <div class="lg:flex lg:flex-wrap g-0">
+                <div class="lg:w-6/12 px-4 md:px-0">
+                  <div class="md:p-12 md:mx-6">
+                    <div class="text-center">
+                      <img
+                        class="mx-auto w-48"
+                        src="./icons/logo.png"
+                        alt="Deevia"
+                      />
+                    </div>
+                    <p class="mb-4 mt-10">Please login to your account</p>
+                    <div class="mb-4">
+                      <input
+                        type="text"
+                        class="input-box form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
+                        required
+                      />
+                    </div>
+                    <div class="mb-4">
+                      <input
+                        type="password"
+                        class="form-control block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required
+                      />
+                    </div>
+                    <span
+                      id="errorMessage"
+                      style="
+                        display: none;
+                        color: #000000;
+                        background-color: #f87b7b;
+                        text-align: center;
+                        font-weight: 500;
+                      "
+                      >Error Message</span
+                    >
+                    <div class="text-center pt-1 mb-2 pb-1">
+                      <button
+                        class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-1"
+                        id="login-button"
+                        data-mdb-ripple="true"
+                        data-mdb-ripple-color="light"
+                        style="
+                          height: 2rem;
+                          background: linear-gradient(
+                            to right,
+                            #0f0c29,
+                            #302b63,
+                            #24243e
+                          );
+                        "
+                        onclick="validateUser()"
+                      >
+                        Log in
+                      </button>
+                      <p
+                        class="text-gray-300"
+                        style="cursor: pointer"
+                        onclick="(() => document.getElementById('forgetPasswordForm').submit())()"
+                      >
+                        Forgot password?
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+                  style="
+                    background: linear-gradient(to right, #2c3e50, #4ca1af);
+                  "
+                >
+                  <div class="text-white px-4 py-6 md:p-12 md:mx-6">
+                    <h4 class="text-xl font-semibold mb-6">
+                      We are more than just a company
+                    </h4>
+                    <p class="text-sm">
+                      A strategic partner who understands software product
+                      engineering with a proven track record can transform your
+                      development cycle and help you be more competitive. Our
+                      solutions are developed using the latest technologies,
+                      exclusive methodologies with a team of top-notch experts
+                      covering different areas of the industry.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form action="/follower" id="followerForm" method="post">
+        <input type="hidden" id="currentUser" name="currentUser" value="" />
+        <input type="hidden" id="currentEmpID" name="currentEmpID" value="" />
+        <input type="hidden" id="companyName" name="companyName" value="" />
+        <input type="hidden" name="token" id="token" />
+      </form>
+      <form action="/adminPortal" id="adminPortalForm" method="post">
+        <input type="hidden" name="token" id="Admintoken" />
+      </form>
+      <form
+        action="/forgotPassword"
+        id="forgetPasswordForm"
+        method="get"
+      ></form>
+    </section>
+
+    <script>
+      document.addEventListener('keypress', function (event) {
+        if (event.key == 'Enter') {
+          document.getElementById('login-button').click();
+        }
+      });
+
+      async function validateUser() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,
+            password,
+          }),
+        });
+
+        const data = await response.json();
+        console.log('login response: ', data);
+
+        if (data.validation == 'failure') {
+          document.getElementById('errorMessage').innerHTML =
+            '⚠ Invalid Credentials';
+          document.getElementById('errorMessage').style.display = 'block';
+          setTimeout(() => {
+            document.getElementById('errorMessage').style.display = 'none';
+          }, 2000);
+        } else if (data.validation == 'success') {
+          localStorage.setItem('token', data.token);
+
+          if (data.userStatus == 'Administrator') {
+            document.getElementById('token').value =
+              localStorage.getItem('token');
+            document.getElementById('Admintoken').value =
+              localStorage.getItem('token');
+            document.getElementById('adminPortalForm').submit();
+          } else {
+            document.getElementById('currentUser').value = data.username;
+            document.getElementById('currentEmpID').value = data.emp_ID;
+            document.getElementById('companyName').value = data.companyName;
+            document.getElementById('token').value =
+              localStorage.getItem('token');
+            document.getElementById('followerForm').submit();
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

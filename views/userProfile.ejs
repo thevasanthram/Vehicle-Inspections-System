@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+    <title>Data Entry System</title>
+    <form action="/" method="get" id="homeForm"></form>
+    <script>
+      (function tokenValidate() {
+        console.log('tokenValidating');
+        if (localStorage.getItem('token') == null) {
+          console.log('invalid');
+          document.getElementById('homeForm').submit();
+        } else {
+          console.log('valid');
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="userProfile.css" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+      tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"}
+        }
+      },
+      fontFamily: {
+        'body': [
+      'Inter',
+      'ui-sans-serif',
+      'system-ui',
+      '-apple-system',
+      'system-ui',
+      'Segoe UI',
+      'Roboto',
+      'Helvetica Neue',
+      'Arial',
+      'Noto Sans',
+      'sans-serif',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      'Noto Color Emoji'
+    ],
+      'sans': [ 'Inter','ui-sans-serif', 'system-ui','-apple-system','system-ui',
+      'Segoe UI','Roboto', 'Helvetica Neue','Arial', 'Noto Sans', 'sans-serif',
+      'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', 'Noto Color Emoji']
+      }
+    }
+  }
+</script>
+  </head>
+  <body>
+    <div class="main_container">
+      <!-- Header part  which contain user_name,  App_Name and LOGOUT btn  -->
+      <div class="header">
+        <div style="display: flex">
+          <img
+            src="./icons/navBarIcon.png"
+            title="Switch Mode"
+            id="navBarIcon"
+            alt="Menu Bar"
+            style="cursor: pointer; width: 8%; margin: 0.5% 3%"
+          />
+          <div class="heading">Data Entry System</div>
+        </div>
+
+        <form id="btn" action="/logout" method="get" class="logoutButton">
+          <div class="admin" id="user-mode-name"><%= currentUser %></div>
+          <button
+            type="button"
+            onclick="logout()"
+            style="
+              background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            "
+            class="button-logout bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            LOGOUT
+          </button>
+        </form>
+      </div>
+      <!-- ! ........Side Nav Bar Menu......... -->
+      <div id="navBarDivision">
+        <div
+          id="UserProfileDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="user_Profile" class="category">User Profile</div>
+        </div>
+        <div
+          id="DataEntryDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="dataEntry" class="category">Data Entry</div>
+        </div>
+        <div
+          id="ReportGenerationDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="reportGeneration" class="category">Report Generation</div>
+        </div>
+        <div
+          id="AdministrationDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="administration" class="category">Administration</div>
+        </div>
+        <div
+          id="AdminLogDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="adminLog" class="category">Admin Logs</div>
+        </div>
+        <div
+          id="DashboardDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="activityLog" class="category">Dashboard</div>
+        </div>
+        <div id="UpdateSectionDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+            <div id="update" class="category">Update Section</div>
+        </div>
+      </div>
+
+      <form action="/profile" method="post" id="userProfileForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+
+      <form action="/selectPack" method="post" id="selectPackForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+
+      <!-- ! -->
+      <div class="card_container">
+        <div class="center">
+          <div class="container" style="max-width: 95%; height: 95%;">
+            <div class="left">
+              <div class="photo">
+                <div class="circle"></div>
+                <div class="circle2"></div>
+                <img alt="user photo" src="./icons/user-picture.png" />
+              </div>
+              <div class="title__contain">
+                <div class="username text-gray-900 font-bold">
+                  <%= currentUser %>
+                </div>
+                <div class="title text-gray-800" style="text-align: center">
+                  <%= employeeDetail.status %>
+                </div>
+              </div>
+              <div class="user_access_section">
+                <div class="user_details">
+                  <div style="display: flex; width: 100%">
+                    <div class="user_details_title text-gray-900 font-bold">
+                      User Details :
+                    </div>
+                  </div>
+                  <div class="details_container">
+                    <div class="text-gray-800">
+                      Emp ID : <b><%= employeeDetail.id %></b>
+                    </div>
+                    <div class="text-gray-800">
+                      Email : <b><%= employeeDetail.email %></b>
+                    </div>
+                    <div class="text-gray-800">
+                      Added By : <b><%= employeeDetail.created_by %></b>
+                    </div>
+                    <span>
+                      <i onclick="(() => document.getElementById('password_container').style.visibility = 'visible')()">
+                        <b class="password_section text-blue-800 cursor-pointer">change your password</b>
+                     </i>
+                    </span>
+                  </div>
+                </div>
+                <div class="payment_container">
+                  <h1 class="btn_title">
+                    Click on <b>Buy now</b> to add More Body No
+                  </h1>
+                  <div class="btn_container">
+                    <button
+                      type="button"
+                      onclick="(() => document.getElementById('selectPackForm').submit())()"
+                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="mr-2 -ml-1 w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                        ></path>
+                      </svg>
+                      Buy now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <div class="rightbox">
+                <span class="large font-bold text-white"><%= companyDetail.body_number %></span>
+                <span class="small text-gray-100 vehicle_count"
+                  >Vehicles Entered by <%= currentUser %></span
+                >
+              </div>
+              <div class="rightbox">
+                <span class="large font-bold text-white"><%= companyDetail.used %></span>
+                <span class="small vehicle_count text-gray-100"
+                  >Vehicles Used</span
+                >
+              </div>
+              <div class="rightbox">
+                <span class="large font-bold text-white"><%= companyDetail.remaining %></span>
+                <span class="small vehicle_count text-gray-100"
+                  >Vehicles Left</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ! ............ Update password Popup  .............-->
+      <div id="password_container" >
+        <!-- <div class="main"> -->
+          <section class=" main bg-gray-600 dark:bg-gray-900">
+            <div
+              class=" password_content h-90  flex flex-col items-center justify-center px-3 py-3 mx-auto md:h-screen lg:py-0"
+            >
+              <div 
+                class="bg-blue-900 w-full p-2  rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-3"
+              >
+                <h2
+                  class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-100 md:text-2xl dark:text-white"
+                >
+                  Change Password
+                </h2>
+                <div class="mb-1  leading-tight tracking-tight text-gray-200  dark:text-white">
+                    Your new password must be different from previous used passwords.
+                </div>
+                <form class="mt-4 space-y-2 lg:mt-5 md:space-y-2.5" id="udpatePasswordForm">
+                  <div>
+                    <label
+                      for="old_password"
+                      class="block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                      >Old Password</label
+                    >
+                    <input
+                      type="password"
+                      name="old_password"
+                      id="old_password"
+                      class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Enter your old password"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="new_password"
+                      class="block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                      >New Password</label
+                    >
+                    <input
+                      type="password"
+                      name="new_password"
+                      id="new_password"
+                      placeholder="••••••••"
+                      class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="confirm-password"
+                      class="block mb-2 text-sm font-medium text-gray-300 dark:text-white"
+                      >Confirm New Password</label
+                    >
+                    <input
+                      type="password"
+                      name="confirm-password"
+                      id="confirm-password"
+                      placeholder="••••••••"
+                      class="bg-gray-50 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <p class="message_title"></p>
+                  <button type="button"
+                    onclick="validate()"
+                    style=" background: linear-gradient(
+                        to right,
+                        #0f0c29,
+                        #302b63,
+                        #24243e
+                      );"
+                    class="w-full uppercase text-white  hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  ><i class="fa fa-fw fa-refresh"></i>
+                    Update Password
+                  </button>
+                  <button type="button"
+                    style=" background: linear-gradient(
+                      to right,
+                      #0f0c29,
+                      #302b63,
+                      #24243e
+                    );"
+                    class="w-full uppercase text-white  hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    onclick="(() => document.getElementById('userProfileForm').submit())()">Cancel</button>
+                </form>
+              </div>
+            </div>
+          </section>
+        <!-- </div> -->
+      </div>
+    </div>
+    <form action="/follower" id="followerForm" method="post">
+      <input
+        type="hidden"
+        id="currentUser"
+        name="currentUser"
+        value="<%= currentUser %>"
+      />
+      <input
+        type="hidden"
+        id="currentEmpID"
+        name="currentEmpID"
+        value="<%= currentEmpID %>"
+      />
+      <input
+        type="hidden"
+        id="companyName"
+        name="companyName"
+        value="<%= companyName %>"
+      />
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+    </form>
+    <form action="/filter" method="post" id="filterFrom">
+      <input
+        type="hidden"
+        id="currentUser"
+        name="currentUser"
+        value="<%= currentUser %>"
+      />
+      <input
+        type="hidden"
+        id="currentEmpID"
+        name="currentEmpID"
+        value="<%= currentEmpID %>"
+      />
+      <input
+        type="hidden"
+        id="companyName"
+        name="companyName"
+        value="<%= companyName %>"
+      />
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+    <form action="/admin" method="post" id="adminForm">
+      <input type="hidden" id="currentUser"
+        name="currentUser" value="<%= currentUser %>" />
+      <input
+        type="hidden"
+        id="currentEmpID"
+        name="currentEmpID"
+        value="<%= currentEmpID %>"
+      /> 
+      <input
+        type="hidden"
+        id="companyName"
+        name="companyName"
+        value="<%= companyName %>"
+      />
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+    <form action="/adminLog" method="post" id="adminLogForm">
+      <input
+        type="hidden"
+        id="currentUser"
+        name="currentUser"
+        value="<%= currentUser %>"
+      />
+      <input
+        type="hidden"
+        id="currentEmpID"
+        name="currentEmpID"
+        value="<%= currentEmpID %>"
+      />
+      <input
+        type="hidden"
+        id="companyName"
+        name="companyName"
+        value="<%= companyName %>"
+      />
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+    <form action="/dashboard" method="post" id="dashboardForm">
+      <input
+        type="hidden"
+        id="currentUser"
+        name="currentUser"
+        value="<%= currentUser %>"
+      />
+      <input
+        type="hidden"
+        id="currentEmpID"
+        name="currentEmpID"
+        value="<%= currentEmpID %>"
+      />
+      <input
+        type="hidden"
+        id="companyName"
+        name="companyName"
+        value="<%= companyName %>"
+      />
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+    <form action="/updateSection" method="post" id="update_Section">
+      <input
+        type="hidden"
+        id="currentUser"
+        name="currentUser"
+        value="<%= currentUser %>"
+      />
+      <input
+        type="hidden"
+        id="currentEmpID"
+        name="currentEmpID"
+        value="<%= currentEmpID %>"
+      />
+      <input
+        type="hidden"
+        id="companyName"
+        name="companyName"
+        value="<%= companyName %>"
+      />
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+
+    <form action="/checkout" id="checkoutForm" method="post">
+      <input type="hidden" class="token" name="token" value="" />
+    </form>
+
+    <!-- Denial of Access for reportGeneration -->
+    <div id="reportGenerationDeniedDivision">
+      <div class="reportGenerationDeniedDivisionModalContent">
+        <div id="reportGenerationDeniedDivisionHolder">
+          <p
+            id="reportGenerationDeniedDivisionMessage"
+            style="font-size: larger; font-weight: 600"
+          >
+            No Accessible Charts.
+          </p>
+          <div id="editEmployeeChartAccessEnsureButton">
+            <button
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('reportGenerationDeniedDivision').style.visibility = 'hidden'})()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Denial of Access for AdminPage -->
+    <div id="adminAccessDeniedDivision">
+      <div class="adminAccessDeniedDivisionModalContent">
+        <div id="adminAccessDeniedDivisionHolder">
+          <p
+            id="adminAccessDeniedDivisionMessage"
+            style="font-weight: 600; font-size: large"
+          >
+          ⚠ Unauthorized Access. Only Admin has privilege
+          </p>
+          <div id="editEmployeeChartAccessEnsureButton">
+            <button style="display: block;"
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('adminAccessDeniedDivision').style.visibility = 'hidden'})()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Denial of Access for AdminPage -->
+    <div id="updatePasswordFinalDivision">
+      <div class="updatePasswordFinalModalContent">
+        <div id="updatePasswordFinalContentHolder">
+          <p id="updatePasswordFinalMsg" style="font-size: larger; font-weight:600;"></p>
+          <button  style="display: block;"
+          class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+          onclick="(() => document.getElementById('userProfileForm').submit())()">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('click', hideAndSeek);
+
+      console.log('token: ', localStorage.getItem('token'));
+
+      const tokenElements = document.getElementsByClassName('token');
+
+      Object.values(tokenElements).map((tokenElement) => {
+        tokenElement.value = localStorage.getItem('token');
+      });
+
+      function hideAndSeek(event) {
+        const navBarDivision = document.getElementById('navBarDivision');
+        if (event.target.id != 'navBarIcon') {
+          navBarDivision.style.display = 'none';
+        } else {
+          if (
+            navBarDivision.style.display == 'none' ||
+            navBarDivision.style.display == ''
+          ) {
+            navBarDivision.style.display = 'inline-block';
+          } else if (navBarDivision.style.display == 'inline-block') {
+            navBarDivision.style.display = 'none';
+          }
+        }
+      }
+
+      function onmouseoverBGColor(event) {
+        event.target.style.backgroundColor = '#075154';
+      }
+
+      function onmouseoutBGColor(event) {
+        if (event.target.id != 'user_Profile') {
+          event.target.style.backgroundColor = '#4ca1af';
+        }
+      }
+
+      function handleFormSubmit(event) {
+        var empStatus = '<%= employeeDetail.status %>';
+        var empChartAccess = '<%= employeeDetail.accessible_charts %>';
+
+        if (event.target.id == 'reportGeneration') {
+          if (empChartAccess.length > 0) {
+            document.getElementById('filterFrom').submit();
+          } else {
+            document.getElementById(
+              'reportGenerationDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        }
+        else if (event.target.id == 'update') {
+          if (empStatus == 'admin') {
+            document.getElementById('update_Section').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'administration') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'adminLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminLogForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'activityLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('dashboardForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'user_Profile') {
+          document.getElementById('userProfileForm').submit();
+        } else if (event.target.id == 'dataEntry') {
+          document.getElementById('followerForm').submit();
+        }
+      }
+
+      function validate() {
+        var udpatePasswordForm = document.getElementById('udpatePasswordForm');
+        const oldPassword = document.getElementById('old_password').value
+        const newPassword = document.getElementById('new_password').value
+        const confirmPassword = document.getElementById('confirm-password').value
+        if (!udpatePasswordForm.checkValidity()) {
+          if (udpatePasswordForm.reportValidity) {
+            udpatePasswordForm.reportValidity();
+          } else {
+            alert(msg.ieErrorForm);
+          }
+        } else {
+          if(newPassword == confirmPassword){
+            updatePassword()
+          }else{
+            document.getElementsByClassName('message_title')[0].innerHTML = '⚠ Password do not match';
+            setTimeout(() => {
+              document.getElementsByClassName('message_title')[0].innerHTML = '';
+            }, 3000);
+          }
+        }
+        
+      }
+    
+      async function updatePassword(){
+        const oldPassword = document.getElementById('old_password').value
+        const newPassword = document.getElementById('new_password').value
+        const confirmPassword = document.getElementById('confirm-password').value
+
+        const response = await fetch('updatePassword',{
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            oldPassword,
+            newPassword,
+            empID: '<%= currentEmpID %>',
+            empName: '<%= currentUser %>',
+            empCompany: '<%= companyName %>',
+          })
+        })
+
+        const data = await response.json()
+
+        console.log('response: ', data)
+
+        if(data.status == 'success'){
+          document.getElementById('updatePasswordFinalMsg').innerHTML = 'Password updated!'
+          document.getElementById('updatePasswordFinalDivision').style.visibility = 'visible'
+        }else{
+          if(data.type == 'same password'){
+            document.getElementsByClassName('message_title')[0].innerHTML = 'Enter new password'
+            setTimeout(() => {
+              document.getElementsByClassName('message_title')[0].innerHTML = ''
+            }, 3000);
+          } else if (data.type == 'Invalid current password'){
+            document.getElementsByClassName('message_title')[0].innerHTML = '⚠ Invalid current password'
+            setTimeout(() => {
+              document.getElementsByClassName('message_title')[0].innerHTML = ''
+            }, 3000);
+          } else if (data.type == 'backend error'){
+            document.getElementById('updatePasswordFinalMsg').innerHTML = 'Problem while updating password. Try Again!'
+            document.getElementById('updatePasswordFinalDivision').style.visibility = 'visible'
+          }
+        }
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        Object.values(tokenElements).map((tokenElement) => {
+          tokenElement.value = '';
+        });
+        document.getElementsByClassName('logoutButton')[0].submit();
+      }
+    </script>
+
+  </body>
+</html>

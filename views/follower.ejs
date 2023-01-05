@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./follower.css" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+
+    <title>Data Entry System</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../resources/tailwind.config.js"></script>
+    <form action="/" method="get" id="homeForm"></form>
+    <script>
+      (function tokenValidate() {
+        console.log('tokenValidating');
+        if (localStorage.getItem('token') == null) {
+          console.log('invalid');
+          document.getElementById('homeForm').submit();
+        } else {
+          console.log('valid');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <script></script>
+    <div>
+      <!-- Header part  which contain user_name,  App_Name and LOGOUT btn  -->
+      <div class="header">
+        <div style="display: flex">
+          <img
+            src="./icons/navBarIcon.png"
+            title="Switch Mode"
+            id="navBarIcon"
+            alt="Switch Mode"
+            style="cursor: pointer; width: 8%; margin: 0.5% 3%"
+          />
+          <div class="heading">Data Entry System</div>
+        </div>
+
+        <form id="btn" action="/logout" method="get" class="logoutButton">
+          <div class="admin" id="user-mode-name"><%= currentUser %></div>
+          <button
+            type="button"
+            onclick="logout()"
+            style="
+              background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            "
+            class="button-logout bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            LOGOUT
+          </button>
+        </form>
+      </div>
+      <!--  -->
+
+      <div id="navBarDivision">
+        <div
+          id="UserProfileDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="user_Profile" class="category">User Profile</div>
+        </div>
+        <div
+          id="DataEntryDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+        >
+          <div id="dataEntry" class="category">Data Entry</div>
+        </div>
+        <div
+          id="ReportGenerationDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="reportGeneration" class="category">Report Generation</div>
+        </div>
+        <div
+          id="AdministrationDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="administration" class="category">Administration</div>
+        </div>
+        <div
+          id="AdminLogDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="adminLog" class="category">Admin Logs</div>
+        </div>
+        <div
+          id="DashboardDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+        >
+          <div id="activityLog" class="category">Dashboard</div>
+        </div>
+        <div id="UpdateSectionDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)"
+        >
+            <div id="update" class="category">Update Section</div>
+        </div>
+      </div>
+
+      <form action="/profile" method="post" id="userProfileForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/filter" method="post" id="filterFrom">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/admin" method="post" id="adminForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/adminLog" method="post" id="adminLogForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/dashboard" method="post" id="dashboardForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/updateSection" method="post" id="update_Section">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <!-- <form action="/" method="get" id="homeForm"></form> -->
+
+      <div class="form-content">
+        <form action="/firstlayer" method="post" id="bodyNumberForm">
+          <label for="bodyNumber" id="bodyNumber">Enter Body Number :</label>
+          <input
+            type="number"
+            name="currentBodyNumber"
+            id="bodyNumberfield"
+            maxlength="4"
+            required
+            min="1"
+            autofocus
+          />
+          <input
+            type="hidden"
+            name="bodyNumberStatus"
+            value=""
+            id="bodyNumberStatus"
+          />
+          <input
+            type="hidden"
+            id="currentUser"
+            name="currentUser"
+            value="<%= currentUser %>"
+          />
+          <input
+            type="hidden"
+            id="currentEmpID"
+            name="currentEmpID"
+            value="<%= currentEmpID %>"
+          />
+          <input
+            type="hidden"
+            id="companyName"
+            name="companyName"
+            value="<%= companyName %>"
+          />
+          <input type="hidden" name="token" class="token" value="" />
+          <button
+            id="body-number-enter-button"
+            type="button"
+            onclick="validate()"
+            class="enter bg-black text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-700 rounded"
+          >
+            ENTER
+          </button>
+          <button
+            id="body-number-pass-button"
+            type="button"
+            onclick="passCar()"
+            class="pass bg-black text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-700 rounded"
+          >
+            PASS
+          </button>
+        </form>
+      </div>
+    </div>
+    <div id="message-content">
+      <span id="message"></span>
+    </div>
+
+    <!-- Denial of Access for AdminPage -->
+    <div id="adminAccessDeniedDivision">
+      <div class="adminAccessDeniedDivisionModalContent">
+        <div id="adminAccessDeniedDivisionHolder">
+          <p
+            id="adminAccessDeniedDivisionMessage"
+            style="font-weight: 600; font-size: large"
+          >
+            Unauthorized Access. Only Admin has privilege
+          </p>
+          <div id="editEmployeeChartAccessEnsureButton">
+            <button
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('adminAccessDeniedDivision').style.visibility = 'hidden'})()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Denial of Access for reportGeneration -->
+    <div id="reportGenerationDeniedDivision">
+      <div class="reportGenerationDeniedDivisionModalContent">
+        <div id="reportGenerationDeniedDivisionHolder">
+          <p
+            id="reportGenerationDeniedDivisionMessage"
+            style="font-size: larger; font-weight: 600"
+          >
+            No Accessible Charts.
+          </p>
+          <div id="editEmployeeChartAccessEnsureButton">
+            <button
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('reportGenerationDeniedDivision').style.visibility = 'hidden'})()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var bodyNumberRecords;
+
+      console.log('token: ', localStorage.getItem('token'));
+
+      const tokenElements = document.getElementsByClassName('token');
+
+      Object.values(tokenElements).map((tokenElement) => {
+        tokenElement.value = localStorage.getItem('token');
+      });
+
+      document.addEventListener('click', hideAndSeek);
+
+      function hideAndSeek(event) {
+        const navBarDivision = document.getElementById('navBarDivision');
+        if (event.target.id != 'navBarIcon') {
+          navBarDivision.style.display = 'none';
+        } else {
+          if (
+            navBarDivision.style.display == 'none' ||
+            navBarDivision.style.display == ''
+          ) {
+            navBarDivision.style.display = 'inline-block';
+          } else if (navBarDivision.style.display == 'inline-block') {
+            navBarDivision.style.display = 'none';
+          }
+        }
+      }
+
+      function onmouseoverBGColor(event) {
+        event.target.style.backgroundColor = '#075154';
+      }
+
+      function onmouseoutBGColor(event) {
+        if (event.target.id != 'dataEntry') {
+          event.target.style.backgroundColor = '#4ca1af';
+        }
+      }
+
+      function handleFormSubmit(event) {
+        var empStatus = '<%= emp_Status %>';
+        var empChartAccess = '<%= emp_ChartAccess %>';
+
+        if (event.target.id == 'reportGeneration') {
+          if (empChartAccess.length > 0) {
+            document.getElementById('filterFrom').submit();
+          } else {
+            document.getElementById(
+              'reportGenerationDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        }
+        else if (event.target.id == 'update') {
+          if (empStatus == 'admin') {
+            document.getElementById('update_Section').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'administration') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'adminLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminLogForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'activityLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('dashboardForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'user_Profile') {
+          document.getElementById('userProfileForm').submit();
+        }
+      }
+
+      function validate() {
+        var bodyNumberForm = document.getElementById('bodyNumberForm');
+        if (!bodyNumberForm.checkValidity()) {
+          if (bodyNumberForm.reportValidity) {
+            bodyNumberForm.reportValidity();
+          } else {
+            alert(msg.ieErrorForm);
+          }
+        } else {
+          bodyNumberBalChecker();
+        }
+      }
+
+      async function bodyNumberBalChecker() {
+        const response = await fetch('/bodyNumberBalanceChecker', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentBodyNumber: document.getElementById('bodyNumberfield').value,
+            companyName: '<%= companyName %>',
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.status == 'failure') {
+          document.getElementById('message').innerHTML =
+            'Insufficient body number. Add more!';
+
+          setTimeout(() => {
+            document.getElementById('message').innerHTML = '';
+          }, 3000);
+        } else {
+          submitBodyNumber();
+        }
+      }
+
+      function submitBodyNumber() {
+        var BodyNumberform = document.getElementById('bodyNumberForm');
+
+        fetch('/bodyNumber', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentBodyNumber: document.getElementById('bodyNumberfield').value,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            bodyNumberRecords = data;
+
+            if (data.data.length == 0) {
+              document.getElementById('bodyNumberStatus').value =
+                'newBodyNumber';
+              BodyNumberform.submit();
+            } else {
+              if (data.data[0].status == 'No Defect') {
+                document.getElementById('message').innerHTML =
+                  'Car already passed today';
+                setTimeout(() => {
+                  document.getElementById('message').innerHTML = '';
+                }, 4000);
+              } else {
+                document.getElementById('bodyNumberStatus').value =
+                  'existingBodyNumber';
+                BodyNumberform.submit();
+              }
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
+      function passCar() {
+        var BodyNumberform = document.getElementById('bodyNumberForm');
+
+        fetch('/bodyNumber', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            currentBodyNumber: document.getElementById('bodyNumberfield').value,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.data);
+            if (data.data.length == 0) {
+              if (confirm('Are you sure want to Pass the Car ?') == true) {
+                document.getElementById('bodyNumberStatus').value =
+                  'newBodyNumber';
+                handlePassCarSave();
+              }
+            } else {
+              if (data.data[0].status == 'No Defect') {
+                document.getElementById('message').innerHTML =
+                  'Car already passed today';
+                setTimeout(() => {
+                  document.getElementById('message').innerHTML = '';
+                }, 4000);
+              } else {
+                document.getElementById('message').innerHTML =
+                  'Car has defects today';
+                setTimeout(() => {
+                  document.getElementById('message').innerHTML = '';
+                }, 4000);
+              }
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
+      function handlePassCarSave() {
+        var bodyNumberValue = document.getElementById('bodyNumberfield').value;
+        var bodyNumberStatus =
+          document.getElementById('bodyNumberStatus').value;
+
+        fetch('/passcar', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            bodyNumber: bodyNumberValue,
+            bodyNumberStatus: bodyNumberStatus,
+            currentUser: '<%= currentUser %>',
+            currentEmpID: '<%= currentEmpID %>',
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.status == 'success');
+            alert('Car Passed with no defects');
+            document.getElementById('bodyNumberForm').reset();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        Object.values(tokenElements).map((tokenElement) => {
+          tokenElement.value = '';
+        });
+        document.getElementsByClassName('logoutButton')[0].submit();
+      }
+    </script>
+  </body>
+</html>

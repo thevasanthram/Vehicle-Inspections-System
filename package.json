@@ -1,0 +1,44 @@
+{
+  "name": "data_entry_front_end",
+  "version": "1.0.0",
+  "description": "GUI to enter data",
+  "main": "app.js",
+  "bin": "app.js",
+  "pkg": {
+    "assets": [
+      "views/**/*",
+      "resources/**/*"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "deevia_vasanth",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "canvasjs": "^1.8.3",
+    "chart.js": "^3.9.1",
+    "chrome-launcher": "^0.15.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.5.1",
+    "nested-property": "^4.0.0",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7",
+    "pg": "^8.8.0",
+    "pgtools": "^0.1.1",
+    "pkg": "^5.8.0",
+    "razorpay": "^2.8.4",
+    "tailwind-config": "^0.1.2",
+    "two-step-auth": "^1.1.2",
+    "uniqid": "^5.4.0",
+    "wait-for-it": "^1.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.1"
+  }
+}

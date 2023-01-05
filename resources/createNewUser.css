@@ -1,0 +1,379 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Raleway', sans-serif;
+  /* font-size: 14px; */
+  color: #eeeeee;
+  background-color: #222831;
+  background-size: cover;
+}
+/* Styling for header part which contain user_name App_Name and LOGOUT btn  */
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #eeeeee;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 10%;
+  font-weight: 500;
+  text-align: center;
+  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+}
+
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.button-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 2%;
+  margin-right: 5%;
+  width: 115px;
+  height: 45px;
+}
+
+#go-back-icon {
+  margin: 0% 30% 0% 5%;
+  max-width: 4%;
+  cursor: pointer;
+}
+.wrapper {
+  /* background: linear-gradient(to right, #4ca1af, #2c3e50); */
+  background-color: #393e46;
+  /* background-color: #0e5368; */
+  padding-right: 1em;
+  padding-left: 1em;
+  border-radius: 14px;
+}
+
+header {
+  height: 64px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+}
+
+header h2 {
+  font-size: 1.8em;
+  margin-top: 0;
+  padding-top: 0.8em;
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 0;
+  font-size: 12px;
+}
+
+.info {
+  text-align: center;
+}
+
+.info h3 {
+  margin-top: 0;
+  padding-top: 1.5em;
+  font-size: 2.5em;
+}
+
+.info p {
+  font-size: 0.85em;
+  border-bottom: 4px solid rgba(45, 57, 69);
+  padding-bottom: 3em;
+  margin-bottom: 0;
+}
+.checkbox-container {
+  display: flex;
+  gap: 1rem;
+}
+form {
+  margin-top: 2px;
+  padding: 2px;
+}
+
+#user-id-mode-name {
+  height: 3%;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+fieldset legend {
+  font-size: 1.65em;
+  font-weight: bold;
+  padding-bottom: 0em;
+}
+
+.contact-info label {
+  display: block;
+  padding: 0.5em;
+  font-size: 1.25em;
+}
+
+.newsletter label {
+  font-size: 1.25em;
+}
+
+.contact-info input,
+select,
+textarea {
+  box-shadow: 0 0 1px;
+  width: 100%;
+  height: 3em;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  border-color: #fff;
+  text-indent: 10px;
+  transition: border-color 0.4s ease-in-out;
+  color: black;
+}
+
+#employeeStatus {
+  color: black;
+}
+
+textarea {
+  height: 85px;
+  padding-top: 10px;
+}
+
+.contact-info input:focus,
+select:focus,
+textarea:focus {
+  border: 2px solid #46698b;
+  border-radius: 0;
+}
+
+#name:focus,
+#email:focus {
+  border: 2px solid #ff7463;
+}
+
+#createUserButton:hover {
+  opacity: 0.8;
+}
+
+.newsletter [type='checkbox'] {
+  transform: scale(1.4);
+}
+
+::placeholder {
+  text-align: right;
+  padding-right: 1em;
+}
+
+.footer p {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: center;
+  margin: 0;
+}
+#createUserButton {
+  width: 100%;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin-top: 1%;
+}
+.contact-info label {
+  display: inline-block;
+  width: 21%;
+}
+.contact-info input,
+select {
+  width: 85%;
+}
+@media screen and (min-width: 1024px) {
+  .wrapper {
+    width: 90%;
+    max-width: 950px;
+  }
+
+  .contact-info label {
+    display: inline-block;
+    width: 40%;
+  }
+
+  .contact-info input,
+  select {
+    width: 72%;
+  }
+
+  .contact-info p,
+  .newsletter p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-width: 340px;
+    height: 500px;
+    justify-content: space-around;
+  }
+
+  fieldset {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .contact-info {
+    width: 55%;
+  }
+
+  .newsletter {
+    width: 41%;
+  }
+
+  /* form {
+    padding-top: 1em;
+  } */
+}
+@media screen and (min-width: 760px) {
+  .wrapper {
+    max-width: 685px;
+  }
+
+  .info h3 {
+    font-size: 2.5em;
+    letter-spacing: 1px;
+  }
+
+  .info p {
+    font-size: 1.1em;
+  }
+
+  .contact-info label {
+    display: inline-block;
+    width: 42%;
+  }
+
+  .contact-info input,
+  select {
+    width: 78%;
+  }
+
+  .newsletter .checkboxes p {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+@media screen and (max-width:768px) {
+  .contact-info label {
+    display: inline-block;
+    width: 40%;
+  }
+}
+@media screen and (max-width: 481px) {
+  .header {
+    min-width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 1%;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(19px, 0.8vw, 1.5rem);
+  }
+
+  #btn {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    line-height: 28px;
+  }
+  .admin {
+    color: #00adb5;
+    margin-right: 10%;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+  }
+
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+  #go-back-icon {
+    margin: 0.5% 14% 0% 5%;
+    max-width: 7%;
+    cursor: pointer;
+  }
+  .contact-info label {
+    display: inline-block;
+    width: 50%;
+  }
+  #employeeStatus {
+    color: black;
+    width: 100%;
+  }
+  .contact-info input, select {
+    width: 100%;
+  }
+  fieldset legend {
+    font-size: 1.65em;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.3em;
+  }
+  .User_Status{
+    padding: 2% 0 1% 0;
+  }
+  .Imp_Status_Btn{
+    margin-bottom: 2%;
+  }
+}

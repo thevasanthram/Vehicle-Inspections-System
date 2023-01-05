@@ -1,0 +1,648 @@
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  padding: 0%;
+}
+body {
+  width: 100%;
+  font-family: var(--font-family-base);
+  background-color: #222831;
+  color: #eeeeee;
+}
+
+#tabDivision {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  position: sticky;
+  width: 100%;
+  top: 130px;
+  z-index: 2;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #f0e3e3;
+}
+
+.canvasjs-chart-credit {
+  display: none;
+}
+
+#my-table {
+  width: 80%;
+  margin: 5% 10%;
+  border: 1px solid rgb(100, 102, 106);
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.button-logout {
+  display: flex;
+  align-items: center;
+  padding-right: 2%;
+  margin-right: 5%;
+}
+/* TODO ...........SIDE NAV BAR MENU................................... */
+
+#navBarDivision {
+  position: fixed;
+  display: none;
+  width: 17%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+  z-index: 5;
+  color: #EEEEEE;
+  background-color: #4ca1af;
+  animation-name: side_bar;
+  animation-duration: 0.7s;
+}
+.category {
+  font-size: 140%;
+  font-weight: 500;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  transition: background 0.25s ease;
+  animation-name: show;
+  animation-duration: 1s;
+}
+/*!.....................Animation for Nav Side Bar.................. */
+
+@keyframes show {
+  0%{font-size: 1%;}
+  50%{font-size: 140%;}
+}
+@keyframes side_bar {
+  0%{width: 0%;}
+  50%{width: 17%;}
+}
+
+#ReportGenerationDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  background-color: #075154;
+}
+#AdminLogDiv, #DataEntryDiv,#AdministrationDiv,
+#DashboardDiv,#UserProfileDiv ,#UpdateSectionDiv{
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+/* ! End of Nav Side Bar Menu */
+
+#adminAccessDeniedDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.adminAccessDeniedDivisionModalContent {
+  align-items: center;
+  background-color: #CA0B00;
+  color: #EEEEEE;
+  margin: auto;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  width: 40%;
+  height: 24%;
+}
+#adminAccessDeniedDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* top: 25%; */
+  gap: 1rem;
+  justify-content: center;
+}
+
+.colorMapSubDefects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 354px;
+  width: 100%;
+  position: relative;
+}
+
+/* TOOGLE SWITCH */
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+
+#chart-condition-select-content {
+  margin: 1.5rem;
+}
+
+.admin {
+  color: #00adb5;
+  margin-right: 8%;
+  line-height: initial;
+  text-align: center;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.filtering-condition-content {
+  max-width: 100%;
+}
+.filtering-condition-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.form {
+  width: 100%;
+  padding-left: 2px;
+  display: flex;
+  min-height: 4rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: #f0e3e3;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+}
+.Date_Filter {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  grid-template-columns: 1fr 1fr;
+}
+.from-date-condition-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+.to-date-condition-content {
+  display: flex;
+  margin-left: -20px;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+#from-date-condition-input,
+#to-date-condition-input {
+  background-color: #eeeeee;
+  color: gray;
+  width: 60%;
+  font-size: medium;
+  font-weight: 400;
+  height: 30px;
+  border-radius: 5px;
+  padding: 3px;
+}
+#filter-text {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+}
+
+#chart-condition-select-content-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: -5%;
+  gap: 5%;
+}
+.Empty_Tag {
+  display: none;
+}
+
+#chart-condition-input {
+  background-color: #eeeeee;
+  color: rgb(67, 67, 67);
+  max-width: 80%;
+  font-size: medium;
+  height: 30px;
+  border-radius: 5px;
+  padding: 1px;
+}
+
+#container {
+  width: 100%;
+}
+
+.button_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  margin: 2px;
+  padding: 2px;
+  gap: 5px;
+  margin-right: 5px;
+}
+
+#reportChild {
+  height: 100%;
+  color: rgb(255, 255, 255);
+}
+
+/*! Master Report CSS Styles */
+#firstSection {
+  margin-top: 1%;
+  display: grid;
+  gap: 10px;
+  height: 27.625rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#UBChartHolder {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+#MBChartHolder {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+#SBSAChartHolder {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+#SBMLChartHolder {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+#SMChartHolder {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+/*! Main Pareto Report  */
+
+#SurfaceParetoAllDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainSurfaceParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#DentParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#BumpParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#BurrsParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#SpattersParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#OthersParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+/* BodyFitting */
+#BodyFittingParetoAllDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainBodyFittingParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#BodyFitting1ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#BodyFitting2ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#BodyFittingOthersParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+/* Missing & Wrong Part */
+
+#MissingWrongPartParetoAllDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainMissingWrongPartParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#MissingPartParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WrongPartParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+/* Welding */
+
+#WeldingParetoAllDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainWeldingParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WeldingPart1ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WeldingPart2ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WeldingPart3ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WeldingPartOthersParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+/* Water Leak */
+
+#WaterLeakParetoAllDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainWaterLeakParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WaterLeak1ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WaterLeak2ParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+#WaterLeakOthersParetoChartDivision {
+  margin: 2%;
+  height: 500px;
+  width: 1000px;
+}
+
+/*! Color Map  */
+
+.defectStyle {
+  color: rgb(128, 128, 128);
+  background-color: rgb(238, 238, 238);
+  font-size: 120%;
+  margin-top: 2%;
+  border-radius: 5px;
+  height: 18px;
+  width: 97px;
+  position: relative;
+  top: 33px;
+  left: 137px;
+  width: 97px;
+  height: 27%;
+  margin: 3px;
+  z-index: 1;
+}
+
+.subDefectStyle {
+  border-radius: 5px;
+  background-color: rgb(238, 238, 238);
+  color: rgb(128, 128, 128);
+  font-size: 120%;
+  position: relative;
+  top: 0px;
+  left: 20%;
+  margin: 3px;
+  z-index: 1;
+}
+
+#colorMapNavigator {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  position: sticky;
+  top: 18%;
+  z-index: 2;
+  background-color: #222831;
+  padding: 0.5% 0%;
+}
+
+/* ! Admin Card Portion Style */
+.footer {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+#filter-container {
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.0625);
+  min-width: 50vw;
+  min-height: 50vh;
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+}
+.card-toggle_container {
+  /* display: flex; */
+  align-items: baseline;
+  justify-content: center;
+}
+.card-title-name {
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  display: flex;
+  justify-content: center;
+}
+#card-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+.card-from-date-condition-content {
+  font-size: 1.25rem;
+  margin: 2%;
+}
+.card-to-date-condition-content {
+  font-size: 1.25rem;
+}
+#from-date-condition-input-card,
+#to-date-condition-input-card {
+  background-color: #eeeeee;
+  color: gray;
+  border-radius: 5px;
+  padding: 4px;
+}
+#from-date-condition-input,
+#to-date-condition-input {
+  background-color: #eeeeee;
+  color: gray;
+  border-radius: 5px;
+  padding-left: 0.8rem;
+}
+#filter-text {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+}
+.Card-Report-heading {
+  font-size: 1.25rem;
+  display: inline-block;
+  margin: 2px;
+  padding: 4px;
+}
+#chart-condition-select-content {
+  margin-left: 0%;
+  margin-top: 1.5rem;
+}
+
+#chart-condition-input-card {
+  background-color: #eeeeee;
+  border-radius: 5px;
+  color: rgb(67, 67, 67);
+  display: inline-block;
+  font-size: 1.25rem;
+  padding: 4px;
+}
+#container {
+  width: 100%;
+}
+.form {
+  width: 100%;
+  padding-left: 2px;
+  display: flex;
+  height: 3.8rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2f576e;
+  color: #f0e3e3;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  background: linear-gradient(to right, #2c3e50, #4ca1af);
+}
+.chart-condition {
+  flex-direction: row;
+}
+
+.button_container {
+  margin: 2px;
+  padding: 2px;
+}

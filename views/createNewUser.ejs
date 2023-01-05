@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="createNewUser.css" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+
+    <title>Data Entry System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../resources/tailwind.config.js"></script>
+  </head>
+  <body>
+    <div>
+      <div class="header" style="position: sticky; top: 0px; z-index: 2">
+        <div class="heading">Data Entry System</div>
+        <form id="btn" action="/logout" method="get" class="logoutButton">
+          <div class="admin" id="user-mode-name"><%= currentUser %></div>
+          <button
+            type="button"
+            onclick="logout()"
+            style="
+              background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            "
+            class="button-logout bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            LOGOUT
+          </button>
+        </form>
+      </div>
+      <div style="display: flex; padding: 2px">
+        <img
+          src="./icons/arrow.png"
+          title="Back"
+          id="go-back-icon"
+          alt="Go Back"
+          onclick="document.getElementById('adminForm').submit();"
+        />
+        <h1
+          style="
+            text-align: center;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+          "
+        >
+          Create New User
+        </h1>
+      </div>
+      <div class="wrapper" style="margin-bottom: 1%">
+        <main>
+          <form action="" method="GET" id="createNewUserForm">
+            <fieldset class="contact-info">
+              <div class="container">
+                <legend>Enter Credentials Details</legend>
+                <p>
+                  <label for="name">User Name</label>
+                  <input
+                    required
+                    type="text"
+                    name="employeeName"
+                    id="employeeName"
+                    placeholder="Required"
+                    title="Please fill out this field"
+                  />
+                </p>
+                <p>
+                  <label for="name">Dummy ID</label>
+                  <input
+                    required
+                    type="number"
+                    name="dummyEmpID"
+                    id="dummyEmpID"
+                    placeholder="Required"
+                    title="Please fill out this field"
+                  />
+                </p>
+                <p>
+                  <label for="name">User Email</label>
+                  <input
+                    required
+                    type="email"
+                    name="employeeEmail"
+                    id="employeeEmail"
+                    placeholder="Required"
+                    title="Please fill out this field"
+                  />
+                </p>
+                <p>
+                  <label for="address">User Password</label>
+                  <input
+                    required
+                    type="password"
+                    name="employeePassword"
+                    id="employeePassword"
+                    placeholder="Required"
+                  />
+                </p>
+                <p>
+                  <label for="address">Confirm Password</label>
+                  <input
+                    required
+                    type="password"
+                    name="employeePassword1"
+                    id="employeePassword1"
+                    placeholder="Required"
+                  />
+                </p>
+              </div>
+            </fieldset>
+
+            <fieldset class="newsletter">
+              <div class="container">
+                <legend>Select the Access Control and Account type</legend>
+                <h3>Accessible Charts</h3>
+                <p class="checkbox-container selectAll">
+                  <input
+                    type="checkbox"
+                    id="selectAllInput"
+                    onclick="selectAll(event)"
+                  />
+                  <label for="html_news">Select All</label>
+                </p>
+                <div class="checkboxes">
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="dpv"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="DPV (Defects Per Vehicle) Report"
+                    />
+                    <label for="html_news"
+                      >DPV (Defects Per Vehicle) Report</label
+                    >
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      id="master"
+                      value="Master Report"
+                    />
+                    <label for="html_news">Master Report</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="mainPareto"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="Main Pareto Report"
+                    />
+                    <label for="css_news">Main Pareto Report</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      id="pareto"
+                      value="Pareto Report"
+                    />
+                    <label for="js_news">Pareto Report</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="surface"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="Surface Summary"
+                    />
+                    <label for="js_news">Surface Summary</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="bodyFitting"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="Body Fitting Summary"
+                    />
+                    <label for="js_news">Body Fitting Summary</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="missingWrongPart"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="Missing & Wrong Part Summary"
+                    />
+                    <label for="js_news">Missing & Wrong Part Summary</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="welding"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="Welding Summary"
+                    />
+                    <label for="js_news">Welding Summary</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      id="waterLeak"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      value="Water Leak Summary"
+                    />
+                    <label for="js_news">Water Leak Summary</label>
+                  </p>
+                  <p class="checkbox-container">
+                    <input
+                      type="checkbox"
+                      class="reportCheckbox"
+                      onclick="checkChartAccessSelected()"
+                      id="colorMap"
+                      value="Color Map"
+                    />
+                    <label for="js_news">Color Map</label>
+                  </p>
+                </div>
+
+                <h3 class="User_Status">User Status</h3>
+                <p class="Imp_Status_Btn">
+                  <select
+                    name="employeeStatus"
+                    id="employeeStatus"
+                    onchange="employeeStatusChange(event)"
+                    required
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="employee">Employee</option>
+                  </select>
+                </p>
+              </div>
+            </fieldset>
+          </form>
+          <div class="footer">
+            <span id="error" style="display: none">Error Message</span>
+            <button
+              id="createUserButton"
+              onclick="validate()"
+              type="submit"
+              class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            >
+              Create New User
+            </button>
+            <!-- <p></p> -->
+          </div>
+          <form action="/admin" id="adminForm" method="post">
+            <input
+              type="hidden"
+              id="currentUser"
+              name="currentUser"
+              value="<%= currentUser %>"
+            />
+            <input
+              type="hidden"
+              id="currentEmpID"
+              name="currentEmpID"
+              value="<%= currentEmpID %>"
+            />
+            <input
+              type="hidden"
+              id="companyName"
+              name="companyName"
+              value="<%= companyName %>"
+            />
+            <input type="hidden" id="token" name="token" value="" />
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+  <script>
+    console.log('token: ', localStorage.getItem('token'));
+
+    document.getElementById('token').value = localStorage.getItem('token');
+
+    const firstUserValue = '<%= firstUser %>';
+    const reportCheckbox = document.getElementsByClassName('reportCheckbox');
+    const creator = '<%= currentUser %>';
+
+    document.getElementById('selectAllInput').click();
+
+    function validate() {
+      const filterForm = document.getElementById('createNewUserForm');
+      if (!filterForm.checkValidity()) {
+        if (filterForm.reportValidity) {
+          filterForm.reportValidity();
+        } else {
+          alert(msg.ieErrorForm);
+        }
+      } else {
+        if (confirm('Are you sure want to create user') == true) {
+          const password = document.getElementById('employeePassword');
+          const confirmPassword = document.getElementById('employeePassword1');
+
+          if (password.value == confirmPassword.value) {
+            createUser();
+          } else {
+            const errorSpanTag = document.getElementById('error');
+            errorSpanTag.innerHTML = 'Passwords do not match';
+            errorSpanTag.style.display = 'block';
+            setTimeout(() => {
+              errorSpanTag.style.display = 'none';
+            }, 2000);
+          }
+        }
+      }
+    }
+
+    function selectAll(event) {
+      const selectAllCheckBox = event.target;
+      const reportCheckbox = document.getElementsByClassName('reportCheckbox');
+
+      Object.values(reportCheckbox).map((singleCheckBox) => {
+        if (selectAllCheckBox.checked == true) {
+          if (singleCheckBox.checked == false) {
+            singleCheckBox.checked = true;
+          }
+        } else {
+          if (singleCheckBox.checked == true) {
+            singleCheckBox.checked = false;
+          }
+        }
+      });
+    }
+
+    function checkChartAccessSelected() {
+      const reportCheckbox = document.getElementsByClassName('reportCheckbox');
+      let checkboxCheckedCounter = 0;
+      Object.values(reportCheckbox).map((singleChart) => {
+        if (singleChart.checked == true) {
+          checkboxCheckedCounter += 1;
+        }
+      });
+
+      if (checkboxCheckedCounter == reportCheckbox.length) {
+        document.getElementById('selectAllInput').checked = true;
+      } else {
+        document.getElementById('selectAllInput').checked = false;
+      }
+    }
+
+    function employeeStatusChange() {
+      const selectedEmployeeStatus = event.target.value;
+      const inputTags = document.getElementsByTagName('input');
+      if (selectedEmployeeStatus == 'employee') {
+        Object.values(inputTags).map((singleInput) => {
+          if (singleInput.type == 'checkbox') {
+            singleInput.checked = false;
+          }
+        });
+      } else {
+        Object.values(inputTags).map((singleInput) => {
+          if (singleInput.type == 'checkbox') {
+            singleInput.checked = true;
+          }
+        });
+      }
+    }
+
+    async function createUser() {
+      const empName = document.getElementById('employeeName').value;
+      const dummyEmpID = document.getElementById('dummyEmpID').value;
+      const empEmail = document.getElementById('employeeEmail').value;
+      const empPassword = document.getElementById('employeePassword').value;
+      const empStatus = document.getElementById('employeeStatus').value;
+      const accessibleCharts = [];
+      Object.values(reportCheckbox).map((singleInput) => {
+        if (singleInput.checked == true) {
+          accessibleCharts.push(singleInput.value);
+        }
+      });
+      const data = await fetch(`/newUser`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          empName,
+          dummyEmpID,
+          empEmail,
+          empPassword,
+          empStatus,
+          accessibleCharts,
+          creator,
+          currentCompany: '<%= currentCompany %>',
+          creatorID: '<%= currentEmpID %>',
+        }),
+      });
+
+      const response = await data.json();
+
+      if (response.status == 'success') {
+        alert('Invitation link sent to user email addresss');
+        document.getElementById('adminForm').submit();
+      } else {
+        if (response.reason == 'existing email address') {
+          document.getElementById('error').innerHTML =
+            'E-mail address already existing, Use Different';
+
+          document.getElementById('error').style.display = 'block';
+
+          setTimeout(() => {
+            document.getElementById('error').style.display = 'none';
+          }, 3000);
+        } else if (response.reason == 'dummy ID already existing') {
+          document.getElementById('error').innerHTML =
+            'ID already existing, Use Different';
+
+          document.getElementById('error').style.display = 'block';
+
+          setTimeout(() => {
+            document.getElementById('error').style.display = 'none';
+          }, 3000);
+        } else {
+          alert(`There's an issue while creating user. Please try again`);
+          document.getElementById(' ').submit();
+        }
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      document.getElementById('token').value = '';
+      document.getElementsByClassName('logoutButton')[0].submit();
+    }
+  </script>
+</html>

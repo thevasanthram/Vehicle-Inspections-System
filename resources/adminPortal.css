@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  width: 100%;
+  height: 100%;
+  /* background-color: #f5f9fc; */
+  background-color: #222831;
+  /* background-color: #EEEBDD; */
+  /* background-color: #222831; */
+}
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #eeeeee;
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 10%;
+  text-align: center;
+  line-height: initial;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.button-logout {
+  display: flex;
+  align-items: center;
+  padding-right: 2%;
+  margin-right: 5%;
+}
+
+/*! Create New Company Styles  */
+
+#createCompanyForm {
+  height: 50%;
+  width: 50%;
+}
+
+.bodyContainer {
+  height: 90vh;
+  width: 100%;
+}
+
+.createCompany {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #105469;
+  flex-direction: column;
+}
+
+.createCompany:hover {
+  cursor: pointer;
+}
+
+.createCompanyImg {
+  height: 50%;
+  width: auto;
+}
+
+#createCompanyDivision {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  color: black;
+}
+
+.createCompanyModalContent {
+  background-color: #84a9ac;
+  color: black;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  height: 90%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.companyTable {
+  text-align: left;
+  margin: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  text-align: center;
+}
+
+#createCompanyContentHolder {
+  color: black;
+  width: 70%;
+}
+
+#companyCreateForm {
+  width: 80%;
+}
+
+#createCompanySuccessDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createCompanySuccessModalContent {
+  background-color: #84a9ac;
+  color: black;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  height: 25%;
+}
+
+.table-heading-container {
+  position: sticky;
+  top: -1px;
+  z-index: 2;
+  color: #e2b842;
+  background-color: #221d51;
+}
+
+#employeeTableDivision {
+  display: block;
+  position: absolute;
+  align-items: center;
+  width: 90%;
+  height: 70%;
+  overflow-y: auto;
+  padding-bottom: 1%;
+  left: 5%;
+}
+
+#createCompanySuccessContentHolder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  margin-left: 2%;
+}
+
+.table_content {
+  /* width: 100%;
+  background: -webkit-linear-gradient(to right, #4ca1af, #485d71);
+  background: linear-gradient(to right, #4ca1af, #485d71); */
+  background: #105469;
+  border-radius: 0.5em;
+  border-collapse: collapse;
+  width: 100%;
+  position: relative;
+}
+.table-heading-container {
+  position: sticky;
+  top: -1px;
+  z-index: 2;
+  color: #e2b842;
+  background-color: #221d51;
+}
+.table_row {
+  color: #fff;
+  font-weight: 400;
+  transition: background 0.25s ease;
+}
+.table_row:hover {
+  background-color: #012b39;
+}
+th,
+tr,
+td {
+  padding: 0.65em 1em;
+}
+
+@media screen and (max-width: 780px) {
+  .header {
+    min-width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 1%;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+    position: relative;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(19px, 0.8vw, 1.5rem);
+  }
+
+  .admin {
+    color: #00adb5;
+    margin-right: 5%;
+    text-align: center;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+  }
+
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 35%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    background-color: #4ca1af;
+  }
+
+  .createCompanyModalContent {
+    background-color: #84a9ac;
+    color: black;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 60%;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .createCompanyModalContent {
+    background-color: #84a9ac;
+    color: black;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    height: 95%;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #submitButton {
+    width: 100%;
+    margin-top: 2%;
+  }
+  #btn {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    line-height: 28px;
+    right: 2%;
+  }
+  .admin {
+    color: #00adb5;
+    margin-right: 0%;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    text-align: center;
+  }
+
+  .button-logout {
+    width: 70px;
+    height: 30px;
+    font-size: 11px;
+  }
+}

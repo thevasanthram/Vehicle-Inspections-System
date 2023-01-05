@@ -1,0 +1,688 @@
+* {
+  margin: 0px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #222831;
+  color: #eeeeee;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-image: url('./icons/hyrider.jpg');
+  background-repeat: no-repeat;
+  margin-bottom: 2%;
+  background-size: 100%;
+  /* backdrop-filter: blur(1px); */
+  background-position: center;
+  background-position-y: 165px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  --webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  --moz-appearance: textfield;
+}
+
+/* Styling for header part which contain user_name App_Name and LOGOUT btn  */
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #f0e3e3;
+  position: relative;
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 8%;
+  text-align: center;
+  line-height: initial;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.button-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  margin: 5%;
+  width: 8rem;
+  font-weight: 600;
+  font-size: medium;
+  height: 2.5rem;
+  border-radius: 5px;
+  color: #eeeeee;
+  border-color: rgb(91, 97, 166);
+}
+.button-logout:hover {
+  border-right-color: rgb(45, 56, 184);
+}
+
+/* TODO ...........SIDE NAV BAR MENU................................................................ */
+
+#navBarDivision {
+  position: absolute;
+  display: none;
+  width: 17%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 89.9%;
+  z-index: 5;
+  color: #eeeeee;
+  background-color: #4ca1af;
+  animation-name: side_bar;
+  animation-duration: 0.7s;
+}
+.category {
+  font-size: 140%;
+  font-weight: 500;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  transition: background 0.25s ease;
+  animation-name: show;
+  animation-duration: 1s;
+}
+/*!.....................Animation for Nav Side Bar.................. */
+
+@keyframes show {
+  0% {
+    font-size: 1%;
+  }
+  50% {
+    font-size: 140%;
+  }
+}
+@keyframes side_bar {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 17%;
+  }
+}
+#DataEntryDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  background-color: #075154;
+}
+#UpdateSectionDiv,
+#ReportGenerationDiv,
+#AdministrationDiv,
+#AdminLogDiv,
+#DashboardDiv,
+#UserProfileDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ! End of Nav Side Bar Menu */
+
+.form-content {
+  margin-top: 2%;
+}
+#bodyNumberForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+#bodyNumber {
+  padding: 2px;
+  margin: 2px;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
+  color: #eeeeee;
+  padding-right: 1%;
+}
+.enter,
+.pass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eeeeee;
+  margin-left: 2%;
+  width: 6rem;
+  padding: 2%;
+}
+input[type='number'],
+select {
+  width: 20%;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 110%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #64666a;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  box-sizing: border-box;
+}
+#body-number-enter-button:hover {
+  transform: scale(0.97);
+}
+#body-number-pass-button:hover {
+  transform: scale(0.97);
+}
+#message-content {
+  position: relative;
+  color: rgb(249, 28, 28);
+  margin-left: 40.5%;
+  font-size: large;
+  font-style: italic;
+}
+
+#body-number-submit-button {
+  font-size: 120%;
+  margin-left: 2%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  border: 1px solid #64666a;
+  border-radius: 4px;
+  color: white;
+  background-color: black;
+}
+
+#body-number-submit-button:hover {
+  cursor: pointer;
+}
+
+#adminAccessDeniedDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.adminAccessDeniedDivisionModalContent {
+  align-items: center;
+  background-color: #ca0b00;
+  color: #eeeeee;
+  margin: auto;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  width: 40%;
+  height: 24%;
+}
+#adminAccessDeniedDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* top: 10%; */
+  gap: 1rem;
+  justify-content: center;
+}
+
+#reportGenerationDeniedDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.reportGenerationDeniedDivisionModalContent {
+  background-color: #84a9ac;
+  color: black;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 40%;
+  height: 24%;
+}
+
+#reportGenerationDeniedDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 25%;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+/*! CSS for Responsive Design  */
+
+@media screen and (max-width: 1280px) {
+  #navBarDivision {
+    position: fixed;
+    display: none;
+    width: 25%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    z-index: 5;
+    color: #eeeeee;
+    background-color: #4ca1af;
+    animation-name: side_bar;
+    animation-duration: 0.7s;
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 25%;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 130%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 130%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 30%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    width: 100%;
+    height: 100vh;
+    background-color: #222831;
+    color: #eeeeee;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-image: url('./icons/hyrider.jpg');
+    background-repeat: no-repeat;
+    /* margin-bottom: 2%; */
+    background-size: 130%;
+    background-position: center;
+  }
+  .admin {
+    color: #00adb5;
+    margin-right: 5%;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    text-align: center;
+  }
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 35%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 10 0%;
+    background-color: #4ca1af;
+    animation-name: side_bar;
+    animation-duration: 0.7s;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    transition: background 0.25s ease;
+    animation-name: show;
+    animation-duration: 1s;
+  }
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 35%;
+    }
+  }
+  #bodyNumberForm {
+    margin-top: 15%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #bodyNumber {
+    padding: 2px;
+    /* margin: 0 -21px; */
+    margin-bottom: 5%;
+    width: 134%;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 500;
+    color: #eeeeee;
+    padding-right: 1%;
+  }
+  #bodyNumberfield {
+    width: 60%;
+    font-size: 110%;
+    padding: 10px 20px;
+    margin: 8px 0 27px 0;
+    display: inline-block;
+    border: 1px solid #64666a;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+  }
+  .enter {
+    margin: auto 70%;
+  }
+  .pass {
+    margin: auto 14%;
+  }
+  .adminAccessDeniedDivisionModalContent {
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    width: 60%;
+    height: 20%;
+  }
+
+  #adminAccessDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .reportGenerationDeniedDivisionModalContent {
+    /* background-color: #fefefe; */
+    color: black;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 20%;
+  }
+
+  #reportGenerationDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 20%;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 480px) {
+  body {
+    width: 100%;
+    height: 100vh;
+    background-color: #222831;
+    color: #eeeeee;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-image: url('./icons/hyrider.jpg');
+    background-repeat: no-repeat;
+    /* margin-bottom: 2%; */
+    background-size: 130%;
+    background-position: center;
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+    position: relative;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(20px, 0.8vw, 1.5rem);
+    /* width: 26px; */
+  }
+
+  #btn {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    line-height: 28px;
+    right: 2%;
+  }
+  .admin {
+    color: #00adb5;
+    margin-right: 0%;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    text-align: center;
+  }
+
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 50%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 50%;
+    }
+  }
+  #bodyNumberfield {
+    width: 60%;
+    font-size: 110%;
+    padding: 10px 20px;
+    margin: 8px 0px 10px 27px;
+    display: inline-block;
+    border: 1px solid #64666a;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+  }
+
+  #bodyNumberForm {
+    margin-top: 15%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    row-gap: 30%;
+  }
+
+  #bodyNumber {
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    font-weight: 500;
+    color: #eeeeee;
+  }
+
+  input[type='number'],
+  select {
+    width: 78%;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 110%;
+    border: 1px solid #64666a;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+    height: 30px;
+  }
+
+  .enter {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    height: 35px;
+    font-size: 14px;
+    text-align: end;
+    position: relative;
+    right: 60px;
+  }
+
+  .pass {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    height: 35px;
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+  }
+  #message-content {
+    position: relative;
+    color: rgb(249, 28, 28);
+    right: 16%;
+    top: 5%;
+    font-style: italic;
+    font-size: large;
+  }
+  #SMTopicElemet {
+    color: rgb(255, 255, 255);
+    margin-left: 4%;
+    text-decoration: underline;
+  }
+  .adminAccessDeniedDivisionModalContent {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    width: 60%;
+    height: 26%;
+  }
+  #adminAccessDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+  .reportGenerationDeniedDivisionModalContent {
+    /* background-color: #fefefe; */
+    color: black;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 20%;
+  }
+
+  #reportGenerationDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 20%;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+}

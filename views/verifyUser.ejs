@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./verifyUser.css" />
+    <title>Data Entry System</title>
+  </head>
+  <body>
+    <h1>User Activation</h1>
+    <form id="userActivationForm">
+      <p>Enter User ID:</p>
+      <input type="number" id="empID" name="empID" value="" required />
+      <p>Enter Password:</p>
+      <input type="password" id="password" name="password" value="" required />
+      <p id="error"></p>
+      <button type="button" onclick="validate()">Activate</button>
+    </form>
+
+    <form action="/" id="homeForm" method="get"></form>
+
+    <div id="successfulActivationDivision">
+      <div class="successfulActivationModalContent">
+        <div id="successfulActivationHolder">
+          <p
+            id="successfulActivationMessage"
+            style="font-weight: 500; padding: 1%; margin: 1%"
+          ></p>
+          <div id="successfulActivationOKButton">
+            <button
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(document.getElementById('homeForm').submit())()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function validate() {
+        var userActivationForm = document.getElementById('userActivationForm');
+        if (!userActivationForm.checkValidity()) {
+          if (userActivationForm.reportValidity) {
+            userActivationForm.reportValidity();
+          } else {
+            alert(msg.ieErrorForm);
+          }
+        } else {
+          activateUser();
+        }
+      }
+
+      async function activateUser() {
+        const userID = document.getElementById('empID').value;
+        const password = document.getElementById('password').value;
+
+        const response = await fetch('/approveUser', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            userID,
+            password,
+          }),
+        });
+
+        const data = await response.json();
+        console.log('response: ', data);
+
+        const errorMsg = document.getElementById('error');
+        if (data.status == 'success') {
+          document.getElementById('successfulActivationMessage').innerHTML =
+            'Account activated successfully';
+          document.getElementById(
+            'successfulActivationDivision'
+          ).style.visibility = 'visible';
+        } else {
+          if (data.reason == 'invalid credentials') {
+            errorMsg.innerHTML = 'Invalid credentials';
+
+            setTimeout(() => {
+              errorMsg.innerHTML = '';
+            }, 3000);
+          } else {
+            errorMsg.innerHTML = 'Error activating. Try Again!';
+
+            setTimeout(() => {
+              errorMsg.innerHTML = '';
+            }, 3000);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

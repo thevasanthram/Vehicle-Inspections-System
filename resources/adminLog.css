@@ -1,0 +1,508 @@
+* {
+  margin: 0px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #222831;
+  color: #eeeeee;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.table_container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.table_container {
+  -ms-overflow-style: none; /* IE and Edge */
+  --scrollbar-width: none; /* Firefox */
+}
+
+/* Styling for header part which contain user_name App_Name and LOGOUT btn  */
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #f0e3e3;
+  position: relative;
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 8%;
+  line-height: initial;
+  text-align: center;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.button-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  margin: 5%;
+  width: 8rem;
+  font-weight: 600;
+  font-size: medium;
+  height: 2.5rem;
+  border-radius: 5px;
+  color: #eeeeee;
+  border-color: rgb(91, 97, 166);
+}
+.button-logout:hover {
+  border-right-color: rgb(45, 56, 184);
+}
+
+/* TODO ...........SIDE NAV BAR MENU................................................................ */
+
+#navBarDivision {
+  position: absolute;
+  display: none;
+  width: 17%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 89.90%;
+  background-color: #4ca1af;
+  z-index: 5;
+  color: #eeeeee;
+  animation-name: side_bar;
+  animation-duration: 0.5s;
+}
+
+/* @keyframes hide {
+  0%{width: 17%;}
+  50%{width: 0%;}
+} */
+.category {
+  font-size: 140%;
+  font-weight: 500;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  transition: background 0.25s ease;
+  animation-name: show;
+  animation-duration: 1s;
+}
+#CloseBtnDiv {
+  display: flex;
+  width: 100.9%;
+  justify-content: end;
+  animation-name: show;
+  animation-duration: 1s;
+}
+
+.close_Btn {
+  font-weight: 500;
+  float: left;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.2em;
+  transition: background 0.25s ease;
+}
+
+#closeButton {
+  color: rgb(184, 184, 184);
+  font-size: 40px;
+  position: relative;
+  float: right;
+}
+
+#closeButton:hover {
+  color: black;
+}
+
+#ReportGenerationDiv,
+ #DataEntryDiv,
+ #AdministrationDiv,
+ #DashboardDiv,
+ #UserProfileDiv,
+ #UpdateSectionDiv{
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+#AdminLogDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  background-color: #075154;
+}
+
+
+
+.title_container {
+  animation-name: shift;
+  position: relative;
+  animation-duration: 5s;
+  /* animation-timing-function: ease-out; */
+}
+/*!.....................Animation for Nav Side Bar.................. */
+
+@keyframes show {
+  0% {
+    font-size: 1%;
+  }
+  50% {
+    font-size: 140%;
+  }
+}
+
+@keyframes side_bar {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 17%;
+  }
+}
+/* ! End of Nav Side Bar Menu */
+
+/* !   ...........................Admin Log Table.......................... */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.table_container {
+  display: block;
+  height: 65vh;
+  width: 80%;
+  position: relative;
+  left: 10%;
+  border-radius: 0.5em;
+  overflow-y: scroll;
+  animation-name: shift_table;
+  animation-duration: 5s;
+}
+
+/* @keyframes shift_table {
+  0% {left: -60%;}
+  50%{left:10%}
+}
+@keyframes shift {
+  0% {left: -50%;}
+  50%{left:0%}
+} */
+/* @keyframes shift_table {
+  0% {transform: scale(0.1);}
+  25%{transform: scale(0.25);}
+  50%{transform: scale(0.5);}
+  75%{transform: scale(0.75);}
+  100%{transform: scale(1);}
+} */
+table {
+  background: #105469;
+  border-radius: 0.5em;
+  border-collapse: collapse;
+  width: 100%;
+  position: relative;
+  overflow-y: scroll;
+  /* overflow-x: auto; */
+}
+
+.table_Heading {
+  position: sticky;
+  top: -1px;
+  text-align: center;
+  background-color: #221d51;
+}
+
+th {
+  border-bottom: 1px solid #364043;
+  color: #e2b842;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+td {
+  color: #fff;
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+.table_body {
+  text-align: center;
+}
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: #012b39;
+}
+
+/* !...........................Media query Responsive Style....................... */
+@media screen and (max-width: 1280px) {
+  #navBarDivision {
+    position: fixed;
+    display: none;
+    width: 25%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    z-index: 5;
+    color: #eeeeee;
+    background-color: #4ca1af;
+    animation-name: side_bar;
+    animation-duration: 0.7s;
+  }
+  @keyframes show {
+    0%{font-size: 1%;}
+    50%{font-size: 130%;}
+  }
+  @keyframes side_bar {
+    0%{width: 0%;}
+    50%{width: 25%;}
+  }
+}
+@media screen and (max-width: 1024px) {
+  #navBarDivision {
+    position: fixed;
+    display: none;
+    width: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 130%;
+    font-weight: 500;
+    min-height: 7vh;
+    color: #eeeeee;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  @keyframes show {
+    0%{font-size: 1%;}
+    50%{font-size: 130%;}
+  }
+  @keyframes side_bar {
+    0%{width: 0%;}
+    50%{width: 30%;}
+  }
+}
+@media screen and (max-width: 780px) {
+  .header {
+    min-width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 1%;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+    position: relative;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(19px, 0.8vw, 1.5rem);
+  }
+
+  .admin {
+    color: #00adb5;
+    margin-right: 5%;
+    line-height: initial;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    text-align: center;
+  }
+
+  #navBarDivision {
+    position: fixed;
+    display: none;
+    width: 35%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 35%;
+    }
+  }
+
+  .editEmployeeStatusEnsureModalContent {
+    width: 40%;
+    display: flex;
+    min-height: 20%;
+  }
+
+  #editEmployeeStatusEnsureButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    margin-left: 2%;
+  }
+  #employeeTableDivision {
+    display: block;
+    position: absolute;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    overflow-y: auto;
+    padding-bottom: 8%;
+    /* left: 5%; */
+  }
+  #addUser-img,
+  #removeUser-img {
+    cursor: pointer;
+    width: 4rem;
+  }
+  .reportGenerationDeniedDivisionModalContent {
+    background-color: #fefefe;
+    color: black;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 18%;
+  }
+
+  #reportGenerationDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 20%;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+  .removeUserEnsureModalContent {
+    background-color: #faf7f0;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 35%;
+    min-height: 26%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .admin {
+    color: #00adb5;
+    margin-right: 0%;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+  }
+  #btn {
+    width: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    right: 2%;
+    line-height: 28px;
+  }
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  #navBarDivision {
+    display: none;
+    width: 50%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  /* !........................Animation Style for Side Menu Bar */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 50%;
+    }
+  }
+  .table_container {
+    display: block;
+    width: 90%;
+    height: 60vh;
+    position: relative;
+    left: 5%;
+    overflow-y: scroll;
+    overflow-x: auto;
+  }
+  table {
+    background: #175f75;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    margin: 1%;
+  }
+}

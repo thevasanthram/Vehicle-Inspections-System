@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <form action="/" method="get" id="homeForm"></form>
+    <script>
+      (function tokenValidate() {
+        console.log('tokenValidating');
+        if (localStorage.getItem('token') == null) {
+          console.log('invalid');
+          document.getElementById('homeForm').submit();
+        } else {
+          console.log('valid');
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="adminPage.css">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script  src="https://cdn.tailwindcss.com"></script>
+    <title>Data Entry System</title>
+  </head>
+  <body>
+
+    <div>
+      <div class="header" >
+        <div style="display: flex">
+          <img
+            src="./icons/navBarIcon.png"
+            title="Switch Mode"
+            id="navBarIcon"
+            alt="Switch Mode"
+            style="cursor: pointer; width: 8%; margin: 0.5% 3%"
+          />
+          <div class="heading">Data Entry System</div>
+        </div>
+          <form id="btn" action="/logout" method="get" class="logoutButton">
+            <div class="admin" id="user-mode-name"><%= currentUser %></div>
+            <button
+              type="button"
+              onclick="logout()"
+              style="
+                background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+              "
+              class="button-logout bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            >
+              LOGOUT
+            </button>
+          </form>
+      </div>
+<!-- ! ........SIde Nav Bar Menu......... -->
+      <div id="navBarDivision">
+        <div id="UserProfileDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)">
+            <div id="user_Profile" class="category">User Profile</div>
+        </div>
+        <div id="DataEntryDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)">
+            <div id="dataEntry" class="category"> Data Entry</div>
+        </div>
+        <div id="ReportGenerationDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)">
+            <div id="reportGeneration" class="category">Report Generation </div>
+        </div>
+        <div id="AdministrationDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)" 
+            >
+            <div id="administration" class="category">Administration</div>
+        </div>
+        <div id="AdminLogDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)"
+          >
+            <div id="adminLog" class="category">Admin Logs</div>
+        </div>
+        <div id="DashboardDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)"
+          >
+            <div id="activityLog" class="category">Dashboard</div>
+        </div>
+        <div id="UpdateSectionDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)"
+          >
+            <div id="update" class="category">Update Section</div>
+        </div>
+      </div>
+
+      <!-- Denial of Access for reportGeneration -->
+    <div id="reportGenerationDeniedDivision">
+      <div class="reportGenerationDeniedDivisionModalContent">
+        <div id="reportGenerationDeniedDivisionHolder">
+          <p id="reportGenerationDeniedDivisionMessage" style="font-size:larger; font-weight:600">
+            No Accessible Charts.
+          </p>
+          <div id="editEmployeeChartAccessEnsureButton">
+            <button
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"              
+              onclick="(() => {document.getElementById('reportGenerationDeniedDivision').style.visibility = 'hidden'})()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- division for add and remove user icon -->
+      <div class="user_update_container" >
+        <div id="addUser">
+          <img
+            src="./icons/addUserIcon.png"
+            class="addUser" id="addUser-img"
+            onclick="AddOrRemoveUser(event)"
+            alt="Add User"
+          />
+          <p
+            class="addUser"
+            onclick="AddOrRemoveUser(event)"
+            style="cursor: pointer ; font-weight: 500;color: #eeeeee;"
+          > Add User
+          </p>
+        </div>
+        <div id="removeUser" class="removeUser">
+          <img
+            src="./icons/removeUserIcon.png"
+            alt="Remove User"
+            onclick="(() => document.getElementById('removeUserDivision').style.visibility = 'visible')()"
+            class="removeUser" id="removeUser-img"
+          />
+          <p
+            class="removeUser"
+            onclick="(() => document.getElementById('removeUserDivision').style.visibility = 'visible')()"
+            style="cursor: pointer; font-weight: 500; color: #eeeeee;"
+          > Remove User
+          </p>
+        </div>
+        <form action="/addUser" id="addUserForm" method="post">
+          <input type="hidden" name="firstUser" value="false" />
+          <input
+            type="hidden"
+            id="currentUser"
+            name="currentUser"
+            value="<%= currentUser %>"
+          />
+          <input type="hidden" name="empCompany" value="<%= companyName %>">
+          <input
+            type="hidden"
+            id="currentEmpID"
+            name="currentEmpID"
+            value="<%= currentEmpID %>"
+          />
+          <input
+            type="hidden"
+            id="companyName"
+            name="companyName"
+            value="<%= companyName %>"
+          />
+          <input type="hidden" class="token" name="token" value="" />
+        </form>
+      </div>
+        <!-- Employee Table Division -->
+      <div id="employeeTableDivision" class="overflow-x-auto   ">
+        <table class=" table_content ">
+          <tr class="uppercase  table-heading-container" >
+            <th >Emp ID</th>
+            <th >Emp Name</th>
+            <th >Emp Status</th>
+            <th >Accessible Reports</th>
+            <th >Created By</th>
+            <th >Update Emp Status</th>
+            <th >Update Report Access</th>
+          </tr>
+          <%for(let i=0; i<employeeRecords.length; i++){%>
+            <tr class="table_row">
+              <%for(let j=0; j<Object.keys(employeeRecords[i]).length; j++){
+                if(j != 2 && j != 3 && j != 4){
+                  if(j == 6){
+                    if(employeeRecords[i][Object.keys(employeeRecords[i])[j]].length > 0 && employeeRecords[i][Object.keys(employeeRecords[i])[j]][0] != ''){%>
+                      <td class="charts_list" >
+                        <%= employeeRecords[i][Object.keys(employeeRecords[i])[j]].length == 10 ? 'All Reports' : employeeRecords[i][Object.keys(employeeRecords[i])[j]] %>
+                      </td>
+                    <%}else{%>
+                      <td class="user_mode" >
+                        No Reports to access
+                      </td>
+                    <%}%>
+                  <%}else{%>
+                  <td class="user_mode">
+                    <%= employeeRecords[i][Object.keys(employeeRecords[i])[j]] %>
+                  </td>
+                  <%}%>
+                <%}%>
+              <%}
+              if(employeeRecords[i].created_by != 'Root User'){%>
+                <td class="switch_btn">
+                  <button onclick="editEmployeeStatus(event)" type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                  class="inline-block px-6 py-2.5 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md 
+                  hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out"
+                  >Switch</button>
+                </td>
+                <td class="edit_btn">
+                  <button onclick="editEmployeeChartAccess(event)" type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                  class="inline-block px-6 py-2.5 bg-gray-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-900 
+                  hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out"   
+                  >Edit</button>
+                </td>
+              <%}%>
+            </tr>
+          <%}%>
+        </table>
+      </div>
+      <!-- remove User Division with hide & seek -->
+      <div id="removeUserDivision">
+        <div class="removeUserModalContent">
+          <!-- <button></button> -->
+          <!-- <span class="close" onclick="(() => {document.getElementById('removeUserDivision').style.visibility = 'hidden'})()">&times;</span> -->
+          <div id="removeUserDivisionHolder"  >
+            <p style="font-weight: 700; margin:1%; padding:1%; font-size:large;" >Remove User</p>
+            <div id="removeUserInput"  >
+              <p style="font-weight: 500;" >Select User ID:</p>
+              <select  id="selectUserID" required>
+                <option value="dummy" selected hidden>Select User</option>
+                <%for(let i=0; i< employeeRecords.length; i++){
+                if(employeeRecords[i].created_by != 'Root User'){%>
+                <option value="<%= employeeRecords[i].id%>_<%= employeeRecords[i].name%>">
+                <%= employeeRecords[i].id +': ' + employeeRecords[i].name %>
+                </option>
+                <%}%>
+                <%}%>
+              </select>
+            </div>
+            <div  id="selectUserIDErrorMsg" style="visibility: hidden;color: #FF0000;">Select an user ID</div>
+            <div id="removeUserButton">
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 
+              font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="removeUser()">Remove</button>
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('removeUserDivision').style.visibility = 'hidden'})()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="removeUserDivisionEnsure" >
+        <div class="removeUserEnsureModalContent">
+          <div id="removeUserDivisionEnsureHolder" style="display:flex; flex-direction: column; align-items: center; justify-content: center;">
+            <p style="font-size: large; font-weight:600;">Are you sure want to remove user? </p>
+            <div id="removeUserEnsureButton"  >
+              <button  style="display: block;"
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="removeUserFinal()">Remove</button>
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('removeUserDivisionEnsure').style.visibility = 'hidden'})()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div id="removeUserDivisionSuccess">
+        <div class="removeUserDivisionSuccessModalContent">
+          <div id="removeUserDivisionSuccessHolder" style="display:flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;">
+            <p id="removeUserFinalUpdateMessage" style="font-size: large; font-weight:500"></p>
+            <div id="removeUserDivisionSuccessButton"  style="display: flex; justify-content: space-evenly">
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+              rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(document.getElementById('adminForm').submit())()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- edit Employee Status -->
+      <div id="editEmployeeStatusEnsureDivision" >
+        <div class="editEmployeeStatusEnsureModalContent">
+          <div id="editEmployeeStatusEnsureHolder">
+            <p id="editEmployeeStatusEnsureMessage" style="font-weight:500;"></p>
+            <div id="editEmployeeStatusEnsureButton" >
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm 
+              px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="editEmployeeStatusFinal()">Switch</button>
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg 
+              text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('editEmployeeStatusEnsureDivision').style.visibility = 'hidden'})()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="editEmployeeStatusDivisionSuccess">
+        <div class="editEmployeeStatusDivisionSuccessModalContent">
+          <div id="editEmployeeStatusDivisionSuccessHolder" >
+            <p id="editEmployeeStatusFinalUpdateMessage" style="font-weight:600; font-size:large"></p>
+            <div id="editEmployeeStatusDivisionSuccessButton"  style="display: flex; justify-content: space-evenly">
+              <button  style="display: block;" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg 
+              text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(document.getElementById('adminForm').submit())()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p id="currentEmpStatusCache" style="display: none;"></p>
+      <p id="currentEmpIDCache" style="display: none;"></p>
+      <p id="changeEmpNameCache" style="display: none;"></p>
+      <p id="newChartAccessCache" style="display: none;"></p>
+
+      <!-- edit Employee Chart Access -->
+      <div id="editEmployeeChartAccessDivision">
+        <div class="editEmployeeChartAccessDivisionModalContent">
+          <!-- <span class="close" onclick="(() => {document.getElementById('editEmployeeChartAccessDivision').style.visibility = 'hidden'})()">&times;</span> -->
+          <div id="editEmployeeChartAccessDivisionHolder" >
+            <div id="editEmployeeChartAccessTitle" class="underline" style="font-weight: 700;padding: 1%;margin: 1%;">Accessible Reports </div>
+            <div id="selectAllDivision">
+              <input style="margin-top: 1.5% ;" type="checkbox" id="selectAllCheckBox" onclick="selectAll(event)">
+              <p style="font-weight: 500;">Select All</p>
+            </div>
+              <div id="editEmployeeChartAccessCheckBoxHolder" >
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;"type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="DPV (Defects Per Vehicle) Report"/>
+                  <p style="font-weight: 500;">DPV (Defects Per Vehicle) Report</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Master Report"/>
+                  <p style="font-weight: 500;">Master Report</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Main Pareto Report"/>
+                  <p style="font-weight: 500;">Main Pareto Report</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Pareto Report"/>
+                  <p style="font-weight: 500;">Pareto Report</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Surface Summary"/>
+                  <p style="font-weight: 500;">Surface Summary</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Body Fitting Summary"/>
+                  <p style="font-weight: 500;">Body Fitting Summary</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Missing & Wrong Part Summary"/>
+                  <p style="font-weight: 500;">Missing & Wrong Part Summary</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Welding Summary"/>
+                  <p style="font-weight: 500;">Welding Summary</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Water Leak Summary"/>
+                  <p style="font-weight: 500;">Water Leak Summary</p>
+                </div>
+                <div class="editEmployeeChartAccessCheckBox">
+                  <input style="margin-top: 1.5% ;" type="checkbox" onclick="checkChartAccessSelected()" class="employeeChartAccessCheckBox" value="Color Map"/>
+                  <p style="font-weight: 500;">Color Map</p>
+                </div>
+            </div>
+            <div id="editEmployeeChartAccessDivisionButton" >
+              <button id="save_reports_btn" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg 
+              text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="editEmployeeChartAccessFinal()">Save</button>
+              <button id="cancle_btn" 
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg 
+              text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(document.getElementById('adminForm').submit())()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="editEmployeeChartAccessSuccess">
+        <div class="editEmployeeChartAccessSuccessModalContent">
+          <div id="editEmployeeChartAccessSuccessHolder" >
+            <p id="editEmployeeChartAccessFinalUpdateMessage" style="font-weight:500;padding: 1%;margin: 1%;"></p>
+            <div id="editEmployeeChartAccessDivisionSuccessButton" >
+              <button  class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg 
+              text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+               onclick="(document.getElementById('adminForm').submit())()">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form action="/profile" method="post" id="userProfileForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/filter" id="filterForm" method="post">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/follower" id="followerForm" method="post">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/admin" id="adminForm" method="post">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/adminLog" method="post" id="adminLogForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/dashboard" method="post" id="dashboardForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/updateSection" method="post" id="update_Section">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+    </div>
+    <script>
+
+      console.log('token: ', localStorage.getItem('token'));
+
+      const tokenElements = document.getElementsByClassName('token');
+
+      Object.values(tokenElements).map((tokenElement) => {
+        tokenElement.value = localStorage.getItem('token');
+      });
+
+      document.addEventListener('click', hideAndSeek);
+
+      function hideAndSeek(event) {
+        const navBarDivision = document.getElementById('navBarDivision');
+        if (event.target.id != 'navBarIcon') {
+          navBarDivision.style.display = 'none';
+        } else {
+          if (
+            navBarDivision.style.display == 'none' ||
+            navBarDivision.style.display == ''
+          ) {
+            navBarDivision.style.display = 'inline-block';
+          } else if (navBarDivision.style.display == 'inline-block') {
+            navBarDivision.style.display = 'none';
+          }
+        }
+      }
+
+      function onmouseoverBGColor(event) {
+        event.target.style.backgroundColor = '#075154';
+      }
+
+      function onmouseoutBGColor(event) {
+        if (event.target.id != 'administration') {
+          event.target.style.backgroundColor = '#4ca1af';
+        }
+      }
+
+      function handleFormSubmit(event) {
+        var empStatus = '<%= emp_Status %>';
+        var empChartAccess = '<%= emp_ChartAccess %>';
+
+        if (event.target.id == 'reportGeneration') {
+          if (empChartAccess.length > 0) {
+            document.getElementById('filterForm').submit();
+          } else {
+            document.getElementById(
+              'reportGenerationDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'update') {
+          if (empStatus == 'admin') {
+            document.getElementById('update_Section').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        }else if (event.target.id == 'dataEntry') {
+          console.log('dataEntry')
+          document.getElementById('followerForm').submit();
+        } else if (event.target.id == 'adminLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminLogForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'activityLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('dashboardForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'user_Profile') {
+          document.getElementById('userProfileForm').submit();
+        }
+      }
+
+      var removeUserDivisionModal = document.getElementById("removeUserDivision");
+
+      function AddOrRemoveUser(event) {
+        const mode = event.target.className;
+        if (mode == 'addUser') {
+          document.getElementById('addUserForm').submit();
+        }
+      }
+
+      function removeUser() {
+        const selectedUserID = document.getElementById('selectUserID');
+
+        if (selectedUserID.value == 'dummy') {
+          document.getElementById('selectUserIDErrorMsg').style.visibility =
+            'visible';
+          setTimeout(() => {
+            document.getElementById('selectUserIDErrorMsg').style.visibility =
+              'hidden';
+          }, 2000);
+        } else {
+           document.getElementById('removeUserDivisionEnsure').style.visibility = 'visible'
+        }
+      }
+
+      async function removeUserFinal(){
+        const selectedUserID = document.getElementById('selectUserID');
+        const response = await fetch('/removeUser', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            userID: selectedUserID.value.split('_')[0],
+            userName: selectedUserID.value.split('_')[1],
+            currentEmpID: '<%= currentEmpID %>',
+            currentUser: '<%= currentUser %>',
+          }),
+        });
+
+        document.getElementById('removeUserDivisionSuccess').style.visibility = 'visible'
+
+        if (response.status == 200) {
+          document.getElementById('removeUserFinalUpdateMessage').innerHTML = 'User Removed successfully'
+        } else if (response.status == 400) {
+          document.getElementById('removeUserFinalUpdateMessage').innerHTML = 'User Removal Failed. Try Again!'
+        } else {
+          document.getElementById('removeUserFinalUpdateMessage').innerHTML = 'Unhandled Error, try again'
+        }
+      }
+
+      function editEmployeeStatus(event){
+        const currentEmpStatus = event.target.parentNode.parentNode.childNodes[5].innerText
+        const currentEmpID= event.target.parentNode.parentNode.childNodes[1].innerText
+        const changeEmpName= event.target.parentNode.parentNode.childNodes[3].innerText
+        document.getElementById('currentEmpStatusCache').innerHTML = currentEmpStatus
+        document.getElementById('currentEmpIDCache').innerHTML = currentEmpID
+        document.getElementById('changeEmpNameCache').innerHTML = changeEmpName
+        document.getElementById('editEmployeeStatusEnsureMessage').innerHTML = `Are you sure want to switch user status to ${currentEmpStatus == 'employee' ? 'admin': 'employee'}`
+        document.getElementById('editEmployeeStatusEnsureDivision').style.visibility = 'visible'
+      }
+
+
+      async function editEmployeeStatusFinal(){
+        // editing employee status
+        const currentEmpStatus = document.getElementById('currentEmpStatusCache').innerText
+        const currentEmpID = document.getElementById('currentEmpIDCache').innerText
+        const changeEmpName = document.getElementById('changeEmpNameCache').innerText
+        
+        let changeEmpStatus = ''
+
+        if(currentEmpStatus == 'employee'){
+          changeEmpStatus = 'admin'
+        }else{
+          changeEmpStatus = 'employee'
+        }
+
+        const response = await fetch('/updateEmpStatus',{
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            changeEmpStatus,
+            changeEmpID: currentEmpID,
+            current_Emp_ID: '<%= currentEmpID %>',
+            changeEmpName: changeEmpName,
+            currentUser: '<%= currentUser %>'
+          })
+        })
+
+        document.getElementById('editEmployeeStatusDivisionSuccess').style.visibility = 'visible'
+
+        if(response.status == 200){
+          document.getElementById('editEmployeeStatusFinalUpdateMessage').innerHTML = `Employee status updated to ${changeEmpStatus}`
+        }else if(response.status == 400){
+          document.getElementById('editEmployeeStatusFinalUpdateMessage').innerHTML = 'Status updation failed. Try Again!'
+        }else{
+          document.getElementById('editEmployeeStatusFinalUpdateMessage').innerHTML = 'Unhandled Exception'
+        }
+      }
+
+      function editEmployeeChartAccess(event){
+        const currentEmpID= event.target.parentNode.parentNode.childNodes[1].innerText
+        const currentEmpChartAccess = event.target.parentNode.parentNode.childNodes[7].innerText
+        const changeEmpName= event.target.parentNode.parentNode.childNodes[3].innerText
+        
+        document.getElementById('currentEmpIDCache').innerHTML = currentEmpID
+        document.getElementById('changeEmpNameCache').innerHTML = changeEmpName
+
+        const empChartAccessArray = currentEmpChartAccess.split(',')
+
+        const employeeChartAccessCheckBox = document.getElementsByClassName('employeeChartAccessCheckBox')
+        let checkboxCheckedCounter = 0
+
+        if(empChartAccessArray[0] == 'All Reports'){
+          Object.values(employeeChartAccessCheckBox).map( (singleInput) => {
+            singleInput.checked = true
+            if(singleInput.checked == true){
+              checkboxCheckedCounter += 1
+            }
+          })
+        }else{
+          Object.values(employeeChartAccessCheckBox).map( (singleInput) => {
+            if(empChartAccessArray.includes(singleInput.value)){
+              singleInput.checked = true
+            }
+            if(singleInput.checked == true){
+              checkboxCheckedCounter += 1
+            }
+          })
+        }
+        
+
+        if( checkboxCheckedCounter == employeeChartAccessCheckBox.length){
+          document.getElementById('selectAllCheckBox').checked = true
+        }
+        
+        document.getElementById('editEmployeeChartAccessDivision').style.visibility = 'visible'
+      }
+
+      function selectAll(event){
+        const selectAllCheckBox = event.target
+        const employeeChartAccessCheckBox = document.getElementsByClassName('employeeChartAccessCheckBox')
+
+        Object.values(employeeChartAccessCheckBox).map( (singleCheckBox) => {
+          if(selectAllCheckBox.checked == true){
+            if(singleCheckBox.checked == false){
+              singleCheckBox.checked = true
+            }
+          }else{
+            if(singleCheckBox.checked == true){
+              singleCheckBox.checked = false
+            }
+          }
+        })
+      }
+
+      function checkChartAccessSelected(){
+        const employeeChartAccessCheckBox = document.getElementsByClassName('employeeChartAccessCheckBox')
+        let checkboxCheckedCounter = 0
+        Object.values(employeeChartAccessCheckBox).map( (singleChart) => {
+          if(singleChart.checked == true){
+            checkboxCheckedCounter += 1
+          }
+        })
+
+        if( checkboxCheckedCounter == employeeChartAccessCheckBox.length){
+          document.getElementById('selectAllCheckBox').checked = true
+        }else{
+          document.getElementById('selectAllCheckBox').checked = false          
+        }
+      }
+
+      async function editEmployeeChartAccessFinal(){
+        let selectedChartAccess = []
+        const employeeChartAccessCheckBox = document.getElementsByClassName('employeeChartAccessCheckBox')
+        
+        Object.values(employeeChartAccessCheckBox).map( (singleInput) => {
+          if(singleInput.checked == true){
+            selectedChartAccess.push(singleInput.value)
+          }
+        })
+
+        const changeEmpID = document.getElementById('currentEmpIDCache').innerText
+        const changeEmpName = document.getElementById('changeEmpNameCache').innerText
+
+        const response = await fetch('/updateEmpChartAccess', {
+          method: 'POST',
+          headers:{
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            changeEmpID,
+            changeEmpName,
+            currentEmpID: '<%= currentEmpID %>',
+            currentUser: '<%= currentUser %>',
+            selectedChartAccess
+          })
+        })
+
+        if(response.status == 200){
+          document.getElementById('editEmployeeChartAccessFinalUpdateMessage').innerHTML = 'Chart access updated!'
+        }else if(response.status == 400){
+          document.getElementById('editEmployeeChartAccessFinalUpdateMessage').innerHTML = 'Error updating chart access. Try Again!'
+        }
+
+        document.getElementById('editEmployeeChartAccessSuccess').style.visibility = 'visible'
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        Object.values(tokenElements).map((tokenElement) => {
+          tokenElement.value = '';
+        });
+        document.getElementsByClassName('logoutButton')[0].submit();
+      }
+    </script>
+  </body>
+</html>

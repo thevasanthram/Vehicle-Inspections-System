@@ -1,0 +1,879 @@
+* {
+  margin: 0px;
+}
+
+body {
+  width: 100%;
+  background-color: #282c34;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #f0e3e3;
+  position: relative;
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 5px;
+}
+#home-icon {
+  margin-left: 2%;
+  width: 4%;
+  margin-right: 1%;
+  min-height: 3%;
+  position: relative;
+  z-index: 0;
+}
+#home-icon:hover {
+  cursor: pointer;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 8%;
+  text-align: center;
+  line-height: initial;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.button-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  margin: 5%;
+  width: 8rem;
+  font-weight: 600;
+  font-size: medium;
+  height: 2.5rem;
+  border-radius: 5px;
+  color: #eeeeee;
+  border-color: rgb(91, 97, 166);
+}
+.button-logout:hover {
+  border-right-color: rgb(45, 56, 184);
+}
+.selected-message {
+  text-align: center;
+  line-height: 0.9;
+  margin-left: 12%;
+  margin-right: 5%;
+  padding: 14px;
+  font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+  color: #eeeeee;
+}
+
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
+}
+#title-name-content {
+  margin: 2px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.sub_container {
+  display: flex;
+  justify-content: start;
+  margin: 1%;
+  gap: 2rem;
+  align-items: center;
+}
+#go-back-icon {
+  max-width: 7%;
+}
+
+#go-back-icon:hover {
+  cursor: pointer;
+}
+
+#title-name {
+  padding: 5px;
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  color: #f0e3e3;
+}
+#mode_status {
+  margin-right: 2rem;
+  padding: 5px;
+}
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  width: 72%;
+  position: relative;
+  left: 14%;
+  transition: all 0.5s ease-in-out;
+}
+
+.form-content {
+  cursor: pointer;
+  font-size: 110%;
+  padding: 3%;
+  margin: 3%;
+  border: 1px solid #64666a;
+  border-radius: 4px;
+  background-color: black;
+  color: #f0e3e3;
+  text-align: center;
+}
+
+/* !................... Style for Update Section................. */
+
+.update_container{
+  margin: 2px;
+  padding: 5px;
+  transition: all 0.5s ease-in-out;
+}
+.update_subContainer{
+  position: relative;
+  margin: auto;
+  width: 70%;
+  min-height: 20vh;
+  background-color: #070a1d;
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+}
+.update_title{
+  color: goldenrod;
+  text-align: center;
+  margin: 1%;
+  padding: 1%;
+  font-size: large;
+  font-weight: 600;
+}
+.update_btn_container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 5px;
+  margin: 2% ;
+  gap: 1rem;
+}
+
+/* !.............. Popup for delete Sub-category............ */
+#removeSubCategoryDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.removeSubCategoryModalContent {
+  background-color: #84A9AC;
+  margin: auto;
+  padding: 2%;
+  border: 1px solid #888;
+  width: 35%;
+  min-height: 25%;
+  border-radius: 10px;
+}
+
+#removeSubCategoryButton {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+/* !................. Remove .................... */
+
+#removeSubCategoryDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+#removeSubCategoryInput {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-evenly;
+  width: 85%;
+}
+#remove_sub_category{
+  text-align: center;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: rgb(70, 69, 69);
+}
+
+#removeSubCategoryDivisionEnsure {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: all 0.5s ease-in-out;
+}
+
+.removeSubCategoryEnsureModalContent {
+  background-color: #84A9AC;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  min-height: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+#removeSubCategoryDivisionEnsureHolder {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+#removeSubCategoryEnsureButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#removeSubCategoryDivisionSuccess {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  transition: all 0.5s ease-in-out;
+}
+
+.removeSubCategoryDivisionSuccessModalContent {
+  background-color: #00ab41;
+  margin: auto;
+  padding: 0px;
+  width: 35%;
+  height: 33%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+/* !.......... Popup for Updating / Edit Sub-category......... */
+
+#UpdateSubCategoryDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.UpdateSubCategoryModalContent {
+  background-color: #84A9AC;
+  margin: auto;
+  padding: 2%;
+  border: 1px solid #888;
+  width: 35%;
+  min-height: 25%;
+  border-radius: 10px;
+}
+#update_sub_category{
+  text-align: center;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: rgb(70, 69, 69);
+}
+#UpdateSubCategoryButton {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+/* !................. Update .................... */
+
+#UpdateSubCategoryDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+#UpdateSubCategoryInput {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-evenly;
+  width: 85%;
+}
+#Update_sub_category{
+  text-align: center;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: rgb(70, 69, 69);
+}
+
+#UpdateSubCategoryDivisionEnsure {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: all 0.5s ease-in-out;
+}
+
+.UpdateSubCategoryEnsureModalContent {
+  background-color: #84A9AC;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  min-height: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+#UpdateSubCategoryDivisionEnsureHolder {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+#UpdateSubCategoryEnsureButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#UpdateSubCategoryDivisionSuccess {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  transition: all 0.5s ease-in-out;
+}
+
+.UpdateSubCategoryDivisionSuccessModalContent {
+  background-color: #00ab41;
+  margin: auto;
+  padding: 0px;
+  width: 35%;
+  height: 33%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+/* !.......... Popup for  Adding Sub-category......... */
+
+#addSubCategoryDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.addSubCategoryModalContent {
+  background-color: #84A9AC;
+  margin: auto;
+  padding: 2%;
+  border: 1px solid #888;
+  width: 35%;
+  min-height: 25%;
+  border-radius: 10px;
+}
+#add_sub_category{
+  text-align: center;
+  border-radius: 5px;
+  background-color: #eeeeee;
+  color: rgb(70, 69, 69);
+}
+#addSubCategoryButton {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+/* !................. ADD .................... */
+
+#addSubCategoryDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+#addSubCategoryInput {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-evenly;
+  width: 85%;
+}
+
+#addSubCategoryDivisionEnsure {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: all 0.5s ease-in-out;
+}
+
+.addSubCategoryEnsureModalContent {
+  background-color: #84A9AC;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 35%;
+  min-height: 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+#addSubCategoryDivisionEnsureHolder {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+#addSubCategoryEnsureButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#addSubCategoryDivisionSuccess {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  transition: all 0.5s ease-in-out;
+}
+
+.addSubCategoryDivisionSuccessModalContent {
+  background-color: #00ab41;
+  margin: auto;
+  padding: 0px;
+  width: 35%;
+  height: 33%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+/* !CSS for REsponsive Design */
+
+@media screen and (max-width: 1025px) {
+  #home-icon {
+    margin-left: 1%;
+    min-width: 30px;
+    min-height: 30px;
+    margin-right: 2%;
+    min-height: 3%;
+  }
+
+  /* !.........Remove Sub-Category Popup.......... */
+  .removeSubCategoryModalContent {
+    width: 45%;
+    min-height: 24%;
+    border-radius: 10px;
+  }
+  #removeSubCategoryInput {
+    gap: 0.75rem;
+    width: 95%;
+  }
+  /* !.........Update Sub-Category Popup.......... */
+  .UpdateSubCategoryModalContent {
+    width: 45%;
+    min-height: 24%;
+    border-radius: 10px;
+  }
+  #UpdateSubCategoryInput {
+    gap: 0.75rem;
+    width: 95%;
+  }
+  /* !.........Add Sub-Category Popup.......... */
+  .addSubCategoryModalContent {
+    width: 45%;
+    min-height: 24%;
+    border-radius: 10px;
+  }
+  #addSubCategoryInput {
+    gap: 0.75rem;
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin {
+    margin-right: 5%;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+  }
+  .update_subContainer {
+    width: 80%;
+  }
+
+/* !..........Remove Sub Category Popup........... */
+
+  .removeSubCategoryModalContent {
+    width: 65%;
+    min-height: 24%;
+  }
+  #removeSubCategoryInput {
+    width: 95%;
+  }
+
+/* !..........Update Sub Category Popup........... */
+
+  .UpdateSubCategoryModalContent {
+    width: 65%;
+    min-height: 24%;
+  }
+  #UpdateSubCategoryInput {
+    width: 95%;
+  }
+
+/* !..........Add Sub Category Popup........... */
+
+  .addSubCategoryModalContent {
+    width: 65%;
+    min-height: 24%;
+  }
+  #addSubCategoryInput {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 540px) {
+  #btn {
+    width: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    line-height: 28px;
+  }
+  #removeSubCategoryInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-evenly;
+    width: 85%;
+  }
+  #remove_sub_category {
+    width: 90%;
+  }
+
+  /* !......... Update ..........*/
+  #update_sub_category {
+    width: 90%;
+  }
+  #UpdateSubCategoryInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-evenly;
+    width: 85%;
+  }
+  /* !..........Edit........ */
+
+  #addSubCategoryInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: space-evenly;
+    width: 85%;
+  }
+  #add_sub_category {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    width: 100%;
+    height: 100vh;
+    background-color: #282c34;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+  .header {
+    min-width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 1%;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(19px, 0.8vw, 1.5rem);
+  }
+
+  #btn {
+    width: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    line-height: 28px;
+  }
+  .admin {
+    margin-right: 0%;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+  }
+
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  #home-icon {
+    margin-left: 2%;
+    min-width: 25px;
+    min-height: 25px;
+    margin-right: 1%;
+    min-height: 3%;
+  }
+  .selected-message {
+    text-align: center;
+    margin: 1%;
+    padding: 0px;
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    color: #eeeeee;
+  }
+  .sub_container {
+    display: flex;
+    min-width: 40%;
+    margin: 1%;
+    gap: 1rem;
+    align-items: center;
+  }
+  #title-name-content {
+    position: relative;
+    margin: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #go-back-icon {
+    min-width: 28px;
+    margin-left: 10%;
+  }
+  #title-name {
+    padding: 2px;
+    line-height: 0.9;
+    font-size: clamp(16px, 1.2vw, 1.5rem);
+    color: #f0e3e3;
+  }
+  #mode_status {
+    margin-right: 0.5rem;
+    padding: 5px;
+  }
+  .form-content {
+    cursor: pointer;
+    font-size: 95%;
+    padding: 2%;
+    margin: 2%;
+    border: 2px solid #64666a;
+    border-radius: 5px;
+    background-color: black;
+    color: #eeeeee;
+    text-align: center;
+  }
+  .form-conten:hover {
+    transform: scale(0.98);
+  }
+  /* ! ............Update Section........... */
+
+  .update_subContainer{
+    width: 85%;
+  }
+  .update_btn_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 5px;
+    margin: 2%;
+    gap: 0.5rem;
+  }
+  .main-content {
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    width: 90%;
+    position: relative;
+    left: 5%;
+    margin: 2% 0% 2% 0%;
+  }
+
+/* !.............Popup for remove Sub category.............. */
+  #remove_sub_category{
+    width: 95%;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+  #removeSubCategoryButton {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+  .removeSubCategoryModalContent {
+    width: 75%;
+    min-height: 24%;
+  }
+
+/* !.............Popup for updating Sub category.............. */
+  .UpdateSubCategoryModalContent {
+    width: 75%;
+    min-height: 24%;
+  }
+  #update_sub_category{
+    width: 90%;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+  #UpdateSubCategoryButton {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+
+/* !.............Popup for Adding Sub category.............. */
+ 
+  .addSubCategoryModalContent {
+    width: 75%;
+    min-height: 24%;
+  }
+  #add_sub_category{
+    width: 90%;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+  #addSubCategoryButton {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+}
+
+@media screen and (max-height: 1280px) {
+  .update_subContainer {
+    min-height: 14vh;
+  }
+}
+
+@media screen and (max-height: 1000px) {
+  .update_subContainer {
+    min-height: 18vh;
+  }
+}
+
+@media screen and (max-height: 680px) {
+  .update_subContainer {
+    min-height: 22vh;
+  }
+}

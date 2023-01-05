@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <form action="/" method="get" id="homeForm"></form>
+    <script>
+      (function tokenValidate() {
+        console.log('tokenValidating');
+        if (localStorage.getItem('token') == null) {
+          console.log('invalid');
+          document.getElementById('homeForm').submit();
+        } else {
+          console.log('valid');
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="./thirdLayer.css" />
+    <link rel="stylesheet" href="./thirdLayer_2.css" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+    <title>Data Entry System</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="../resources/tailwind.config.js"></script> -->
+  </head>
+  <body>
+    <div>
+      <div class="header">
+        <div style="display: flex; align-items: center">
+          <img
+            src="./icons/home.png"
+            title="Home"
+            id="home-icon"
+            alt="Home"
+            onclick="document.getElementById('followerForm').submit();"
+          />
+          <div class="heading">Data Entry System</div>
+          <p class="selected-message">
+            Body Number : <%= currentBodyNumber %> | Category : <%=
+            selectedCategory %> | Sub-Category : <%= selectedSubCategory %>
+          </p>
+        </div>
+        <form id="btn" action="/logout" method="get" class="logoutButton">
+          <div class="admin" id="user-mode-name"><%= currentUser %></div>
+          <button
+            type="button"
+            onclick="logout()"
+            style="
+              background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+            "
+            class="button-logout bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            LOGOUT
+          </button>
+        </form>
+      </div>
+      <div id="title-name-content">
+        <div class="sub_container">
+          <img
+            src="./icons/arrow.png"
+            title="Back"
+            id="go-back-icon"
+            alt="Go Back"
+            onclick="document.getElementById('secondLayerForm').submit();"
+          />
+          <p id="title-name">Select Defect :</p>
+        </div>
+        <!-- Toggle Switch for online / offline -->
+        <div id="toggle" class="mt-6 ml-6">
+          <div class="flex w-full mb-6">
+            <label
+              id="label_switch"
+              for="toggle_switch"
+              class="flex items-center cursor-pointer"
+              style="justify-content: center"
+            >
+              <div class="relative">
+                <input
+                  type="checkbox"
+                  id="toggle_switch"
+                  class="sr-only mode"
+                  onclick="dynamicText()"
+                />
+                <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                <div
+                  class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+                ></div>
+              </div>
+              <div
+                class="ml-2 text-gray-300 font-medium text-2xl"
+                id="mode_status"
+              >
+                Online
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <!-- !.............. Update Category Section.......... -->
+      <div class="update_container">
+        <div class="update_subContainer">
+          <h1 class="update_title ">UPDATE DEFECT SECTION</h1>
+          <div class="update_btn_container">
+            <button type="button" class="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight
+              uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg 
+              focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out"
+              onclick="(() => {document.getElementById('UpdateDefectsDivision').style.visibility = 'visible'})()">EDIT DEFECT/SUB-DEFECT</button>
+            <button type="button" class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs 
+              leading-tight uppercase rounded shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg
+              focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
+              onclick="(() => {document.getElementById('addDefectsDivision').style.visibility = 'visible'})()">ADD DEFECT/SUB-DEFECT</button>
+            <button type="button" class="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs 
+              leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg
+              focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+              onclick="(() => {document.getElementById('removeDefectsDivision').style.visibility = 'visible'})()">DELETE DEFECT/SUB-DEFECT</button>
+          </div>
+        </div>
+      </div>
+        <!-- !........... Popups for Deletion of category........... -->
+        <div id="removeDefectsDivision">
+          <div class="removeDefectsModalContent">
+            <div id="removeDefectsDivisionHolder"  >
+              <p style="font-weight: 700; margin:1%; padding:1%; font-size:large;" >Remove Defects/Sub-Defects</p>
+              <p style="font-weight: 500;" >Select Category :</p>
+              <select name="removeDefect_category" id="removeDefect_category">
+                <option value="" style="background-color: black;color: white; "
+                  id="defect_option">DEFECT</option>
+                <option value="" style="background-color: black; color: white;"
+                  id="SubDefect_option">SUB-DEFECT</option>
+              </select>
+              <div id="removeDefectsInput"  >
+                <div class="select_updateDefect_container">
+                  <div class="select_removeOptions_container">
+                    <p style="font-weight: 500;" >Select Defect/Sub-Defect :</p>
+                    <select name="removeDefect_category" id="removeDefect_category">
+                      <option value="" style="background-color: black;color: white; "
+                        id="defect_option">DEFECT</option>
+                      <option value="" style="background-color: black; color: white;"
+                        id="SubDefect_option">SUB-DEFECT</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="select_removeOptions_container">
+                  <p style="font-weight: 500;" >Select Defect/Sub-Defect :</p>
+                  <select class="remove_defect_content" style="border-radius: 5px;">
+                    <% const removeDefectListId = Object.keys(defectObject); let
+                    removeSubDefectListId = []; let removeSubDefectListName = []; %> <% for (let
+                    i=0; i < removeDefectListId.length; i++){%>
+                    <option
+                      type="button"
+                      class="Defects_options"
+                      style="background-color: black; color: #eeeeee; border-radius: 5px;"
+                      id="<%= removeDefectListId[i] %>-main-defect-button"
+                      onclick="defectCategorySwitch('<%= removeDefectListId[i] %>')"
+                    >
+                      <%= defectObject[removeDefectListId[i]].name%>
+                    </option>
+                    <%}%>
+                  </select>
+                </div>
+                <!-- <select class="removeSubDefect_content">
+                  <%for ( let i=0; i < removeSubDefectListId.length; i++){ removeSubDefectListId =
+                  Object.keys(defectObject[removeSubDefectListId[i]]['subdefects']);
+                  subDefectListName =
+                  Object.values(defectObject[removeSubDefectListId[i]]['subdefects']); %>
+                  <div
+                    id=""
+                    class="defectName"
+                    style="display: none"
+                  >
+                    <div class="sub-defects-category-content">
+                      <%for (let j = 0; j < removeSubDefectListId.length; j++){%>
+                      <option
+                        type="button"
+                        class="sub-defect-category <%= removeSubDefectListId[i] %>-buttons"
+                        style="background-color: black; color: white"
+                        onclick="subdefectCategorySwitch(event , '<%= removeSubDefectListId[i] %>-<%= subDefectListId[j] %>')"
+                      >
+                        <%= subDefectListName[j] %>
+                      </option>
+                      <%}%>
+                    </div>
+                  </div>
+                  <%}%>
+                </select> -->
+              </div>
+              <div  id="removeDefectsErrorMsg" style="visibility: hidden;color: #FF0000;">Select Category</div>
+              <div id="removeDefectsButton">
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="removeUser()">Remove</button>
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(() => {document.getElementById('removeDefectsDivision').style.visibility = 'hidden'})()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div id="removeDefectsDivisionEnsure" >
+          <div class="removeDefectsEnsureModalContent">
+            <div id="removeDefectsDivisionEnsureHolder" style="display:flex; flex-direction: column; align-items: center; justify-content: center;">
+              <p style="font-size: large; font-weight:600;">Are you sure want to remove ? </p>
+              <div id="removeDefectsEnsureButton"  >
+                <button  style="display: block;"
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="removeUserFinal()">Remove</button>
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(() => {document.getElementById('removeDefectsDivisionEnsure').style.visibility = 'hidden'})()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- !........... Popups for Adding of category........... -->
+        <div id="addDefectsDivision">
+          <div class="addDefectsModalContent">
+            <div id="addDefectsDivisionHolder"  >
+              <p style="font-weight: 700; margin:1%; padding:1%; font-size:large;" >Add Category</p>
+              <p style="font-weight: 500;" >Select Category -></p>
+                <select name="defect_catogery" id="defect_catogery" style="border-radius: 5px;">
+                  <option value="" style="background-color: black; color: white ;"
+                   id="defect_option">DEFECT</option>
+                  <option value="" style="background-color: black; color: white ;"
+                   id="SubDefect_option">SUB-DEFECT</option>
+                </select>
+              <div id="addDefectsInput"  >
+                <div class="select_addOptions_container">
+                  <p style="font-weight: 500;" >Select Defect/Sub-Defect :</p>
+                  <select class="add" style="border-radius: 5px;">
+                    <% const addDefectListId = Object.keys(defectObject); let
+                    addSubDefectListId = []; let addSubDefectListName = []; %> <% for (let
+                    i=0; i < addDefectListId.length; i++){%>
+                    <option
+                      type="button"
+                      class="Defects_options"
+                      style="background-color: black; color: #eeeeee; border-radius: 5px;"
+                      id="<%= addDefectListId[i] %>-main-defect-button"
+                      onclick="defectCategorySwitch('<%= addDefectListId[i] %>')"
+                    >
+                      <%= defectObject[addDefectListId[i]].name%>
+                    </option>
+                    <%}%>
+                  </select>
+                </div>
+                <div class="add_inputOptions_container">
+                  <p style="font-weight: 500;" > Defects/Sub-Defects Name</p>
+                  <input type="text" value="" id="add_Defects" style="border-radius: 5px; text-align: center;">
+                </div>
+              </div>
+              <div  id="addDefectsErrorMsg" style="visibility: hidden;color: #FF0000;">Name can not be identical</div>
+              <div id="addDefectsButton">
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="removeUser()">Add</button>
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(() => {document.getElementById('addDefectsDivision').style.visibility = 'hidden'})()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div id="addDefectsDivisionEnsure" >
+          <div class="addDefectsEnsureModalContent">
+            <div id="addDefectsDivisionEnsureHolder" style="display:flex; flex-direction: column; align-items: center; justify-content: center;">
+              <p style="font-size: large; font-weight:600;">Are you sure want to Add ? </p>
+              <div id="addDefectsEnsureButton"  >
+                <button  style="display: block;"
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="removeSubCategoryFinal()">Add</button>
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(() => {document.getElementById('addDefectsDivisionEnsure').style.visibility = 'hidden'})()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- !........... Popups for Updating Category........... -->
+        <div id="UpdateDefectsDivision">
+          <div class="UpdateDefectsModalContent">
+            <div id="UpdateDefectsDivisionHolder"  >
+              <p style="font-weight: 700; margin:1%; padding:1%; font-size:large;" >Edit Category</p>
+              <p style="font-weight: 500;" >Select Category :</p>
+              <select name="removeDefect_category" id="removeDefect_category">
+                <option value="" style="background-color: black;color: white; "
+                  id="defect_option">DEFECT</option>
+                <option value="" style="background-color: black; color: white;"
+                  id="SubDefect_option">SUB-DEFECT</option>
+              </select>
+              <div id="UpdateDefectsInput"  >
+                <div class="select_updateDefect_container">
+                  <p style="font-weight: 500;" >Select Category :</p>
+                  <select name="updateDefect_category" id="updateDefect_category">
+                    <option value="" style="background-color: black; color: white ;border-radius: 5px;"
+                     id="defect_option">DEFECT</option>
+                    <option value="" style="background-color: black; color: white;border-radius: 5px;"
+                     id="SubDefect_option">SUB-DEFECT</option>
+                  </select>
+                </div>
+                <div class="select_updateOptions_container">
+                  <p style="font-weight: 500;" >Select Defects/Sub-Defects :</p>
+                  <select class="update_defect_content" style="border-radius: 5px;">
+                    <% const updateDefectListId = Object.keys(defectObject); let
+                    updateSubDefectListId = []; let updateSubDefectListName = []; %> <% for (let
+                    i=0; i < updateDefectListId.length; i++){%>
+                    <option
+                      type="button"
+                      class="Defects_options"
+                      style="background-color: black; color: #eeeeee;border-radius: 5px;"
+                      id="<%= updateDefectListId[i] %>-main-defect-button"
+                      onclick="defectCategorySwitch('<%= updateDefectListId[i] %>')"
+                    >
+                      <%= defectObject[updateDefectListId[i]].name%>
+                    </option>
+                    <%}%>
+                  </select>
+                </div>
+              </div>
+              <div  id="removeDefectsErrorMsg" style="visibility: hidden;color: #FF0000;">Name cannot be identical</div>
+              <div id="UpdateDefectsButton">
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 
+                font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="removeUser()">Update</button>
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(() => {document.getElementById('UpdateDefectsDivision').style.visibility = 'hidden'})()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div id="UpdateDefectsDivisionEnsure" >
+          <div class="UpdateDefectsEnsureModalContent">
+            <div id="UpdateDefectsDivisionEnsureHolder" style="display:flex; flex-direction: column; align-items: center; justify-content: center;">
+              <p style="font-size: large; font-weight:600;">Are you sure want to remove user? </p>
+              <div id="UpdateDefectsEnsureButton"  >
+                <button  style="display: block;"
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="removeUserFinal()">Remove</button>
+                <button  style="display: block;" 
+                class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium 
+                rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+                onclick="(() => {document.getElementById('UpdateDefectsDivisionEnsure').style.visibility = 'hidden'})()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+      <div class="main-content">
+        <form
+          id="defectLayerForm"
+          action="/receive-thirdLayer-temp"
+          method="post"
+        >
+          <div class="defect-title-name">
+            <p>Defect :</p>
+          </div>
+          <div class="defect-category-content">
+            <% const defectListId = Object.keys(defectObject); let
+            subDefectListId = []; let subDefectListName = []; %> <% for (let
+            i=0; i < defectListId.length; i++){%>
+            <button
+              type="button"
+              class="defect-category"
+              style="background-color: black; color: white"
+              id="<%= defectListId[i] %>-main-defect-button"
+              onclick="defectCategorySwitch('<%= defectListId[i] %>')"
+            >
+              <%= defectObject[defectListId[i]].name%>
+            </button>
+            <%}%>
+          </div>
+          <div class="sub-defect-title-name">
+            <p>Sub-Defect :</p>
+          </div>
+          <div class="sub-content">
+            <%for ( let i=0; i < defectListId.length; i++){ subDefectListId =
+            Object.keys(defectObject[defectListId[i]]['subdefects']);
+            subDefectListName =
+            Object.values(defectObject[defectListId[i]]['subdefects']); %>
+            <div
+              id="<%= defectListId[i] %>"
+              class="defectName"
+              style="display: none"
+            >
+              <div class="sub-defects-category-content">
+                <%for (let j = 0; j < subDefectListId.length; j++){%>
+                <button
+                  type="button"
+                  class="sub-defect-category <%= defectListId[i] %>-buttons"
+                  style="background-color: black; color: white"
+                  onclick="subdefectCategorySwitch(event , '<%= defectListId[i] %>-<%= subDefectListId[j] %>')"
+                >
+                  <%= subDefectListName[j] %>
+                </button>
+                <%}%>
+              </div>
+              <div class="save_reset_container">
+                <div class="zones-title-name">Zones :</div>
+                <div class="save-reset-content">
+                  <button
+                    type="button"
+                    class="save-button"
+                    onclick="validate()"
+                    style="background-color: black; color: white"
+                  >
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    class="reset-button"
+                    onclick="handleReset()"
+                    style="background-color: black; color: white"
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+              <div class="Zone_Container">
+                <div id="zone-division<%= i+1 %>">
+                  <%for(let k = 0; k < subDefectListId.length; k++){%>
+                  <div
+                    id="<%= defectListId[i] %>-<%= subDefectListId[k] %>"
+                    class="<%= defectListId[i] %>"
+                    style="display: none"
+                  >
+                    <% for (let l = 0; l < ShortlistedSubCategoryOptions.length;
+                    l++){%>
+                    <div
+                      class="<%= categoryId %>_<%= subcategoryId %><%= ShortlistedSubCategoryOptions[l] %>"
+                      id="<%= categoryId %>_<%= subcategoryId %>_<%= defectListId[i] %>_<%= subDefectListId[k] %>_<%= l+1 %>"
+                    >
+                      <input
+                        type="number"
+                        inputmode="numeric"
+                        class="<%= categoryId %>_<%= subcategoryId %>_<%= defectListId[i] %>_<%= subDefectListId[k] %>_<%= l+1 %> defectInputTag"
+                        name="<%= defectObject[defectListId[i]].name %>_<%= subDefectListName[k] %>_<%= ShortlistedSubCategoryOptions[l] %>"
+                        min="1"
+                      />
+                      <div class="zone-number">
+                        <%= ShortlistedSubCategoryOptions[l] %>
+                      </div>
+                    </div>
+                    <%}%>
+                  </div>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+            <%}%>
+          </div>
+        </form>
+      </div>
+      <div>
+        <form action="/follower" id="followerForm" method="post">
+          <input
+            type="hidden"
+            id="currentUser"
+            name="currentUser"
+            value="<%= currentUser %>"
+          />
+          <input
+            type="hidden"
+            id="currentEmpID"
+            name="currentEmpID"
+            value="<%= currentEmpID %>"
+          />
+          <input
+            type="hidden"
+            id="companyName"
+            name="companyName"
+            value="<%= companyName %>"
+          />
+          <input type="hidden" class="token" name="token" value="" />
+        </form>
+        <form action="/firstlayer" method="post" id="firstLayerform">
+          <input
+            type="hidden"
+            id="currentUser"
+            name="currentUser"
+            value="<%= currentUser %>"
+          />
+          <input
+            type="hidden"
+            id="currentEmpID"
+            name="currentEmpID"
+            value="<%= currentEmpID %>"
+          />
+          <input
+            type="hidden"
+            id="companyName"
+            name="companyName"
+            value="<%= companyName %>"
+          />
+          <input
+            type="hidden"
+            id="currentBodyNumber"
+            name="currentBodyNumber"
+            value="<%= currentBodyNumber %>"
+          />
+          <input
+            type="hidden"
+            id="defectBodyNumberStatus"
+            name="defectBodyNumberStatus"
+            value="<%= defectBodyNumberStatus %>"
+          />
+          <input type="hidden" class="token" name="token" value="" />
+        </form>
+        <form action="/secondlayer" method="post" id="secondLayerForm">
+          <input
+            type="hidden"
+            id="currentUser"
+            name="currentUser"
+            value="<%= currentUser %>"
+          />
+          <input
+            type="hidden"
+            id="currentEmpID"
+            name="currentEmpID"
+            value="<%= currentEmpID %>"
+          />
+          <input
+            type="hidden"
+            id="companyName"
+            name="companyName"
+            value="<%= companyName %>"
+          />
+          <input
+            type="hidden"
+            id="currentBodyNumber"
+            name="currentBodyNumber"
+            value="<%= currentBodyNumber %>"
+          />
+          <input
+            type="hidden"
+            id="defectBodyNumberStatus"
+            name="defectBodyNumberStatus"
+            value="<%= defectBodyNumberStatus %>"
+          />
+          <input
+            type="hidden"
+            id="selectedCategory"
+            name="selectedCategory"
+            value="<%= selectedCategory %>"
+          />
+          <input type="hidden" name="mode" id="mode" value="" />
+          <input type="hidden" class="token" name="token" value="" />
+        </form>
+      </div>
+    </div>
+
+    <script>
+      console.log('token: ', localStorage.getItem('token'));
+
+      const tokenElements = document.getElementsByClassName('token');
+
+      Object.values(tokenElements).map((tokenElement) => {
+        tokenElement.value = localStorage.getItem('token');
+      });
+
+      modeDOM = document.getElementsByClassName('mode')[0];
+      var mode = '<%= mode %>';
+      if (mode == 'online') {
+        modeDOM.checked = true;
+        document.getElementById('mode_status').innerHTML = 'Online';
+      } else {
+        modeDOM.checked = false;
+        document.getElementById('mode_status').innerHTML = 'Offline';
+      }
+      function dynamicText() {
+        if (!modeDOM.checked) {
+          modeDOM.checked = false;
+          document.getElementById('mode_status').innerHTML = 'Offline';
+          mode = 'offline';
+        } else {
+          modeDOM.checked = true;
+          document.getElementById('mode_status').innerHTML = 'Online';
+          mode = 'online';
+        }
+      }
+
+      async function transmit(selectedSubCategory) {
+        var mode = 'online';
+        if (!modeDOM.checked) {
+          mode = 'offline';
+        }
+        const secondLayerForm = document.getElementById('secondLayerForm');
+        document.getElementById('selectedSubCategory').value =
+          selectedSubCategory;
+        document.getElementById('mode').value = mode;
+        secondLayerForm.submit();
+      }
+
+      // first defect button format (autoselect and auto display)
+      document
+        .getElementById('<%= defectListId[0] %>')
+        .removeAttribute('style');
+      document.getElementById(
+        '<%= defectListId[0] %>-main-defect-button'
+      ).style.background = '#ffffff';
+      document.getElementById(
+        '<%= defectListId[0] %>-main-defect-button'
+      ).style.color = '#000000';
+
+      let defectObj = JSON.parse('<%- JSON.stringify(defectObject) %>');
+      const mainDefectId = Object.keys(defectObj);
+
+      // first sub-defect button format (autoselect and auto display)
+      for (let i = 0; i < mainDefectId.length; i++) {
+        document
+          .getElementById(
+            mainDefectId[i] +
+              '-' +
+              Object.keys(defectObj[mainDefectId[i]].subdefects)[0]
+          )
+          .removeAttribute('style');
+        document.getElementsByClassName(
+          mainDefectId[i] + '-buttons'
+        )[0].style.background = '#ffffff';
+        document.getElementsByClassName(
+          mainDefectId[i] + '-buttons'
+        )[0].style.color = '#000000';
+      }
+
+      console.log(
+        `url(./bodyParts/<%= categoryId %>_<%= subcategoryId %>.jpg)`
+      );
+
+      // code to set corresponding background image for zone-divisions
+      for (let i = 1; i <= mainDefectId.length; i++) {
+        // console.log(`<%= categoryId %>_<%= subcategoryId %>`);
+        document.getElementById('zone-division' + i).style.backgroundImage =
+          'url(./bodyParts/<%= categoryId %>_<%= subcategoryId %>.jpg)';
+      }
+
+      function defectCategorySwitch(clickedDefect) {
+        var i;
+        var defectCategory = document.getElementsByClassName('defectName');
+
+        //code block to displaying the selected defect division only
+        for (i = 0; i < defectCategory.length; i++) {
+          defectCategory[i].style.display = 'none';
+        }
+        document.getElementById(clickedDefect).style.display = 'block';
+
+        //code block to highlight the selected defect button only
+        var y = document.getElementsByClassName(event.target.className);
+        for (i = 0; i < y.length; i++) {
+          y[i].style.background = '#000000';
+          y[i].style.color = '#ffffff';
+        }
+        event.target.style.background = '#ffffff';
+        event.target.style.color = '#000000';
+      }
+
+      function subdefectCategorySwitch(event, clickedSubDefect) {
+        var i;
+        var subDefectCategory = document.getElementsByClassName(
+          event.target.parentElement.parentElement.id
+        );
+
+        // code block to displaying the selected sub-defect division only
+        for (i = 0; i < subDefectCategory.length; i++) {
+          subDefectCategory[i].style.display = 'none';
+        }
+        document.getElementById(clickedSubDefect).style.display = 'block';
+
+        //code block to highlight the selected sub-defect button only
+        var y = document.getElementsByClassName(
+          event.target.parentElement.parentElement.id + '-buttons'
+        );
+        for (i = 0; i < y.length; i++) {
+          y[i].style.background = '#000000';
+          y[i].style.color = '#ffffff';
+        }
+        event.target.style.background = '#ffffff';
+        event.target.style.color = '#000000';
+      }
+
+      function validate() {
+        var defectLayerFormInputElements =
+          document.getElementsByClassName('defectInputTag');
+
+        console.log(
+          'defectLayerFormInputElements: ',
+          defectLayerFormInputElements
+        );
+        var checkBoxNotSelectedCount = 0;
+        Object.values(defectLayerFormInputElements).map((singleInput) => {
+          if (!singleInput.value) {
+            checkBoxNotSelectedCount++;
+          }
+        });
+        console.log('checkBoxNotSelectedCount: ', checkBoxNotSelectedCount);
+        console.log(
+          'defectLayerFormInputElements.length: ',
+          defectLayerFormInputElements.length
+        );
+        if (checkBoxNotSelectedCount == defectLayerFormInputElements.length) {
+          alert('No Zones were selected as defect. Atleast select a zone');
+        } else {
+          handleSave();
+        }
+      }
+
+      async function handleSave() {
+        var defectLayerFormData = {};
+        var defectLayerFormInputElements =
+          document.getElementsByClassName('defectInputTag');
+
+        Object.values(defectLayerFormInputElements).map((singleInput) => {
+          if (singleInput.value) {
+            defectLayerFormData[singleInput.name] = singleInput.value;
+          }
+        });
+
+        console.log('defectLayerFormData: ', defectLayerFormData);
+
+        //disabling onclick function of the save button, :- save button can be clicked only once.
+        const saveButton = document.getElementsByClassName('save-button')[0];
+
+        const zoneCheckerResponse = await fetch('/zonechecker', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            defectObj: defectLayerFormData,
+            mode,
+            currentUser: '<%= currentUser %>',
+            currentEmpID: '<%= currentEmpID %>',
+            companyName: '<%= companyName %>',
+            currentBodyNumber: '<%= currentBodyNumber %>',
+            defectBodyNumberStatus: '<%= defectBodyNumberStatus %>',
+            selectedCategory: '<%= selectedCategory %>',
+            selectedSubCategory: '<%= selectedSubCategory %>',
+          }),
+        });
+
+        const zoneCheckerResponseObject = await zoneCheckerResponse.json();
+
+        console.log('zoneCheckerResponseObject: ', zoneCheckerResponseObject);
+
+        let message = 'Defect Report.Are you sure want to make changes\n\n';
+
+        // making up zone report for prompt box
+        for (let i in zoneCheckerResponseObject.data) {
+          message = message + i + ': \n';
+          for (let j in zoneCheckerResponseObject.data[i]) {
+            message = message + ' ' + j.replace('_', '') + ': ';
+            for (let k in zoneCheckerResponseObject.data[i][j]) {
+              message += k + '->';
+              for (let l in zoneCheckerResponseObject.data[i][j][k]) {
+                message +=
+                  l + `(${zoneCheckerResponseObject.data[i][j][k][l]})`;
+                if (
+                  Object.keys(zoneCheckerResponseObject.data[i][j][k]).length >
+                  1
+                ) {
+                  message += ',';
+                }
+              }
+              if (
+                Object.keys(zoneCheckerResponseObject.data[i][j]).length > 1 &&
+                Object.keys(zoneCheckerResponseObject.data[i][j][k]).length == 1
+              ) {
+                message += ',';
+              }
+            }
+            message += '\n';
+          }
+          message += '\n';
+        }
+        console.log('message: ', message);
+
+        if (confirm(message) == true) {
+          const mainResponse = await fetch('/receive-thirdLayer-temp', {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              defectObj: defectLayerFormData,
+              mode,
+              currentUser: '<%= currentUser %>',
+              currentEmpID: '<%= currentEmpID %>',
+              companyName: '<%= companyName %>',
+              currentBodyNumber: '<%= currentBodyNumber %>',
+              defectBodyNumberStatus: '<%= defectBodyNumberStatus %>',
+              selectedCategory: '<%= selectedCategory %>',
+              selectedSubCategory: '<%= selectedSubCategory %>',
+            }),
+          });
+
+          const mainResponseObject = await mainResponse.json();
+
+          console.log('mainResponseObject: ', mainResponseObject);
+
+          let finalMessage =
+            'Defects Saved. Click OK to add more defects to the same body number\n\n';
+
+          // making up zone report for prompt box
+          for (let i in zoneCheckerResponseObject.data) {
+            finalMessage = finalMessage + i + ': \n';
+            for (let j in zoneCheckerResponseObject.data[i]) {
+              finalMessage = finalMessage + ' ' + j.replace('_', '') + ': ';
+              for (let k in zoneCheckerResponseObject.data[i][j]) {
+                finalMessage += k + '->';
+                for (let l in zoneCheckerResponseObject.data[i][j][k]) {
+                  finalMessage +=
+                    l + `(${zoneCheckerResponseObject.data[i][j][k][l]})`;
+                  if (
+                    Object.keys(zoneCheckerResponseObject.data[i][j][k])
+                      .length > 1
+                  ) {
+                    finalMessage += ',';
+                  }
+                }
+                if (
+                  Object.keys(zoneCheckerResponseObject.data[i][j]).length >
+                    1 &&
+                  Object.keys(zoneCheckerResponseObject.data[i][j][k]).length ==
+                    1
+                ) {
+                  finalMessage += ',';
+                }
+              }
+              finalMessage += '\n';
+            }
+            finalMessage += '\n';
+          }
+          console.log('finalMessage: ', finalMessage);
+
+          if (confirm(finalMessage) == false) {
+            document.getElementById('followerForm').submit();
+          } else {
+            document.getElementById('firstLayerform').submit();
+          }
+        } else {
+          event.preventDefault();
+          return false;
+        }
+      }
+
+      function handleReset() {
+        document.getElementById('defectLayerForm').reset();
+      }
+
+      function logout() {
+        localStorage.removeItem('token');
+        Object.values(tokenElements).map((tokenElement) => {
+          tokenElement.value = '';
+        });
+        document.getElementsByClassName('logoutButton')[0].submit();
+      }
+    </script>
+  </body>
+</html>

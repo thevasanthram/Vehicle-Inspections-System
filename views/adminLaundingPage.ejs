@@ -1,0 +1,3321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <form action="/" method="get" id="homeForm"></form>
+    <script>
+      (function tokenValidate() {
+        console.log('tokenValidating');
+        if (localStorage.getItem('token') == null) {
+          console.log('invalid');
+          document.getElementById('homeForm').submit();
+        } else {
+          console.log('valid');
+        }
+      })();
+    </script>
+
+    <link rel="stylesheet" href="./adminLaundingPage.css">
+    <link rel="stylesheet" href="./adminLandingPage2.css">
+    <title>Data Entry System</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+     rel="stylesheet">
+     <script  src="https://cdn.tailwindcss.com"></script>
+    <script src="../resources/tailwind.config.js"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
+    <script src="./canvasjs.min.js"></script>
+    <!-- <script src="/Data Entry Versions/Data_Entry/node_modules/chart.js"></script> -->
+    <script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.min.js'></script>
+    <!-- html-to-pdfmake file: -->
+    <script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/browser.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://github.com/MrRio/jsPDF/tree/master/src/modules"></script>
+    <script src="https://github.com/MrRio/jsPDF/tree/master/src/libs"></script>
+    <script src="jspdf.min.js"></script>
+    <script src="jspdf.plugin.autotable.min.js"></script>
+    <script src='https://unpkg.com/jspdf-autotable@2.3.2'></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js" > </script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js" > </script>
+
+
+  </head>
+  <body >
+      <div id="data_entry" >
+        <div class="header" style="position: sticky;top: 0px;z-index: 2;">
+          <div style="display: flex">
+            <img
+              src="./icons/navBarIcon.png"
+              title="Switch Mode"
+              id="navBarIcon"
+              alt="Switch Mode"
+              style="cursor: pointer; width: 8%; margin: 0.5% 3%"
+            />
+            <div class="heading">Data Entry System</div>
+          </div>
+            <form id="btn" action="/logout" method="get" class="logoutButton">
+              <div class="admin" id="user-mode-name"><%= currentUser %></div>
+              <button
+                type="button"
+                onclick="logout()"
+                style="
+                  background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+                "
+                class="button-logout bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+              >
+                LOGOUT
+              </button>
+            </form>
+        </div>
+
+        <!-- ! ........Side Nav Bar Menu......... -->
+        <div id="navBarDivision">
+          <div id="UserProfileDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)">
+            <div id="user_Profile" class="category">User Profile</div>
+          </div>
+          <div id="DataEntryDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)">
+            <div id="dataEntry" class="category"> Data Entry</div>
+          </div>
+          <div id="ReportGenerationDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)">
+            <div id="reportGeneration" class="category">Report Generation </div>
+          </div>
+          <div id="AdministrationDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)" 
+            >
+            <div id="administration" class="category">Administration</div>
+            <!-- <ul style="text-align: center; display: none;">
+              <li style="padding-right: 5%;  font-size: 120%;">User Management </li>
+              <li style="padding-right: 26%;  font-size: 120%;"> Dashboard</li>
+              <li style="padding-right: 26%;  font-size: 120%;">Admin Log</li>
+            </ul> -->
+          </div>
+          <div id="AdminLogDiv"
+          onmouseover="onmouseoverBGColor(event)"
+          onmouseout="onmouseoutBGColor(event)"
+          onclick="handleFormSubmit(event)"
+            >
+            <div id="adminLog" class="category">Admin Logs</div>
+          </div>
+          <div id="DashboardDiv"
+            onmouseover="onmouseoverBGColor(event)"
+            onmouseout="onmouseoutBGColor(event)"
+            onclick="handleFormSubmit(event)"
+          >
+            <div id="activityLog" class="category">Dashboard</div>
+          </div>
+          <div id="UpdateSectionDiv"
+                onmouseover="onmouseoverBGColor(event)"
+                onmouseout="onmouseoutBGColor(event)"
+                onclick="handleFormSubmit(event)"
+            >
+                <div id="update" class="category">Update Section</div>
+            </div>
+        </div>
+
+      <div id="adminAccessDeniedDivision">
+      <div class="adminAccessDeniedDivisionModalContent">
+        <!-- <span
+          class="close"
+          onclick="(() => {document.getElementById('adminAccessDeniedDivision').style.visibility = 'hidden'})()"
+          >&times;</span
+        > -->
+        <div id="adminAccessDeniedDivisionHolder" >
+          <p
+            id="adminAccessDeniedDivisionMessage"
+            style="font-weight: 600; font-size: large"
+          >
+            Unauthorized Access. Only Admin has privilege
+          </p>
+          <div id="editEmployeeChartAccessEnsureButton">
+            <button
+              class="text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2"
+              onclick="(() => {document.getElementById('adminAccessDeniedDivision').style.visibility = 'hidden'})()"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <form action="/profile" method="post" id="userProfileForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/follower" id="followerForm" method="post">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/admin" id="adminForm" method="post">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/adminLog" method="post" id="adminLogForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/dashboard" method="post" id="dashboardForm">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+      <form action="/updateSection" method="post" id="update_Section">
+        <input
+          type="hidden"
+          id="currentUser"
+          name="currentUser"
+          value="<%= currentUser %>"
+        />
+        <input
+          type="hidden"
+          id="currentEmpID"
+          name="currentEmpID"
+          value="<%= currentEmpID %>"
+        />
+        <input
+          type="hidden"
+          id="companyName"
+          name="companyName"
+          value="<%= companyName %>"
+        />
+        <input type="hidden" class="token" name="token" value="" />
+      </form>
+        <div id="container" style="display: none; position: sticky; top: 70px; z-index: 2;" >
+          <div class="filtering-condition-content" >
+            <div class="filtering-condition-form" >
+              <form  action="/filtered-result-bar" method="post" class="form" id="filterForm">
+                <div id="title-name-content"> 
+                  Filtering Condition<strong>:</strong>
+                </div>
+                <div class="Date_Filter">
+                  <div class="from-date-condition-content">
+                      <label class="label_From" >From<strong>:</strong></label> 
+                      <input type="date" name="fromDateCondition" id="from-date-condition-input"  />
+                  </div>
+                  <div class="to-date-condition-content">
+                      <label class="label_To" >To<strong>:</strong></label>
+                      <input type="date" name="toDateCondition" id="to-date-condition-input"  />
+                  </div>
+                </div>
+                  <div class="chart-condition" id="chart-condition-select-content-1"><p class="Empty_Tag"><br/><br><br></p>
+                    <p id="chart-Condition-topic" style="display:inline-block"> Report<strong>:</strong></p>
+                    <select name="chartCondition" id="chart-condition-input" required>
+                      <% for(let i = 0; i < accessibleReport.length; i++){ %>
+                        <option value="<%= accessibleReport[i] %>"><%= accessibleReport[i] %></option>
+                      <%}%>
+                    </select>
+                  </div>
+                <label for="toggle_switch" class="toggle_content flex items-center cursor-pointer">
+                  <div class="relative">
+                    <input type="checkbox" id="toggle_switch" class="sr-only modeNavBar w-4 " onclick="navBarToggleSwitch()">
+                    <div class="block bg-gray-900 w-14 h-8 rounded-full"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                  </div>
+                  <div id="modeNameNavBar" class="ml-1 text-gray-900" style="font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 500;">
+                    Online 
+                  </div>
+                </label>
+                <div class="button_container"><p class="Empty_Tag"><br/></p>
+                  <button type="button" id="filtering-condition-submit-button" onclick="validate('bar')"
+                  style="background: linear-gradient(
+                  to right, #0f0c29, #302b63, #24243e 
+                  );"
+                  class="generate_btn bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-1 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                  >Generate</button>
+                  <button type="button" id="htmlToPdf" onclick="UniPdf()"
+                  style="background: linear-gradient(
+                  to right, #0f0c29, #302b63, #24243e 
+                  );"
+                  class="download_btn bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-1 border-b-4 border-blue-700 hover:border-blue-500 rounded"         
+                  >Export</button>
+                </div>    
+              </div>
+            </form>
+          </div> 
+        </div>
+       	<!-- Tailwind Card Sample Code -->
+          <div class="flex justify-center mt-20 l filter-container" >
+            <div id="filter-container"
+             class="block p-6 rounded-3xl shadow-lg   " >
+             <form  action="/filtered-result-card" method="post" id="filterForm">
+              <div class="card-toggle_container flex " >
+                <h5  class="card-title-name   underline leading-tight ">Filtering Condition</h5>
+                <!-- Toggle Switch for online / offline -->
+                <div id="toggle" class="mt-8 ml-24">
+                  <div class="flex w-full mb-12">
+                    <label for="toggle_switch_outside" class="flex items-center cursor-pointer">
+                      <div class="relative">
+                        <input type="checkbox" id="toggle_switch_outside" class="sr-only modeTailwind" onclick="tailwindToggleSwitch()">
+                        <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                      </div>
+                      <div class="ml-2 text-gray-800 font-medium text-2xl modeNameTailwind">
+                        Online
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+                <div class="footer ml-2 -mt-12 " >
+                    <div id="card-date" >
+                        <div class="card-from-date-condition-content">From :
+                            <input type="date" name="fromDateCondition"
+                            id="from-date-condition-input-card">
+                        </div>
+                        <div class="card-to-date-condition-content ">To :
+                            <input type="date" name="toDateCondition"
+                            id="to-date-condition-input-card" placeholder="select date" >
+                         </div>
+                    </div>
+                    <div id="chart-condition-select-content"  >
+                      <p class="Card-Report-heading" style="font-size: 1.25rem; " >Report :</p>
+                      <select name="chartCondition" id="chart-condition-input-card" required >
+                        <% for(let i = 0; i < accessibleReport.length; i++){ %>
+                          <option value="<%= accessibleReport[i] %>"><%= accessibleReport[i] %></option>
+                        <%}%>
+                      </select>
+                    </div>
+                    <div id="card-submit" >
+                        <button onClick = "validate('card')" type="button" id="filtering-condition-submit-button"
+                        style="background: linear-gradient(
+                          to right, #0f0c29, #302b63, #24243e
+                        );"
+                        class="inline-block px-6 py-2.5 text-white font-medium text-xl leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-1"  
+                        data-mdb-ripple="true" data-mdb-ripple-color="light" >
+                            GENERATE
+                        </button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div  id="reportParent" class="report-content">
+            <div id="report-topic">
+              <p id="report-topic-data" style="font-size: 150%; margin-left: 2%;"></p>
+            </div>
+            <div id="reportChild" class="report-content-data">
+            </div>
+          </div>
+        </div>
+  </body>
+
+    <script>
+
+      console.log('token: ', localStorage.getItem('token'));
+
+      const tokenElements = document.getElementsByClassName('token');
+
+      Object.values(tokenElements).map((tokenElement) => {
+        tokenElement.value = localStorage.getItem('token');
+      });
+
+      // by default, mode will be online
+      document.getElementById('toggle_switch_outside').checked = true
+      document.getElementById('toggle_switch').checked = true
+
+      document.addEventListener('click', hideAndSeek);
+
+      function hideAndSeek(event) {
+        const navBarDivision = document.getElementById('navBarDivision');
+        if (event.target.id != 'navBarIcon') {
+          navBarDivision.style.display = 'none';
+        } else {
+          if (
+            navBarDivision.style.display == 'none' ||
+            navBarDivision.style.display == ''
+          ) {
+            navBarDivision.style.display = 'inline-block';
+          } else if (navBarDivision.style.display == 'inline-block') {
+            navBarDivision.style.display = 'none';
+          }
+        }
+      }
+
+      function onmouseoverBGColor(event) {
+        event.target.style.backgroundColor = '#075154';
+      }
+
+      function onmouseoutBGColor(event) {
+        if (event.target.id != 'reportGeneration') {
+          event.target.style.backgroundColor = '#4ca1af';
+        }
+      }
+
+      function handleFormSubmit(event) {
+        var empStatus = '<%= emp_Status %>';
+
+        if (event.target.id == 'dataEntry') {
+          document.getElementById('followerForm').submit();
+        } else if (event.target.id == 'administration') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        }else if (event.target.id == 'update') {
+          if (empStatus == 'admin') {
+            document.getElementById('update_Section').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'adminLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('adminLogForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'activityLog') {
+          if (empStatus == 'admin') {
+            document.getElementById('dashboardForm').submit();
+          } else {
+            document.getElementById(
+              'adminAccessDeniedDivision'
+            ).style.visibility = 'visible';
+          }
+        } else if (event.target.id == 'user_Profile') {
+          document.getElementById('userProfileForm').submit();
+        }
+      }
+
+      function generateRandomColor(colorSet) {
+        let maxVal = 0xffffff; // 16777215
+        let randomNumber = Math.random() * maxVal;
+        randomNumber = Math.floor(randomNumber);
+        randomNumber = randomNumber.toString(16);
+        let randColor = randomNumber.padStart(6, 0);
+        if (colorSet.includes(randColor)) {
+          generateRandomColor(colorSet);
+        } else {
+          return `#${randColor.toUpperCase()}`;
+        }
+      }
+
+      var tbl;
+      var firstSection;
+      var mode = 'offline'
+
+      function tailwindToggleSwitch(){
+        var modeDOM = document.getElementsByClassName('modeTailwind')[0]
+
+        if(modeDOM.checked){
+          document.getElementsByClassName('modeNameTailwind')[0].innerHTML = 'Online'
+          document.getElementsByClassName('modeNavBar')[0].checked = true
+          document.getElementById('modeNameNavBar').innerHTML = 'Online'
+        }else{
+          document.getElementsByClassName('modeNameTailwind')[0].innerHTML = 'Offline'
+          document.getElementsByClassName('modeNavBar')[0].checked = false
+          document.getElementById('modeNameNavBar').innerHTML = 'Offline'
+        }
+      }
+
+      function navBarToggleSwitch(){
+        var modeDOM = document.getElementsByClassName('modeNavBar')[0]
+
+        if(modeDOM.checked){
+          document.getElementById('modeNameNavBar').innerHTML = 'Online'
+          document.getElementsByClassName('modeTailwind')[0].checked = true
+          document.getElementsByClassName('modeNameTailwind')[0].innerHTML = 'Online'
+        }else{
+          document.getElementById('modeNameNavBar').innerHTML = 'Offline'
+          document.getElementsByClassName('modeTailwind')[0].checked = false
+          document.getElementsByClassName('modeNameTailwind')[0].innerHTML = 'Offline'
+        }
+      }
+
+      document.getElementById('from-date-condition-input-card').valueAsDate = new Date();
+      document.getElementById('to-date-condition-input-card').valueAsDate = new Date();
+
+      // Function for GENERATE Button
+      function validate(ownerForm){
+        if(ownerForm == 'card'){
+          document.getElementById('from-date-condition-input').value = document.getElementById('from-date-condition-input-card').value
+          document.getElementById('to-date-condition-input').value = document.getElementById('to-date-condition-input-card').value
+          document.getElementById('chart-condition-input').value = document.getElementById('chart-condition-input-card').value
+        }
+        var filterForm = document.getElementById('filterForm')
+        let container = document.getElementById('container');
+        let filter_container = document.getElementsByClassName('filter-container')[0];
+        container.style.display = 'inline-block';
+        filter_container.style.display = 'none';
+        if (!filterForm.checkValidity()) {
+          if (filterForm.reportValidity) {
+            filterForm.reportValidity();
+          } else {
+            alert(msg.ieErrorForm);
+          }
+        } else {
+          var reportContentData = document.getElementsByClassName("report-content-data")[0];
+          var childNodes = reportContentData.childNodes;
+          Object.values(childNodes).map((child) => child.remove())
+          if(document.getElementById('tabDivision')){
+            console.log('entering')
+            document.getElementById('report-topic').removeChild(document.getElementById('tabDivision'))
+          }
+          document.getElementById('report-topic-data').innerHTML = ''
+          generateReport()
+        }
+      }
+
+      function generateReport(){
+        // checking mode
+        var modeDOM = document.getElementsByClassName('modeTailwind')[0]
+        if(modeDOM.checked){
+          mode = 'online'
+        }else{
+          mode = 'offline'
+        }
+        console.log('mode: ',mode)
+        var report = document.getElementById('chart-condition-input').value;
+        document.getElementById('report-topic').style.color = '#ffffff'
+        document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+        switch(report){
+          case 'DPV (Defects Per Vehicle) Report': dpv(); break;
+          case 'Master Report': master(); break;
+          case 'Main Pareto Report': mainPareto(); break;
+          case 'Pareto Report': pareto(); break;
+          case 'Surface Summary': individualSummary('Surface',['Dent','Bump','Burrs','Spatters','Others']); break;
+          case 'Body Fitting Summary': individualSummary('Body Fitting',['Body Fitting 1','Body Fitting 2','Body Fitting 3','Body Fitting Others']); break;
+          case 'Missing & Wrong Part Summary': individualSummary('Missing & Wrong Part',['Missing Part', 'Wrong Part']); break;
+          case 'Welding Summary': individualSummary('Welding', ['Welding Part 1','Welding Part 2','Welding Part 3','Welding Part Others']); break;
+          case 'Water Leak Summary': individualSummary('Water Leak',['Water Leak 1','Water Leak 2','Water Leak Others']); break;
+          case 'Color Map': colorMap(); break;
+          default: break;
+        }
+      }
+
+      function dpv(){
+        var fromDate = document.getElementById('from-date-condition-input').value
+        var toDate = document.getElementById('to-date-condition-input').value
+        var querySender = {
+          'UB': [`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Surface';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Body Fitting';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Missing & Wrong Part';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Welding';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Water Leak';`],
+          'MB': [`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Water Leak'`],
+          'SB SA': [`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Water Leak'`],
+          'SB ML': [`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Water Leak'`],
+          'SM': [`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Water Leak'`],
+        }
+
+        fetch('/reportDataProvider', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            querySender,
+            fromDate,
+            toDate,
+            mode,
+          })
+        }).then((response) => response.json()).then((data) => {
+          console.log(data.data)
+
+          document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+
+          var reportContentData = document.getElementsByClassName('report-content-data')
+          reportContentData[0].style.color = '#ffffff'
+
+
+          tbl = document.createElement('table');
+          tbl.id="my-table"
+          // tbl.style.width = '80%';
+          // tbl.style.margin = '5% 10%'
+          // tbl.style.border = '1px solid #64666a'
+          // tbl.style.borderRadius = '4px'
+          // tbl.setAttribute('border', '1');
+          reportContentData[0].appendChild(tbl)
+
+          var tblRowforHeading = document.createElement('tr')
+          tbl.appendChild(tblRowforHeading)
+
+          var tableHeading = ['Category','Surface','Body Fitting','Missing & Wrong Part', 'Welding', 'Water Leak', 'Total', 'Total DPV', 'Surface DPV','Body Fitting DPV','Missing & Wrong Part DPV', 'Welding DPV', 'Water Leak DPV']
+
+          tableHeading.map( (singleHeading) => {
+            var tblHeading = document.createElement('th')
+            tblHeading.style.backgroundColor = '#242323'
+            tblHeading.style.width = '5%'
+            tblHeading.style.color = '#f5f0f0'
+            tblHeading.style.padding = '1%'
+            tblHeading.style.fontSize = '100%'
+            tblHeading.innerHTML = singleHeading
+            tblRowforHeading.appendChild(tblHeading)
+          })
+
+          var horizontalTotalArray = [0,0,0,0,0]
+          var horizontalTotalDPVArray = [0,0,0,0,0]
+          var individualDefectTotal = [0,0,0,0,0]
+          var individualDefectDPV = [0,0,0,0,0]
+
+
+          var i=0;
+          for(let [key,value] of Object.entries(data.data)){
+            var tblRowforData = document.createElement('tr')
+            tbl.appendChild(tblRowforData)
+
+            var tblDataforDefectName = document.createElement('td')
+            tblDataforDefectName.innerHTML = key
+            tblDataforDefectName.style.backgroundColor = '#242323'
+            tblDataforDefectName.style.color = '#f5f0f0'
+            tblDataforDefectName.style.padding = '0.5%'
+            tblRowforData.appendChild(tblDataforDefectName)
+
+            for(let j=0; j< value.length; j++){
+              var tblDataforDefectName = document.createElement('td')
+              tblDataforDefectName.innerHTML = value[j]
+              tblDataforDefectName.style.backgroundColor = '#f5f0f0'
+              tblDataforDefectName.style.color = '#242323'
+              tblDataforDefectName.style.padding = '0.5%'
+              tblDataforDefectName.style.textAlign = 'center'
+              tblRowforData.appendChild(tblDataforDefectName)
+
+              horizontalTotalArray[i] += value[j]
+
+              individualDefectTotal[j] += value[j]
+            }
+
+            // Total column
+            var tblDataforTotal = document.createElement('td')
+            tblDataforTotal.innerHTML = horizontalTotalArray[i]
+            tblDataforTotal.style.backgroundColor = '#f5f0f0'
+            tblDataforTotal.style.color = '#242323'
+            tblDataforTotal.style.padding = '0.5%'
+            tblDataforTotal.style.textAlign = 'center'
+            tblRowforData.appendChild(tblDataforTotal)
+
+            // Total DPV column
+            var tblDataforTotalDPV = document.createElement('td')
+            horizontalTotalDPVArray[i] = (horizontalTotalArray[i]/data.uniqueBodyNumberData.length)
+            if(isNaN(horizontalTotalDPVArray[i])){
+              tblDataforTotalDPV.innerHTML = 0
+            }else{
+              tblDataforTotalDPV.innerHTML = ((horizontalTotalDPVArray[i] % 1) != 0) ? horizontalTotalDPVArray[i].toFixed(2): horizontalTotalDPVArray[i]
+            }
+            tblDataforTotalDPV.style.backgroundColor = '#f5f0f0'
+            tblDataforTotalDPV.style.color = '#242323'
+            tblDataforTotalDPV.style.padding = '0.5%'
+            tblDataforTotalDPV.style.textAlign = 'center'
+            tblRowforData.appendChild(tblDataforTotalDPV)
+
+            // Individual defect DPV
+            for(let j=0; j< value.length; j++){
+              var tblDataforIndividualDefectDPV = document.createElement('td')
+              let individualDefectTotalDPV = value[j]/data.uniqueBodyNumberData.length
+              if(isNaN(individualDefectTotalDPV)){
+                tblDataforIndividualDefectDPV.innerHTML = 0
+              }else{
+                tblDataforIndividualDefectDPV.innerHTML = ((individualDefectTotalDPV % 1) != 0) ? individualDefectTotalDPV.toFixed(2): individualDefectTotalDPV;
+              }
+              tblDataforIndividualDefectDPV.style.backgroundColor = '#f5f0f0'
+              tblDataforIndividualDefectDPV.style.color = '#242323'
+              tblDataforIndividualDefectDPV.style.padding = '0.5%'
+              tblDataforIndividualDefectDPV.style.textAlign = 'center'
+              tblRowforData.appendChild(tblDataforIndividualDefectDPV)
+
+              individualDefectDPV[j] += individualDefectTotalDPV
+            }
+            console.log('individualDefectDPV: ', individualDefectDPV[i])
+
+            // increamenting iterator
+            i++;
+          }
+
+          var tblRowforTotal = document.createElement('tr')
+          tbl.appendChild(tblRowforTotal)
+
+          var tblDataforTotal = document.createElement('td')
+          tblDataforTotal.innerHTML = 'Total'
+          tblDataforTotal.style.backgroundColor = '#242323'
+          tblDataforTotal.style.color = '#f5f0f0'
+          tblDataforTotal.style.padding = '0.5%'
+          tblRowforTotal.appendChild(tblDataforTotal)
+
+          for(let j = 0; j < individualDefectTotal.length; j++){
+            var tblDataforIndividualDefect = document.createElement('td')
+            tblDataforIndividualDefect.innerHTML = individualDefectTotal[j]
+            tblDataforIndividualDefect.style.backgroundColor = '#f5f0f0'
+            tblDataforIndividualDefect.style.color = '#242323'
+            tblDataforIndividualDefect.style.padding = '0.5%'
+            tblDataforIndividualDefect.style.textAlign = 'center'
+            tblRowforTotal.appendChild(tblDataforIndividualDefect)
+          }
+
+          var tblDataforHorizontalTotal = document.createElement('td')
+          const horizontalTotal = horizontalTotalArray.reduce((partialSum, a) => partialSum + a, 0);
+          tblDataforHorizontalTotal.style.backgroundColor = '#f5f0f0'
+          tblDataforHorizontalTotal.style.color = '#242323'
+          tblDataforHorizontalTotal.innerHTML = horizontalTotal
+          tblDataforHorizontalTotal.style.padding = '0.5%'
+          tblDataforHorizontalTotal.style.textAlign = 'center'
+          tblRowforTotal.appendChild(tblDataforHorizontalTotal)
+
+          var tblDataforHorizontalTotalDPV = document.createElement('td')
+          const horizontalTotalDPV = horizontalTotalDPVArray.reduce((partialSum, a) => partialSum + a, 0);
+          if(isNaN(horizontalTotalDPV)){
+            tblDataforHorizontalTotalDPV.innerHTML = 0
+          }else{
+            tblDataforHorizontalTotalDPV.innerHTML = horizontalTotalDPV.toFixed(2)
+          }
+          tblDataforHorizontalTotalDPV.style.backgroundColor = '#f5f0f0'
+          tblDataforHorizontalTotalDPV.style.color = '#242323'
+          tblDataforHorizontalTotalDPV.style.padding = '0.5%'
+          tblDataforHorizontalTotalDPV.style.textAlign = 'center'
+          tblRowforTotal.appendChild(tblDataforHorizontalTotalDPV)
+
+          // displaying added values of each defect's DPV in all category
+          for(let j=0; j< individualDefectDPV.length; j++){
+            var individualDefectDPVinAllCategory= document.createElement('td')
+            if(isNaN(individualDefectDPV[j])){
+              individualDefectDPVinAllCategory.innerHTML = 0
+            }else{
+              individualDefectDPVinAllCategory.innerHTML = ((individualDefectDPV[j] % 1) != 0)? individualDefectDPV[j].toFixed(2): individualDefectDPV[j];
+            }
+            individualDefectDPVinAllCategory.style.backgroundColor = '#f5f0f0'
+            individualDefectDPVinAllCategory.style.color = '#242323'
+            individualDefectDPVinAllCategory.style.padding = '0.5%'
+            individualDefectDPVinAllCategory.style.textAlign = 'center'
+            tblRowforTotal.appendChild(individualDefectDPVinAllCategory)
+          }
+
+          var tblRowforProduction = document.createElement('tr')
+          tbl.appendChild(tblRowforProduction)
+
+          var tblDataforProduction = document.createElement('td')
+          // tblDataforProduction.style.colSpan = '7'
+
+          tblDataforProduction.innerHTML = 'Line off(Production)'
+          tblDataforProduction.colSpan = '12'
+          tblDataforProduction.style.padding = '0.5%'
+          tblDataforProduction.style.backgroundColor = '#f5f0f0'
+          tblDataforProduction.style.color = '#242323'
+          tblDataforProduction.style.textAlign = 'right'
+          tblDataforProduction.style.paddingRight = '2%'
+          tblDataforProduction.style.fontSize = '120%'
+          tblRowforProduction.appendChild(tblDataforProduction)
+
+          var tblDataforBodyNumbers = document.createElement('td')
+          tblDataforBodyNumbers.innerHTML = data.uniqueBodyNumberData.length
+          tblDataforBodyNumbers.style.backgroundColor = '#f5f0f0'
+          tblDataforBodyNumbers.style.color = '#242323'
+          tblDataforBodyNumbers.style.padding = '0.5%'
+          tblDataforBodyNumbers.style.textAlign = 'center'
+          tblRowforProduction.appendChild(tblDataforBodyNumbers)
+
+          // styling table rule
+        const tdTags = document.getElementsByTagName('td')
+        Object.keys(tdTags).map( (td) => {
+          tdTags[td].style.border = '1px solid #64666a'
+          tdTags[td].style.borderCollapse = 'collapse'
+        })
+
+        const thTags = document.getElementsByTagName('th')
+        Object.keys(thTags).map( (th) => {
+          thTags[th].style.border = '1px solid #64666a'
+          thTags[th].style.borderCollapse = 'collapse'
+        })
+
+        const trTags = document.getElementsByTagName('tr')
+        Object.keys(trTags).map( (tr) => {
+          trTags[tr].style.border = '1px solid #64666a'
+          trTags[tr].style.borderCollapse = 'collapse'
+        })
+        }).catch((error) => {
+          console.log(error)
+        })
+
+      }
+
+      // Master Report Function
+     async function master(){
+        var fromDate = document.getElementById('from-date-condition-input').value
+        var toDate = document.getElementById('to-date-condition-input').value
+
+        var querySender = {
+          'UB': [`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Surface';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Body Fitting';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Missing & Wrong Part';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Welding';`,`SELECT * FROM defect_table WHERE category='UNDER BODY' and defect='Water Leak';`],
+          'MB': [`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LH MAIN BODY' or category='RH MAIN BODY') and defect='Water Leak'`],
+          'SB SA': [`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY SUB-LINE' or category='RH SHELL BODY SUB-LINE') and defect='Water Leak'`],
+          'SB ML': [`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LH SHELL BODY MAIN-LINE' or category='RH SHELL BODY MAIN-LINE') and defect='Water Leak'`],
+          'SM': [`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Surface'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Body Fitting'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Missing & Wrong Part'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Welding'`,`SELECT * FROM defect_table WHERE (category='LEFT SIDE MEMBER' or category='RH SIDE MEMBER') and defect='Water Leak'`],
+        }
+
+        const response = await fetch('/reportDataProvider', {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            querySender,
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+        const data = await response.json();
+
+        // calculating these 3
+        var horizontalTotalArray = [0,0,0,0,0]
+        var horizontalTotalDPVArray = [0,0,0,0,0]
+        var individualDefectTotal = [0,0,0,0,0]
+
+        let groupDefectData = {}
+        Object.keys(data.data).map( (group , iIndex) => {
+          groupDefectData[group] = {}
+          data.data[group].map ( (defectCount, jIndex) => {
+            horizontalTotalArray[iIndex] += defectCount
+            individualDefectTotal[jIndex] += defectCount
+            switch(jIndex){
+              case 0: groupDefectData[group]['Surface'] = defectCount; break;
+              case 1: groupDefectData[group]['Body Fitting'] = defectCount; break;
+              case 2: groupDefectData[group]['Missing & Wrong Part'] = defectCount; break;
+              case 3: groupDefectData[group]['Welding'] = defectCount; break;
+              case 4: groupDefectData[group]['Water Leak'] = defectCount; break;
+              default: groupDefectData[group]['defect'] = defectCount; break;
+            }
+          })
+          horizontalTotalDPVArray[iIndex] = (horizontalTotalArray[iIndex]/data.uniqueBodyNumberData.length)
+        })
+
+        console.log('Group Defects Data: ',groupDefectData)
+
+        let individualGroupWiseChartDataset = []
+        // sorting
+        Object.keys(groupDefectData).map( (group) => {
+          groupDefectData[group] = Object.entries(groupDefectData[group])
+            .sort(([, a], [, b]) => b - a)
+            .reduce(
+              (r, [k, v]) => ({
+                ...r,
+                [k]: v
+              }),
+              {}
+            )
+
+          // creating dataset for individualGroupWisechart
+          let singleGroupChartDataset = []
+          Object.keys(groupDefectData[group]).map( (defect) => {
+            singleGroupChartDataset.push({ y: groupDefectData[group][defect] == 0 ? '' :groupDefectData[group][defect], label: defect })
+          })
+          individualGroupWiseChartDataset.push(singleGroupChartDataset)
+        })
+
+        document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+        var reportContentData = document.getElementsByClassName('report-content-data')
+        reportContentData[0].style.color = '#ffffff'
+
+        var tableHeading = ['Section','Surface','Body Fitting','Missing & Wrong Part', 'Welding', 'Water Leak', 'Total', 'Total DPV']
+
+        const horizontalTotal = horizontalTotalArray.reduce((partialSum, a) => partialSum + a, 0);
+        let horizontalTotalDPV = horizontalTotalDPVArray.reduce((partialSum, a) => partialSum + a, 0);
+
+        function findMajorDefect(position){
+          switch(position){
+            case 0: return 'Surface';break;
+            case 1: return 'Body Fitting';break;
+            case 2: return 'Missing & Wrong Part';break;
+            case 3: return 'Welding';break;
+            case 4: return 'Water Leak';break;
+            default: break;
+          }
+        }
+
+        const majorDefectsInAllGroup = {
+          'UB': findMajorDefect(data.data.UB.indexOf(Math.max(...data.data.UB))),
+          'MB': findMajorDefect(data.data.MB.indexOf(Math.max(...data.data.MB))),
+          'SB SA': findMajorDefect(data.data['SB SA'].indexOf(Math.max(...data.data['SB SA']))),
+          'SB ML': findMajorDefect(data.data['SB ML'].indexOf(Math.max(...data.data['SB ML']))),
+          'SM': findMajorDefect(data.data.SM.indexOf(Math.max(...data.data.SM))),
+        }
+        const newResponse = await fetch('/majorDefectDetail' , {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            majorDefectsInAllGroup,
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+
+        const majorDefectsDataAllGroup = await newResponse.json()
+        const majorDefectsDataInAllGroup = majorDefectsDataAllGroup.data;
+
+        console.log('majorDefectsInAllGroup:',majorDefectsInAllGroup)
+        console.log('majorDefectsDataInAllGroup:',majorDefectsDataInAllGroup)
+
+        // sorting majorDefectsDataInAllGroup based on defectCount of each DefectType
+        Object.keys(majorDefectsDataInAllGroup).map( (groupName) => {
+          majorDefectsDataInAllGroup[groupName] = Object.entries(majorDefectsDataInAllGroup[groupName])
+            .sort(([, a], [, b]) => b - a)
+            .reduce(
+              (r, [k, v]) => ({
+                ...r,
+                [k]: v
+              }),
+              {}
+            )
+        })
+
+        console.log('sortedMajorDefectsDataInAllGroup: ', Object.keys(majorDefectsDataInAllGroup['UB']))
+
+        const majorSubDefectsInAllGroup = JSON.parse(JSON.stringify(majorDefectsDataInAllGroup))
+        // populating the object with each group's maximum subDefects and value
+        Object.keys(majorDefectsDataInAllGroup).map( (group) => {
+          //getting the first property and its value in descendingly sorted object
+          let maxSubdefect = {}
+          maxSubdefect[Object.keys(majorDefectsDataInAllGroup[group])[0]] = majorDefectsDataInAllGroup[group][Object.keys(majorDefectsDataInAllGroup[group])[0]]
+          majorSubDefectsInAllGroup[group] = maxSubdefect
+        })
+
+        console.log('majorSubDefectsInAllGroup: ', majorSubDefectsInAllGroup)
+
+        const majorSubDefectsResponse = await fetch('/majorSubDefectDetail' , {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            majorSubDefectsInAllGroup,
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+
+        const majorSubDefectsDataInAllGroup = await majorSubDefectsResponse.json()
+
+        console.log('majorSubDefectsDataInAllGroup: ',majorSubDefectsDataInAllGroup.data)
+
+        // sorting majorSubDefectsDataInAllGroup.data in descending based on no of zones
+        let sortedMajorSubDefectsDataInAllGroup= JSON.parse(JSON.stringify(majorSubDefectsDataInAllGroup.data))
+        let majorSubDefectsDataInAllGroupCount = JSON.parse(JSON.stringify(majorSubDefectsDataInAllGroup.data))
+
+        Object.keys(majorSubDefectsDataInAllGroup.data).map( (groupName) => {
+          // counting defectCount in each subCategory
+          Object.keys(majorSubDefectsDataInAllGroup.data[groupName]).map( (subCategoryName) =>{
+            // sortedMajorSubDefectsDataInAllGroup[groupName][subCategoryName] = sortedMajorSubDefectsDataInAllGroup[groupName][subCategoryName].length;
+            let subCategoryCount = 0
+            Object.keys(majorSubDefectsDataInAllGroup.data[groupName][subCategoryName]).map( (zone) => {
+              subCategoryCount += majorSubDefectsDataInAllGroup.data[groupName][subCategoryName][zone]
+            })
+            majorSubDefectsDataInAllGroupCount[groupName][subCategoryName] = subCategoryCount
+          })
+        })
+
+        let yMaximum = {}
+
+        // sorting
+        Object.keys(majorSubDefectsDataInAllGroupCount).map( (groupName) => {
+          majorSubDefectsDataInAllGroupCount[groupName] = Object.entries(majorSubDefectsDataInAllGroupCount[groupName])
+            .sort(([, a], [, b]) => b - a)
+            .reduce(
+              (r, [k, v]) => ({
+                ...r,
+                [k]: v
+              }),
+              {}
+            )
+          yMaximum[groupName] = Object.values(majorSubDefectsDataInAllGroupCount[groupName])[0]
+          let temp = {}
+          Object.keys(majorSubDefectsDataInAllGroupCount[groupName]).map( (subCategoryName) => {
+            temp[subCategoryName] = majorSubDefectsDataInAllGroup.data[groupName][subCategoryName]
+          })
+          let nTopMaster = 5;
+            // having only top zone, deleting others
+          let exceptnTopCategory = Object.keys(temp).filter(x => !Object.keys(temp).slice(0,nTopMaster).includes(x))
+          exceptnTopCategory.map( (subCategoryName) => {
+            delete temp[subCategoryName]
+          })
+          majorSubDefectsDataInAllGroup.data[groupName] = temp
+        })
+
+        const labelSetForMajorDefects = []
+        const labelSetForMajorDefectsTitle = Object.values(majorDefectsInAllGroup)
+        Object.keys(majorDefectsDataInAllGroup).map( (group) => {
+          let tempArr = []
+          Object.keys(majorDefectsDataInAllGroup[group]).map( (defect) => {
+            tempArr.push({y: majorDefectsDataInAllGroup[group][defect] == 0 ? '' : majorDefectsDataInAllGroup[group][defect] , label: defect})
+          })
+          labelSetForMajorDefects.push(tempArr)
+        } )
+
+        // console.log('labelSetForMajorDefects: ', labelSetForMajorDefects)
+
+        // console.log('Total DPV: ', horizontalTotalDPV)
+        // console.log('Category wise: ', individualDefectTotal)
+        // console.log('Group wise: ', horizontalTotalArray)
+        // console.log('Individual Group defects:',data.data)
+        // console.log('Group wise Total DPV: ',horizontalTotalDPVArray)
+
+
+        var reportContent = document.getElementsByClassName('report-content-data')[0]
+
+        var firstSection = document.createElement('div')
+        firstSection.id = 'firstSection'
+        // firstSection.style.marginTop = '1%'
+        // firstSection.style.display = 'grid'
+        // firstSection.style.gap = '10px'
+        // firstSection.style.height = ''
+        // firstSection.style.gridTemplateColumns = '1fr 1fr 1fr'
+        reportContent.appendChild(firstSection)
+
+        var totalDPV = document.createElement('div')
+        totalDPV.id = 'totalDPV'
+        totalDPV.style.backgroundColor = '#2b323c'
+        firstSection.appendChild(totalDPV)
+
+        var totalDPVChart= new CanvasJS.Chart("totalDPV", {
+          animationEnabled: true,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          theme: "dark1", // "light1", "light2", "dark1", "dark2"
+          title:{
+            text: "Total DPV",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+          },
+          dataPointWidth: 35,
+          axisY: {
+            title: "Defects",
+            titleFontFamily: 'tahoma',
+            minimum: 0,
+            gridThickness: 0,
+              stripLines: [
+                {
+                  value: 0,
+                  showOnTop: true,
+                  color: "gray",
+                  thickness: 2
+                }
+              ]
+          },
+          data: [{
+            type: "column",
+            indexLabel: "{y}",
+            indexLabelPlacement: "outside",
+            indexLabelOrientation: "horizontal",
+            dataPoints: [
+              { y: horizontalTotalDPV , label: 'Vehicle'},
+            ]
+          }]
+        });
+
+        totalDPVChart.render();
+
+
+        var categoryWise = document.createElement('div')
+        categoryWise.id = 'categoryWise'
+        categoryWise.style.backgroundColor = '#2b323c'
+        firstSection.appendChild(categoryWise)
+
+        var categoryWiseChart = new CanvasJS.Chart("categoryWise", {
+          animationEnabled: true,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          theme: "dark1",
+          title:{
+            text: "Defect Based Visualization",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+            // horizontalAlign: "left"
+          },
+          data: [{
+            type: "doughnut",
+            startAngle: 60,
+            // innerRadius: 70,
+            indexLabelFontSize: 15,
+            indexLabel: "{label} - {y}, #percent%",
+            toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+            dataPoints: [
+              { y: individualDefectTotal[0], label: "Surface" },
+              { y: individualDefectTotal[1], label: "Body Fitting" },
+              { y: individualDefectTotal[2], label: "Missing & Wrong Part" },
+              { y: individualDefectTotal[3], label: "Welding"},
+              { y: individualDefectTotal[4], label: "Water Leak"},
+            ]
+          }]
+        });
+
+        categoryWiseChart.render();
+
+        // console.log('categoryWiseChart: ',categoryWiseChart)
+
+
+        var groupWise = document.createElement('div')
+        groupWise.id = 'groupWise'
+        groupWise.style.backgroundColor = '#2b323c'
+        firstSection.appendChild(groupWise)
+
+        // function for navigating to the corresponding group function
+        function masterNavigate(event){
+          document.getElementById(`${event.dataPoint.label.replace(' ','')}_titleName`).scrollIntoView({ behavior: "smooth" })
+          // console.log('id: ',event.dataPoint.label.replace(' ',''))
+        }
+
+        var groupWiseChart = new CanvasJS.Chart("groupWise", {
+          animationEnabled: true,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          theme: "dark1",
+          title:{
+            text: "Category Based Visualization",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+            // horizontalAlign: "left"
+          },
+          data: [{
+            type: "doughnut",
+            startAngle: 60,
+            // innerRadius: 70,
+            indexLabelFontSize: 15,
+            indexLabel: "{label} - {y}, #percent%",
+            toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+            dataPoints: [
+              { y: horizontalTotalArray[0], label: "UB" ,click: masterNavigate},
+              { y: horizontalTotalArray[1], label: "MB" ,click: masterNavigate},
+              { y: horizontalTotalArray[2], label: "SB SA" ,click: masterNavigate},
+              { y: horizontalTotalArray[3], label: "SB ML" ,click: masterNavigate},
+              { y: horizontalTotalArray[4], label: "SM" ,click: masterNavigate},
+            ]
+          }]
+        });
+
+        groupWiseChart.render();
+
+
+        const groupName = ['UNDER BODY', 'MAIN BODY', 'SHELL BODY SUB-LINE','SHELL BODY MAIN-LINE','SIDE MEMBER']
+        const groupID = ['UB','MB','SBSA','SBML','SM']
+        const groupKeyForDataObj = ['UB','MB','SB SA','SB ML','SM']
+
+        var groupDPVChart = [];
+        var individualGroupWisechart = [];
+        var groupWiseMajorDefectChart = [];
+        var groupWiseMajorSubDefectChart = [];
+        var divElementHolder = document.createElement('div')
+        // divElementHolder.style.marginTop='33%'
+        divElementHolder.id = 'AllGroupChartDivision'
+        divElementHolder.style.marginTop = '40px'
+        reportContent.appendChild(divElementHolder)
+
+
+        Object.keys(groupDefectData).map((group , i) => {
+          var divElement = document.createElement('div');
+          divElement.id=`${groupID[i]}`
+          // divElement.style.height = '540px'
+          divElementHolder.appendChild(divElement)
+
+          var groupTitleDiv = document.createElement('div')
+          groupTitleDiv.id = `${groupID[i]}_titleName`
+          groupTitleDiv.style.textAlign = 'center'
+
+          groupTitleDiv.style.height = '50px'
+          divElement.appendChild(groupTitleDiv)
+
+          var groupTitleContent = document.createElement('p')
+          groupTitleContent.innerHTML = groupName[i]
+          groupTitleContent.style.fontSize = '130%'
+          groupTitleDiv.appendChild(groupTitleContent)
+
+          var horizontalRule = document.createElement('hr')
+          groupTitleDiv.appendChild(horizontalRule)
+
+          // division for groupTotalDPVData
+          var groupTotalDPVDivision = document.createElement('div')
+          groupTotalDPVDivision.id = `groupTotalDPVDivision`
+          divElement.appendChild(groupTotalDPVDivision)
+
+          var groupTotalDPVData = document.createElement('p')
+          groupTotalDPVData.id = `${groupID[i]}_GroupTotalDPV`
+          groupTotalDPVData.style.textAlign = 'center'
+          groupTotalDPVData.style.fontSize = '100%'
+          groupTotalDPVData.style.height = '51px'
+          groupTotalDPVData.innerHTML = `${groupName[i]} DPV: ${((horizontalTotalDPVArray[i] % 1) != 0) ? horizontalTotalDPVArray[i].toFixed(2) : horizontalTotalDPVArray[i]}`
+          groupTotalDPVDivision.appendChild(groupTotalDPVData)
+
+
+          var groupWiseChartHolder = document.createElement('div')
+          groupWiseChartHolder.id = `${groupID[i]}ChartHolder`
+          // groupWiseChartHolder.style.display = 'grid'
+          // groupWiseChartHolder.style.justifyContent = 'center'
+          // groupWiseChartHolder.style.alignItems = 'center'
+          // groupWiseChartHolder.style.gridTemplateColumns = '1fr 1fr 1fr'
+          // groupWiseChartHolder.style.gap = '10px'
+
+          divElement.appendChild(groupWiseChartHolder)
+
+          var categoryWiseChartDivision= document.createElement('div')
+          categoryWiseChartDivision.id=`${groupID[i]}_Category_DPV`
+          categoryWiseChartDivision.style.width = '100%'
+          categoryWiseChartDivision.style.backgroundColor = '#2b323c'
+          categoryWiseChartDivision.style.height = '442px'
+          groupWiseChartHolder.appendChild(categoryWiseChartDivision)
+
+          individualGroupWisechart.push(new CanvasJS.Chart(categoryWiseChartDivision.id, {
+            animationEnabled: true,
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            theme: "dark1", // "light1", "light2", "dark1", "dark2"
+            title:{
+              text: "Defect Visualization",
+              fontFamily: 'tahoma',
+              fontSize: 18,
+            },
+            dataPointWidth: 30,
+            axisX: {
+              labelFontSize: 10,
+            },
+            axisY: {
+              title: "Total no of defects",
+              gridThickness: 0,
+              minimum: 0,
+              stripLines: [
+                {
+                  value: 0,
+                  showOnTop: true,
+                  color: "gray",
+                  thickness: 2
+                }
+              ]
+            },
+            data: [{
+              type: "column",
+              indexLabel: "{y}",
+              indexLabelPlacement: "outside",
+              indexLabelOrientation: "horizontal",
+              dataPoints: individualGroupWiseChartDataset[i]
+            }]
+          }));
+
+          individualGroupWisechart[i].render();
+
+
+          var groupWiseMajorDefectChartDivision= document.createElement('div')
+          groupWiseMajorDefectChartDivision.id=`${groupID[i]}_GroupWise_Major_Defect_Counts`
+          groupWiseMajorDefectChartDivision.style.width = '100%'
+          groupWiseMajorDefectChartDivision.style.height = '442px'
+          groupWiseMajorDefectChartDivision.style.backgroundColor = '#2b323c'
+          groupWiseChartHolder.appendChild(groupWiseMajorDefectChartDivision)
+
+          groupWiseMajorDefectChart.push(new CanvasJS.Chart(groupWiseMajorDefectChartDivision.id, {
+            animationEnabled: true,
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            theme: "dark1", // "light1", "light2", "dark1", "dark2"
+            title:{
+              text: `${majorDefectsInAllGroup[[groupKeyForDataObj[i]]]} Visualization`, //${labelSetForMajorDefectsTitle[i]} Category
+              fontFamily: 'tahoma',
+              fontSize: 18,
+            },
+            dataPointWidth: 30,
+            axisX: {
+              labelFontSize: 10,
+            },
+            axisY: {
+              title: "Total no of defects",
+              gridThickness: 0,
+              minimum: 0,
+              stripLines: [
+                {
+                  value: 0,
+                  showOnTop: true,
+                  color: "gray",
+                  thickness: 2
+                }
+              ]
+            },
+            data: [{
+              type: "column",
+              indexLabel: "{y}",
+              indexLabelPlacement: "outside",
+              indexLabelOrientation: "horizontal",
+              dataPoints: labelSetForMajorDefects[i]
+            }]
+          }))
+
+          groupWiseMajorDefectChart[i].render();
+
+
+
+          var groupWiseMajorSubDefectChartDivision= document.createElement('div')
+          groupWiseMajorSubDefectChartDivision.id=`${groupID[i]}_GroupWise_Major_SubDefect_Counts`
+          groupWiseMajorSubDefectChartDivision.style.width = '100%'
+          groupWiseMajorSubDefectChartDivision.style.height = '442px'
+          groupWiseMajorSubDefectChartDivision.style.backgroundColor = '#2b323c'
+          groupWiseChartHolder.appendChild(groupWiseMajorSubDefectChartDivision)
+
+          // generating data attribute individual Group's Major subDefect
+          let singleGroupChartMainData = []
+          let chartConfigurationBlockAccess= true;
+            // storing all the zones in list for chartStacked configuration
+          let TotalZones = []
+          Object.keys(majorSubDefectsDataInAllGroup.data[groupKeyForDataObj[i]]).map( (subCategoryName) => {
+            TotalZones.push(...Object.keys(majorSubDefectsDataInAllGroup.data[groupKeyForDataObj[i]][subCategoryName]))
+          })
+          let TotalZonesSet = new Set(TotalZones)
+          TotalZones = Array.from(TotalZonesSet)
+          // console.log('Total Zones: ',TotalZones)
+
+          TotalZones.map( (singleZone) => {
+            let dataPoints = []
+            // no of bars in x axis
+            Object.keys(majorSubDefectsDataInAllGroup.data[groupKeyForDataObj[i]]).map( (subCategoryName) => {
+              if(Object.keys(majorSubDefectsDataInAllGroup.data[groupKeyForDataObj[i]][subCategoryName]).includes(singleZone)){
+                dataPoints.push({y: majorSubDefectsDataInAllGroup.data[groupKeyForDataObj[i]][subCategoryName][singleZone], label: subCategoryName})
+              }else{
+                dataPoints.push({y:'', label: subCategoryName})
+              }
+            })
+            // no of stacked column
+            singleGroupChartMainData.push({
+              type: 'stackedColumn',
+              name: `Z${singleZone.replace('_','')}`,
+              // indexLabel: "{y}",
+              // indexLabelPlacement: "inside",
+              // indexLabelOrientation: "horizontal",
+              // showInLegend: true,
+              dataPoints: dataPoints
+            })
+          })
+          // console.log('singleGroupChartMainData: ',singleGroupChartMainData);
+
+          groupWiseMajorSubDefectChart.push(new CanvasJS.Chart(groupWiseMajorSubDefectChartDivision.id, {
+            animationEnabled: true,
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            theme: "dark1", // "light1", "light2", "dark1", "dark2"
+            title:{
+              text: `${Object.keys(majorSubDefectsInAllGroup[groupKeyForDataObj[i]])[0]} Visualization`, //${labelSetForMajorDefectsTitle[i]} Category
+              fontFamily: 'tahoma',
+              fontSize: 18,
+            },
+            dataPointWidth: 30,
+            axisX: {
+              labelFontSize: 7,
+            },
+            axisY: {
+              title: "Total no of defects",
+              minimum: 0,
+              maximum: yMaximum[group]+(yMaximum[group]*(10/100)),
+              gridThickness: 0,
+              stripLines: [
+                {
+                  value: 0,
+                  showOnTop: true,
+                  color: "gray",
+                  thickness: 2
+                }
+              ]
+            },
+            toolTip: {
+              content: '{label} - {name} : {y}'
+            },
+            data: singleGroupChartMainData
+          }))
+          groupWiseMajorSubDefectChart[i].render();
+        })
+      }
+
+      async function mainPareto(){
+        document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+        var fromDate = document.getElementById('from-date-condition-input').value
+        var toDate = document.getElementById('to-date-condition-input').value
+        console.log('main Pareto');
+
+        const response = await fetch('/pareto',{
+          method: 'POST',
+          headers:{
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+        const data = await response.json()
+        console.log('data: ', data.data)
+
+        let zoneDefectCountProvider = {}
+        let zoneSubDefectCountProvider = {}
+        let zoneDetailProvider = {}
+
+        // counting no of defects in each bodyNumber, category, defect, subDefect, bodyNumber
+        // storing count in
+        Object.keys(data.data).map( (group)=> {
+          Object.keys(data.data[group]).map( (category) => {
+            Object.keys(data.data[group][category]).map( (defect) => {
+              Object.keys(data.data[group][category][defect]).map( (subDefect) => {
+                Object.keys(data.data[group][category][defect][subDefect]).map( (bodyNumber) => {
+                  Object.keys(data.data[group][category][defect][subDefect][bodyNumber]).map( (singleZone) => {
+                    let defectCount = data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                      // for Zone & Defect Count
+                    if(!zoneDefectCountProvider[`${singleZone}`]){
+                      zoneDefectCountProvider[`${singleZone}`] = {}
+                      if(!zoneDefectCountProvider[`${singleZone}`][defect]){
+                        zoneDefectCountProvider[`${singleZone}`][defect] = defectCount
+                      }
+                    }else{
+                      if(!zoneDefectCountProvider[`${singleZone}`][defect]){
+                        zoneDefectCountProvider[`${singleZone}`][defect] = defectCount
+                      }else{
+                        zoneDefectCountProvider[`${singleZone}`][defect] += defectCount
+                      }
+                    }
+
+                    // for Zone Detail
+                    zoneDetailProvider[`${singleZone}`] = {}
+                    zoneDetailProvider[`${singleZone}`]['Group'] = group
+                    zoneDetailProvider[`${singleZone}`]['Category'] = category
+
+                    // for Zones Sub-defect Count
+                    if(!zoneSubDefectCountProvider[`${singleZone}`]){
+                      zoneSubDefectCountProvider[`${singleZone}`] = {}
+                      zoneSubDefectCountProvider[`${singleZone}`][defect] = {}
+                      zoneSubDefectCountProvider[`${singleZone}`][defect][`${subDefect}`] = defectCount
+                    }else{
+                      if(!zoneSubDefectCountProvider[`${singleZone}`][defect]){
+                        zoneSubDefectCountProvider[`${singleZone}`][defect] = {}
+                        zoneSubDefectCountProvider[`${singleZone}`][defect][`${subDefect}`] = defectCount
+                      }else{
+                        if(!zoneSubDefectCountProvider[`${singleZone}`][defect][`${subDefect}`]){
+                          zoneSubDefectCountProvider[`${singleZone}`][defect][`${subDefect}`] = defectCount
+                        }
+                        else{
+                          zoneSubDefectCountProvider[`${singleZone}`][defect][`${subDefect}`] += defectCount
+                        }
+                      }
+                    }
+                  })
+                })
+              })
+            })
+          })
+        })
+
+        console.log('Zone Defect Count Provider: ',zoneDefectCountProvider)
+        console.log('Zone Sub-Defect Count Provider: ',zoneSubDefectCountProvider)
+        console.log('Zone Detail Provider: ',zoneDetailProvider)
+
+        // mainParetoContent Holder
+        const mainParetoContentHolder = document.createElement('div')
+        mainParetoContentHolder.id = 'mainParetoContentHolder'
+        document.getElementById('reportChild').appendChild(mainParetoContentHolder)
+
+        // creating 5 divisions
+        // displaying only the selected one
+        let defectList = ['Surface','Body Fitting','Missing & Wrong Part', 'Welding', 'Water Leak']
+          // 5 tabs
+        const tabDivision = document.createElement('div')
+        tabDivision.id = 'tabDivision'
+        mainParetoContentHolder.appendChild(tabDivision)
+
+        // function for only showing corresponding defect division
+        function showDefectPareto(clickedDefect){
+          // hiding all division
+          const paretoDivisions = document.getElementsByClassName('defectParetoDivision')
+          const defectParetoButtons = document.getElementsByClassName('defectParetoButton')
+          Object.keys(paretoDivisions).map( (singleDefectDivision, index) => {
+            paretoDivisions[singleDefectDivision].style.display = 'none'
+            defectParetoButtons[index].style.color = '#ffffff'
+            defectParetoButtons[index].style.backgroundColor = '#000000'
+          })
+          // showing only clicked Defect Division
+          document.getElementById(`${clickedDefect}ParetoDivision`).style.display = 'block'
+          document.getElementById(`${clickedDefect}ParetoButton`).style.color = '#000000'
+          document.getElementById(`${clickedDefect}ParetoButton`).style.backgroundColor = '#ffffff'
+        }
+
+        let subDefects = {
+          'Surface': ['Dent','Bump','Burrs','Spatters','Others'],
+          'Body Fitting': ['Body Fitting 1','Body Fitting 2','Body Fitting Others'],
+          'Missing & Wrong Part': ['Missing Part','Wrong Part'],
+          'Welding': ['Welding Part 1','Welding Part 2','Welding Part 3','Welding Part Others'],
+          'Water Leak': ['Water Leak 1','Water Leak 2','Water Leak Others']
+        }
+
+        // element creation for main Pareto
+        defectList.map( (defect) => {
+          // creating buttons for defect inside tabDivision
+          let defectParetoButton = document.createElement('button')
+          defectParetoButton.onclick = () => showDefectPareto(`${defect.replace(' ','')}`)
+          defectParetoButton.id = `${defect.replace(' ','')}ParetoButton`
+          defectParetoButton.className = 'defectParetoButton'
+          defectParetoButton.innerHTML = `${defect}`
+          defectParetoButton.style.backgroundColor = '#000000'
+          defectParetoButton.style.color = '#ffffff'
+          defectParetoButton.style.cursor = 'pointer'
+          defectParetoButton.style.fontSize = '80%'
+          defectParetoButton.style.padding = '0.6% 4%'
+          // defectParetoButton.style.paddingRight = '1%'
+          tabDivision.appendChild(defectParetoButton)
+
+          // creating division for each Defect Pareto
+          let correspondingTabDivision = document.createElement('div')
+          correspondingTabDivision.id = `${defect.replace(' ','')}ParetoDivision`
+          correspondingTabDivision.style.color = '#ffffff'
+          correspondingTabDivision.className = 'defectParetoDivision'
+          mainParetoContentHolder.appendChild(correspondingTabDivision)
+
+          // divisoin for all container
+          let correspondingTabDivisionHolder = document.createElement('div')
+          correspondingTabDivisionHolder.id = `${defect.replace(/&| /g,'')}ParetoAllDivisionHolder`
+          // correspondingTabDivisionHolder.style.display = 'grid'
+          // correspondingTabDivisionHolder.style.gridTemplateColumns = '1fr'
+          // correspondingTabDivisionHolder.style.justifyContent = 'center'
+          // correspondingTabDivisionHolder.style.gap = '30%'
+          correspondingTabDivision.appendChild(correspondingTabDivisionHolder)
+
+          // fetching the values for chart
+          let individualDefectCountProvider = {}
+          Object.keys(zoneDefectCountProvider).map( (zone) => {
+            if(zoneDefectCountProvider[zone][defect]){
+              individualDefectCountProvider[zone] = zoneDefectCountProvider[zone][defect]
+            }
+          })
+            // sorting in descending based on defect zone count
+          individualDefectCountProvider = Object.entries(individualDefectCountProvider)
+            .sort(([, a], [, b]) => b - a)
+            .reduce(
+              (r, [k, v]) => ({
+                ...r,
+                [k]: v
+              }),
+              {}
+            )
+
+
+          let nTop = 20;
+
+            // having only top zone, deleting others
+          let exceptnTopZones = Object.keys(individualDefectCountProvider).filter(x => !Object.keys(individualDefectCountProvider).slice(0,nTop).includes(x))
+          exceptnTopZones.map( (zone) => {
+            delete individualDefectCountProvider[zone]
+          })
+
+          let individualSubDefectCountProvider = {}
+          let subDefectList = []
+            //populating the corresponding Defect's subdefect object inside a zone property
+          Object.keys(individualDefectCountProvider).map( (zone) => {
+            individualSubDefectCountProvider[zone] = zoneSubDefectCountProvider[zone][defect]
+            subDefectList.push(...Object.keys(zoneSubDefectCountProvider[zone][defect]))
+          })
+
+          // console.log(`${defect} Zone Count:`,individualDefectCountProvider)
+          console.log(`${defect} Zone Sub-Defect Count:`,individualSubDefectCountProvider)
+
+          let mainDefectParetoDataset = []
+          // preparing the dataset for the mainDefect Pareto Chart
+          subDefects[defect].map( (subDefect) => {
+            let dataPoints = []
+            Object.keys(individualDefectCountProvider).map( (zone) => {
+              let yValue = ''
+              if(individualSubDefectCountProvider[zone][subDefect]){
+                yValue = individualSubDefectCountProvider[zone][subDefect]
+              }
+              dataPoints.push({label: zone.replace('_',''), y:yValue})
+            })
+            mainDefectParetoDataset.push({
+              type:'stackedColumn',
+              // showInLegend: true,
+              // indexLabel: "{y}",
+              // indexLabelPlacement: "inside",
+              // indexLabelOrientation: "horizontal",
+              name: subDefect.split('_')[0],
+              dataPoints: dataPoints
+            })
+          })
+
+          let mainParetoColorSet = []
+          subDefects[defect].map(() => {
+            mainParetoColorSet.push(generateRandomColor(mainParetoColorSet));
+          });
+
+          // division for chart & table for main Defect Pareto
+          let mainDefectParetoChartDivision = document.createElement('div')
+          mainDefectParetoChartDivision.id = `main${defect.replace(/&| /g,'')}ParetoChartDivision`
+          // mainDefectParetoChartDivision.style.position = 'absolute'
+          // mainDefectParetoChartDivision.style.marginBottom = '2%'
+          // mainDefectParetoChartDivision.style.width = '100%'
+          // mainDefectParetoChartDivision.style.height = '419px'
+          // mainDefectParetoChartDivision.style.width = '509px'
+          // mainDefectParetoChartDivision.style.widows = '80%'
+          correspondingTabDivisionHolder.appendChild(mainDefectParetoChartDivision)
+
+          CanvasJS.addColorSet("mainParetoColorSet", mainParetoColorSet);
+
+          // chart configuration
+          var mainDefectParetoChart =  new CanvasJS.Chart(mainDefectParetoChartDivision.id, {
+            animationEnabled: true,
+            colorSet: 'mainParetoColorSet',
+            backgroundColor: "rgba(0, 0, 0, 0)",
+            theme: "dark1",
+            title:{
+              text: `${defect} Pareto Visualization`,
+              fontFamily: 'tahoma',
+              fontSize: 18,
+            },
+            dataPointWidth: 18,
+            axisY: {
+              title: "No of Defects",
+              lineColor: "#4F81BC",
+              tickColor: "#4F81BC",
+              minimum: 0,
+              labelFontFamily: 'tahoma',
+              labelFontSize: 12,
+              gridThickness: 0,
+              stripLines: [
+                {
+                  value: 0,
+                  showOnTop: true,
+                  color: "gray",
+                  thickness: 2
+                }
+              ]
+            },
+            axisX:{
+              title: 'Zones',
+              labelFontFamily: 'tahoma',
+              labelFontSize: 12,
+              gridThickness: 0,
+              tickLength: 0,
+              lineThickness: 0,
+              interval: 1,
+            },
+            toolTip: {
+              content: '{name} : {y}'
+            },
+            data: mainDefectParetoDataset
+          });
+          mainDefectParetoChart.render();
+
+          let mainDefectParetoTableDivision = document.createElement('div')
+          mainDefectParetoTableDivision.id = `main${defect.replace(/&| /g,'')}ParetoTableDivision`
+          mainDefectParetoTableDivision.style.width = '100%'
+          mainDefectParetoTableDivision.style.display = 'flex'
+          mainDefectParetoTableDivision.style.flexDirection = 'column'
+          mainDefectParetoTableDivision.style.alignItems = 'center'
+          correspondingTabDivisionHolder.appendChild(mainDefectParetoTableDivision)
+
+          let mainDefectParetoTableHeading = document.createElement('p')
+          mainDefectParetoTableHeading.id = `main${defect.replace(/&| /g,'')}ParetoTableHeading`
+          mainDefectParetoTableHeading.innerHTML = `${defect}`
+          mainDefectParetoTableHeading.style.textAlign = 'center'
+          mainDefectParetoTableDivision.appendChild(mainDefectParetoTableHeading)
+
+          let mainDefectParetoTableHeadingRule = document.createElement('hr')
+          mainDefectParetoTableDivision.appendChild(mainDefectParetoTableHeadingRule)
+
+          let mainDefectParetoTableContainer = document.createElement('div')
+          mainDefectParetoTableContainer.id = `main${defect.replace(/&| /g,'')}ParetoTableContainer`
+          // mainDefectParetoTableContainer.style.position = 'absolute'
+          mainDefectParetoTableContainer.style.marginTop = '5%'
+          // mainDefectParetoTableContainer.style.height = '65%'
+          // mainDefectParetoTableContainer.style.overflow = 'auto'
+          mainDefectParetoTableDivision.appendChild(mainDefectParetoTableContainer)
+
+          let mainDefectParetoTable = document.createElement('table')
+          mainDefectParetoTable.id = `main${defect.replace(/&| /g,'')}ParetoTable`
+          mainDefectParetoTableContainer.appendChild(mainDefectParetoTable)
+
+          let mainDefectParetoTableHeadingList = ['S.No','Zone','Category','Sub-Category',...subDefects[defect],'Total']
+          let mainDefectParetoTableHeadingRow = document.createElement('tr')
+          mainDefectParetoTable.appendChild(mainDefectParetoTableHeadingRow)
+          // printing headings of mainDefectParetoTable
+          mainDefectParetoTableHeadingList.map( (heading) => {
+            let mainDefectParetoTableHeadingContent = document.createElement('th')
+            mainDefectParetoTableHeadingContent.innerHTML = heading
+            mainDefectParetoTableHeadingContent.style.whiteSpace = 'nowrap'
+            mainDefectParetoTableHeadingContent.style.backgroundColor = '#242323'
+            mainDefectParetoTableHeadingContent.style.color = '#ffffff'
+            // mainDefectParetoTableHeadingContent.style.textAlign = 'center'
+            // mainDefectParetoTableHeadingContent.style.fontSize = '90%'
+            mainDefectParetoTableHeadingRow.appendChild(mainDefectParetoTableHeadingContent)
+          })
+
+          // inserting zone rows into table
+          let rowCount = 0
+          Object.keys(individualSubDefectCountProvider).map( (zone, index) => {
+            let singleZoneRow = document.createElement('tr')
+            singleZoneRow.style.backgroundColor = '#ffffff'
+            singleZoneRow.style.color = '#242323'
+            rowCount++
+            let totalDefectCount = 0
+            singleZoneRow.addEventListener('mouseover', function () {
+              singleZoneRow.style.backgroundColor = '#000000';
+              singleZoneRow.style.color = '#ffffff';
+            });
+            singleZoneRow.addEventListener('mouseleave', function () {
+              singleZoneRow.style.backgroundColor = '#ffffff';
+              singleZoneRow.style.color = '#242323';
+            });
+            mainDefectParetoTable.appendChild(singleZoneRow)
+            mainDefectParetoTableHeadingList.map( (heading) => {
+              let singleCellData = document.createElement('td')
+              singleCellData.style.textAlign = 'center'
+              singleCellData.style.border = '1px solid black'
+              singleCellData.style.whiteSpace = 'nowrap'
+              singleZoneRow.appendChild(singleCellData)
+              if(heading == 'S.No'){
+                singleCellData.innerHTML = rowCount
+              }else if(heading == 'Zone'){
+                singleCellData.innerHTML = zone.replace('_','')
+              }else if(heading == 'Category'){
+                singleCellData.innerHTML = zoneDetailProvider[zone]['Group']
+              }else if(heading == 'Sub-Category'){
+                singleCellData.innerHTML = zoneDetailProvider[zone]['Category'].replace(` ${zoneDetailProvider[zone]['Group']}`,'')
+                singleCellData.style.textAlign = 'left'
+              }else if(heading == 'Total'){
+                singleCellData.innerHTML = totalDefectCount
+              }else{
+                // for subDefects
+                if(!individualSubDefectCountProvider[zone][`${heading}${zone}`]){
+                  singleCellData.innerHTML = 0
+                }else{
+                  singleCellData.innerHTML = individualSubDefectCountProvider[zone][`${heading}${zone}`]
+                  totalDefectCount += individualSubDefectCountProvider[zone][`${heading}${zone}`]
+                }
+              }
+            })
+          })
+
+          // division for subDefect Pareto visualization
+
+
+          subDefects[defect].map( (subdefect, index) => {
+            //subDefect Chart Container
+            let subDefectParetoChartDivision = document.createElement('div')
+            subDefectParetoChartDivision.id = `${subdefect.replace(/&| /g,'')}ParetoChartDivision`
+            // subDefectParetoChartDivision.style.margin = '20px'
+            // subDefectParetoChartDivision.style.marginBottom = '2%'
+            // subDefectParetoChartDivision.style.width = '100%'
+            // subDefectParetoChartDivision.style.height = '400px'
+            correspondingTabDivisionHolder.appendChild(subDefectParetoChartDivision)
+
+            // subDefectParetoChart Dataset
+            let subDefectParetoChartDataset = []
+            let subDefectZoneCount = {}
+            Object.keys(zoneSubDefectCountProvider).map( (singleZone) => {
+              if(zoneSubDefectCountProvider[singleZone][defect]){
+                if(zoneSubDefectCountProvider[singleZone][defect][`${subdefect}`]){
+                  subDefectZoneCount[singleZone] = zoneSubDefectCountProvider[singleZone][defect][`${subdefect}`]
+                }
+              }
+            })
+            // sorting subDefectZoneCount
+            subDefectZoneCount = Object.entries(subDefectZoneCount)
+              .sort(([, a], [, b]) => b - a)
+              .reduce(
+                (r, [k, v]) => ({
+                  ...r,
+                  [k]: v
+                }),
+                {}
+              )
+            
+              // having only top zone, deleting others
+          let exceptnTopZonesSubDefect = Object.keys(subDefectZoneCount).filter(x => !Object.keys(subDefectZoneCount).slice(0,nTop).includes(x))
+          exceptnTopZonesSubDefect.map( (zone) => {
+            delete subDefectZoneCount[zone]
+          })
+
+            Object.keys(subDefectZoneCount).map( (singleZone) => {
+              subDefectParetoChartDataset.push({y: subDefectZoneCount[singleZone], label: singleZone.replace('_','')})
+            })
+
+            console.log('subDefectParetoChartDataset: ',subDefectParetoChartDataset)
+
+            // chart configuration
+            var subDefectParetoChart =  new CanvasJS.Chart(subDefectParetoChartDivision.id, {
+              animationEnabled: true,
+              backgroundColor: "rgba(0, 0, 0, 0)",
+              theme: "dark1",
+              title:{
+                text: `${subdefect} Pareto Visualization`,
+                fontFamily: 'tahoma',
+                fontSize: 18,
+              },
+              dataPointWidth: 18,
+              axisY: {
+                title: "No of Defects",
+                lineColor: "#4F81BC",
+                tickColor: "#4F81BC",
+                minimum: 0,
+                labelFontFamily: 'tahoma',
+                labelFontSize: 12,
+                gridThickness: 0,
+                stripLines: [
+                  {
+                    value: 0,
+                    showOnTop: true,
+                    color: "gray",
+                    thickness: 2
+                  }
+                ]
+              },
+              axisX:{
+                title: 'Zones',
+                labelFontFamily: 'tahoma',
+                labelFontSize: 12,
+                gridThickness: 0,
+                tickLength: 0,
+                lineThickness: 0,
+                interval: 1,
+              },
+              toolTip: {
+                content: 'Z {label} : {y}'
+              },
+              data: [{
+              type: "column",
+              showInLegend: true,
+              legendText: `${subdefect}`,
+              color: mainParetoColorSet[index],
+              indexLabel: "{y}",
+              indexLabelPlacement: "outside",  
+              indexLabelOrientation: "horizontal",
+              dataPoints: subDefectParetoChartDataset
+            }]
+            });
+            subDefectParetoChart.render();
+
+            //subDefect Table Container
+            let subDefectParetoTableDivison = document.createElement('div')
+            subDefectParetoTableDivison.id = `${subdefect.replace(/&| /g,'')}ParetoTableDivision`
+            subDefectParetoTableDivison.style.width = '100%'
+            subDefectParetoTableDivison.style.marginTop = '5%'
+            subDefectParetoTableDivison.style.display = 'flex'
+            subDefectParetoTableDivison.style.flexDirection = 'column'
+            subDefectParetoTableDivison.style.alignItems = 'center'
+            subDefectParetoTableDivison.style.margin = '20px auto'
+            correspondingTabDivisionHolder.appendChild(subDefectParetoTableDivison)
+
+            // subDefect Table name
+            let subDefectParetoTableHeading = document.createElement('p')
+            subDefectParetoTableHeading.id = `main${subdefect.replace(/&| /g,'')}ParetoTableHeading`
+            subDefectParetoTableHeading.innerHTML = `${subdefect.replace(/&| /g,'')}`
+            subDefectParetoTableHeading.style.textAlign = 'center'
+            subDefectParetoTableDivison.appendChild(subDefectParetoTableHeading)
+
+            let subDefectParetoTable = document.createElement('table')
+            subDefectParetoTable.id = `main${subdefect.replace(/&| /g,'')}ParetoTable`
+            subDefectParetoTableDivison.appendChild(subDefectParetoTable)
+
+            let subDefectParetoTableHeadingList = ['S.No','Zone','Category','Sub-Category',`${subdefect} Count`]
+            let subDefectParetoTableHeadingRow = document.createElement('tr')
+            subDefectParetoTable.appendChild(subDefectParetoTableHeadingRow)
+            // printing headings of subDefectParetoTable
+            subDefectParetoTableHeadingList.map( (heading) => {
+              let subDefectParetoTableHeadingContent = document.createElement('th')
+              subDefectParetoTableHeadingContent.innerHTML = heading
+              subDefectParetoTableHeadingContent.style.whiteSpace = 'nowrap'
+              subDefectParetoTableHeadingContent.style.backgroundColor = '#242323'
+              subDefectParetoTableHeadingContent.style.color = '#ffffff'
+              // subDefectParetoTableHeadingContent.style.textAlign = 'center'
+              // subDefectParetoTableHeadingContent.style.fontSize = '90%'
+              subDefectParetoTableHeadingRow.appendChild(subDefectParetoTableHeadingContent)
+            })
+
+            // inserting zone rows into table
+            let rowCountNew = 0
+            Object.keys(subDefectZoneCount).map( (zone, index) => {
+              let singleZoneRowNew = document.createElement('tr')
+              singleZoneRowNew.style.backgroundColor = '#ffffff'
+              singleZoneRowNew.style.color = '#242323'
+              rowCountNew++
+              singleZoneRowNew.addEventListener('mouseover', function () {
+                singleZoneRowNew.style.backgroundColor = '#000000';
+                singleZoneRowNew.style.color = '#ffffff';
+              });
+              singleZoneRowNew.addEventListener('mouseleave', function () {
+                singleZoneRowNew.style.backgroundColor = '#ffffff';
+                singleZoneRowNew.style.color = '#242323';
+              });
+              subDefectParetoTable.appendChild(singleZoneRowNew)
+              subDefectParetoTableHeadingList.map( (heading) => {
+                let singleCellDataNew = document.createElement('td')
+                singleCellDataNew.style.textAlign = 'center'
+                singleCellDataNew.style.whiteSpace = 'nowrap'
+                singleZoneRowNew.appendChild(singleCellDataNew)
+                if(heading == 'S.No'){
+                  singleCellDataNew.innerHTML = rowCountNew
+                }else if(heading == 'Zone'){
+                  singleCellDataNew.innerHTML = zone.replace('_','')
+                }else if(heading == 'Category'){
+                  singleCellDataNew.innerHTML = zoneDetailProvider[zone]['Group']
+                }else if(heading == 'Sub-Category'){
+                  singleCellDataNew.innerHTML = zoneDetailProvider[zone]['Category'].replace(` ${zoneDetailProvider[zone]['Group']}`,'')
+                  singleCellDataNew.style.textAlign = 'left'
+                }else{
+                  // for subDefects
+                  singleCellDataNew.innerHTML = subDefectZoneCount[zone]
+                }
+              })
+            })
+          })
+
+          // showing only Surface Division by default
+          if(defect == 'Surface'){
+            correspondingTabDivision.style.display = 'block'
+            defectParetoButton.style.backgroundColor = '#ffffff'
+            defectParetoButton.style.color = '#000000'
+          }else{
+            correspondingTabDivision.style.display = 'none'
+          }
+        })
+
+        // styling table rule
+        const tdTags = document.getElementsByTagName('td')
+        Object.keys(tdTags).map( (td) => {
+          tdTags[td].style.border = '1px solid #64666a'
+          tdTags[td].style.borderCollapse = 'collapse'
+        })
+
+        const thTags = document.getElementsByTagName('th')
+        Object.keys(thTags).map( (th) => {
+          thTags[th].style.border = '1px solid #64666a'
+          thTags[th].style.borderCollapse = 'collapse'
+        })
+
+        const trTags = document.getElementsByTagName('tr')
+        Object.keys(trTags).map( (tr) => {
+          trTags[tr].style.border = '1px solid #64666a'
+          trTags[tr].style.borderCollapse = 'collapse'
+        })
+      }
+
+      //! Pareto Report
+      async function pareto(){
+        document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+        var fromDate = document.getElementById('from-date-condition-input').value
+        var toDate = document.getElementById('to-date-condition-input').value
+        console.log('pareto');
+
+        const response = await fetch('/pareto',{
+          method: 'POST',
+          headers:{
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+        const data = await response.json()
+
+        console.log('data', data.data)
+        // for Category-SubCategory Pareto Chart
+        let groupCountProvider = {}
+        let groupCategoryCountProvider= {}
+        // for Sub-Category - Zone Pareto Chart
+        let categoryCountProvider = {}
+        let categoryZoneCountProvider = {}
+        // for Zone-Defect Pareto Chart
+        let zoneCountProvider = {}
+        let zoneDefectCountProvider = {}
+        // for Defect-SubDefect Pareto Chart
+        let defectCountProvider = {}
+        let defectSubDefectCountProvider = {}
+
+
+        // counting no of defects in each bodyNumber, category, defect, subDefect, bodyNumber
+        // storing count in
+        Object.keys(data.data).map( (group)=> {
+          let groupCount = 0
+          groupCategoryCountProvider[group] = {}
+          Object.keys(data.data[group]).map( (category) => {
+            let categoryCount = 0
+            categoryZoneCountProvider[category] = {}
+            Object.keys(data.data[group][category]).map( (defect) => {
+              let defectCount = 0
+              if(!defectSubDefectCountProvider[defect]){
+                defectSubDefectCountProvider[defect] = {}
+              }
+              Object.keys(data.data[group][category][defect]).map( (subDefect) => {
+                let subDefectCount = 0
+                Object.keys(data.data[group][category][defect][subDefect]).map( (bodyNumber) => {
+                  let bodyNumberCount = 0
+                  Object.keys(data.data[group][category][defect][subDefect][bodyNumber]).map( (singleZone) => {
+                    // adding each zones defect value in bodyNumberCount
+                    bodyNumberCount += data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                    // adding zones into zones object
+                    if(!zoneCountProvider[singleZone]){
+                      zoneCountProvider[singleZone] = data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                    }else{
+                      zoneCountProvider[singleZone] += data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                    }
+                      // for Zone & Defect Count
+                    if(!zoneDefectCountProvider[singleZone]){
+                      zoneDefectCountProvider[singleZone] = {}
+                      if(!zoneDefectCountProvider[singleZone][`${defect}`]){
+                        zoneDefectCountProvider[singleZone][`${defect}`] = data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                      }
+                    }else{
+                      if(!zoneDefectCountProvider[singleZone][`${defect}`]){
+                        zoneDefectCountProvider[singleZone][`${defect}`] = data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                      }else{
+                        zoneDefectCountProvider[singleZone][`${defect}`] += data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                      }
+                    }
+
+                    // adding zones into category object and keep tracking count
+                    if(!categoryZoneCountProvider[category][singleZone]){
+                      categoryZoneCountProvider[category][singleZone] = data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                    }else{
+                      categoryZoneCountProvider[category][singleZone] += data.data[group][category][defect][subDefect][bodyNumber][singleZone]
+                    }
+                  })
+                  subDefectCount += bodyNumberCount
+                })
+                if(!defectSubDefectCountProvider[defect][subDefect]){
+                  defectSubDefectCountProvider[defect][subDefect] = subDefectCount
+                }else{
+                  defectSubDefectCountProvider[defect][subDefect] += subDefectCount
+                }
+                defectCount += subDefectCount
+              })
+              if(!defectCountProvider[defect]){
+                defectCountProvider[defect] = defectCount
+              }else{
+                defectCountProvider[defect] += defectCount
+              }
+              categoryCount += defectCount
+            })
+            groupCategoryCountProvider[group][category] = categoryCount
+            categoryCountProvider[category] = categoryCount
+            groupCount += categoryCount
+          })
+          groupCountProvider[group] = groupCount
+        })
+
+        // first Pareto chart
+        groupCountProvider = Object.entries(groupCountProvider)
+          .sort(([, a], [, b]) => b - a)
+          .reduce(
+            (r, [k, v]) => ({
+              ...r,
+              [k]: v
+            }),
+            {}
+          )
+
+        let categoryList = []
+        let groupCategoryCountProviderTemp = {}
+        Object.keys(groupCountProvider).map( (group) => {
+          groupCategoryCountProvider[group] = Object.entries(groupCategoryCountProvider[group])
+          .sort(([, a], [, b]) => b - a)
+          .reduce(
+            (r, [k, v]) => ({
+              ...r,
+              [k]: v
+            }),
+            {}
+          )
+          groupCategoryCountProviderTemp[group] = groupCategoryCountProvider[group]
+          // console.log('Before sort: ',Object.keys(groupCategoryCountProvider[group]))
+          categoryList.push(...Object.keys(groupCategoryCountProvider[group]))
+        })
+        groupCategoryCountProvider = JSON.parse(JSON.stringify(groupCategoryCountProviderTemp))
+
+
+        // second Pareto chart
+        categoryCountProvider = Object.entries(categoryCountProvider)
+          .sort(([, a], [, b]) => b - a)
+          .reduce(
+            (r, [k, v]) => ({
+              ...r,
+              [k]: v
+            }),
+            {}
+          )
+
+        let nTopCategory = 20;
+
+        // having only top Categories, deleting others
+        let exceptnTopCategory = Object.keys(categoryCountProvider).filter(x => !Object.keys(categoryCountProvider).slice(0,nTopCategory).includes(x))
+        exceptnTopCategory.map( (singleCategory) => {
+          delete categoryCountProvider[singleCategory]
+          delete categoryZoneCountProvider[singleCategory]
+        })
+
+        let zoneList = []
+        let categoryZoneCountProviderTemp = {}
+        Object.keys(categoryCountProvider).map( (category) => {
+          categoryZoneCountProvider[category] = Object.entries(categoryZoneCountProvider[category])
+          .sort(([, a], [, b]) => b - a)
+          .reduce(
+            (r, [k, v]) => ({
+              ...r,
+              [k]: v
+            }),
+            {}
+          )
+          categoryZoneCountProviderTemp[category] = categoryZoneCountProvider[category]
+
+          let nTopCategoryZone = 20
+          let exceptnTopCategoryZone = Object.keys(categoryZoneCountProvider[category]).filter(x => !Object.keys(categoryZoneCountProvider[category]).slice(0,nTopCategoryZone).includes(x))
+          // console.log('except Top Category Zone: ',exceptnTopCategoryZone)
+          exceptnTopCategoryZone.map( (singleZone)=> {
+            delete categoryZoneCountProvider[category][singleZone]
+          })
+
+          zoneList.push(...Object.keys(categoryZoneCountProvider[category]))
+        })
+        categoryZoneCountProvider = JSON.parse(JSON.stringify(categoryZoneCountProviderTemp))
+
+        // third Pareto chart
+        zoneCountProvider = Object.entries(zoneCountProvider)
+          .sort(([, a], [, b]) => b - a)
+          .reduce(
+            (r, [k, v]) => ({
+              ...r,
+              [k]: v
+            }),
+            {}
+          )
+
+        let nTopZone = 20
+
+        let exceptnTopZone = Object.keys(zoneCountProvider).filter(x => !Object.keys(zoneCountProvider).slice(0,nTopZone).includes(x))
+        exceptnTopZone.map( (singleZone) => {
+          delete zoneCountProvider[singleZone]
+          delete zoneDefectCountProvider[singleZone]
+        })
+
+        let zoneDefectCountProviderTemp = {}
+        Object.keys(zoneCountProvider).map( (zone) => {
+          zoneDefectCountProvider[zone] = Object.entries(zoneDefectCountProvider[zone])
+            .sort(([, a], [, b]) => b - a)
+            .reduce(
+              (r, [k, v]) => ({
+                ...r,
+                [k]: v
+              }),
+              {}
+            )
+          zoneDefectCountProviderTemp[zone] = zoneDefectCountProvider[zone]
+        })
+        zoneDefectCountProvider = JSON.parse(JSON.stringify(zoneDefectCountProviderTemp))
+
+        // fourth Pareto Chart
+        defectCountProvider = Object.entries(defectCountProvider)
+          .sort(([, a], [, b]) => b - a)
+          .reduce(
+            (r, [k, v]) => ({
+              ...r,
+              [k]: v
+            }),
+            {}
+          )
+
+        let subDefectList = []
+        let defectSubDefectCountProviderTemp = {}
+        Object.keys(defectCountProvider).map( (defect) => {
+          defectSubDefectCountProvider[defect] = Object.entries(defectSubDefectCountProvider[defect])
+            .sort(([, a], [, b]) => b - a)
+            .reduce(
+              (r, [k, v]) => ({
+                ...r,
+                [k]: v
+              }),
+              {}
+            )
+          defectSubDefectCountProviderTemp[defect] = defectSubDefectCountProvider[defect]
+          subDefectList.push(...Object.keys(defectSubDefectCountProvider[defect]))
+        })
+        defectSubDefectCountProvider = JSON.parse(JSON.stringify(defectSubDefectCountProviderTemp))
+
+
+        console.log('Group Count Provider: ',groupCountProvider)
+        console.log('Group Category Count Provider: ',groupCategoryCountProvider)
+        console.log('Category Count Provider: ',categoryCountProvider)
+        console.log('Category Zone Count Provider: ',categoryZoneCountProvider)
+        console.log('Zone Count Provider: ',zoneCountProvider)
+        console.log('Zone Defect Count Provider: ',zoneDefectCountProvider)
+        console.log('Defect Count Provider: ',defectCountProvider)
+        console.log('Defect Sub-Defect Count Provider: ',defectSubDefectCountProvider)
+
+        const paretoDivision = document.createElement('div')
+        paretoDivision.id = 'paretoDivision'
+        paretoDivision.style.display = 'flex'
+        paretoDivision.style.flexDirection = 'column'
+        paretoDivision.style.justifyContent = 'center'
+        paretoDivision.style.alignItems = 'center'
+        paretoDivision.style.gap = '100px'
+        document.getElementsByClassName('report-content-data')[0].appendChild(paretoDivision)
+
+        // first Pareto chart
+        const mainParetoCategoryChartDivision= document.createElement('div')
+        mainParetoCategoryChartDivision.id = 'mainParetoCategoryChartDivision'
+        paretoDivision.appendChild(mainParetoCategoryChartDivision)
+        mainParetoCategoryChartDivision.style.width = '80%'
+        mainParetoCategoryChartDivision.style.height = '500px'
+
+        let mainParetoCategoryChartDataset = []
+
+        function subCategoryParetoNavigate(){
+          document.getElementById(`mainParetoSubCategoryChartDivision`).scrollIntoView({ behavior: "smooth" })
+        }
+
+        let firstParetoColorSet = []
+        categoryList.map(() => {
+          firstParetoColorSet.push(generateRandomColor(firstParetoColorSet));
+        });
+
+        // populating data attribute for mainPareto Category Visualization
+        categoryList.map( (category,index) => {
+          let dataPoints = []
+          Object.keys(groupCountProvider).map( (group) => {
+            let yValue;
+            if(groupCategoryCountProvider[group][category]){
+              yValue = groupCategoryCountProvider[group][category]
+            }
+            dataPoints.push({label: group, y: yValue, click: subCategoryParetoNavigate})
+            categoryList[index].replace(`${group}`,'')
+            // console.log(categoryList[index])
+          })
+          mainParetoCategoryChartDataset.push({
+            type:'stackedColumn',
+            showInLegend: true,
+            // indexLabel: "{y}",
+            // indexLabelPlacement: "inside",
+            // indexLabelOrientation: "horizontal",
+            name: category,
+            dataPoints: dataPoints
+          })
+        })
+
+        // console.log('mainParetoCategoryChartDataset: ',mainParetoCategoryChartDataset)
+
+        CanvasJS.addColorSet("firstParetoColorSet", firstParetoColorSet);
+
+        // chart configuration
+        var mainParetoCategoryChart= new CanvasJS.Chart("mainParetoCategoryChartDivision", {
+          animationEnabled: true,
+          colorSet: 'firstParetoColorSet',
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          theme: "dark1",
+          title:{
+            text: "Category Pareto Visualization",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+          },
+          dataPointWidth: 30,
+          axisY: {
+            title: "No of Defects",
+            lineColor: "#4F81BC",
+            tickColor: "#4F81BC",
+            labelFontFamily: 'tahoma',
+            labelFontSize: 12,
+            minimum: 0,
+            gridThickness: 0,
+            stripLines: [
+              {
+                value: 0,
+                showOnTop: true,
+                color: "gray",
+                thickness: 2
+              }
+            ]
+          },
+          axisX:{
+            title: 'Category',
+            labelFontFamily: 'tahoma',
+            labelFontSize: 18,
+            gridThickness: 0,
+            tickLength: 0,
+            lineThickness: 0,
+            // labelFormatter: function(){
+            //   return " ";
+            // }
+          },
+          toolTip: {
+            content: '{name} : {y}'
+          },
+          data: mainParetoCategoryChartDataset
+        });
+        mainParetoCategoryChart.render();
+
+
+        // second Pareto chart
+        const mainParetoSubCategoryChartDivision = document.createElement('div')
+        mainParetoSubCategoryChartDivision.id = 'mainParetoSubCategoryChartDivision'
+        paretoDivision.appendChild(mainParetoSubCategoryChartDivision)
+        mainParetoSubCategoryChartDivision.style.width = '80%'
+        mainParetoSubCategoryChartDivision.style.height = '500px'
+        mainParetoSubCategoryChartDivision.style.position = 'relative'
+
+        let mainParetoSubCategoryChartDataset = []
+
+        function zoneParetoNavigate(){
+          document.getElementById(`mainParetoZoneChartDivision`).scrollIntoView({ behavior: "smooth" })
+        }
+
+        let secondParetoColorSet = []
+        zoneList.map(() => {
+          secondParetoColorSet.push(generateRandomColor(secondParetoColorSet));
+        });
+
+        // populating data attribute for main Pareto Visualization
+        zoneList.map( (zone) => {
+          let dataPoints = []
+          Object.keys(categoryCountProvider).map( (category) => {
+            let yValue
+            if(categoryZoneCountProvider[category][zone]){
+              yValue = categoryZoneCountProvider[category][zone]
+            }
+            dataPoints.push({label: category, y: yValue, click: zoneParetoNavigate})
+          })
+          mainParetoSubCategoryChartDataset.push({
+            type:'stackedColumn',
+            showInLegend: true,
+            // indexLabel: "{y}",
+            // indexLabelPlacement: "inside",
+            // indexLabelOrientation: "horizontal",
+            name: `Z${zone.replace('_','')}`,
+            dataPoints: dataPoints
+          })
+        })
+
+        // console.log('mainParetoSubCategoryChartDataset: ',mainParetoSubCategoryChartDataset)
+
+        CanvasJS.addColorSet("secondParetoColorSet", secondParetoColorSet);
+
+        // chart configuration
+        var mainParetoSubCategoryChart= new CanvasJS.Chart("mainParetoSubCategoryChartDivision", {
+          animationEnabled: true,
+          colorSet: 'secondParetoColorSet',
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          theme: "dark1",
+          title:{
+            text: "Sub-Category Visualization",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+          },
+          dataPointWidth: 30,
+          axisY: {
+            title: "No of Defects",
+            lineColor: "#4F81BC",
+            tickColor: "#4F81BC",
+            labelFontFamily: 'tahoma',
+            labelFontSize: 12,
+            minimum: 0,
+            gridThickness: 0,
+            stripLines: [
+              {
+                value: 0,
+                showOnTop: true,
+                color: "gray",
+                thickness: 2
+              }
+            ]
+          },
+          axisX:{
+            title: 'Sub-Category',
+            labelFontFamily: 'tahoma',
+            labelFontSize: 12,
+            gridThickness: 0,
+            tickLength: 0,
+            lineThickness: 0,
+            // labelFormatter: function(){
+            //   return " ";
+            // }
+          },
+          toolTip: {
+            content: '{label} - {name} : {y}'
+          },
+          data: mainParetoSubCategoryChartDataset
+        });
+        mainParetoSubCategoryChart.render();
+
+
+        // third Pareto chart
+        const mainParetoZoneChartDivision = document.createElement('div')
+        mainParetoZoneChartDivision.id = 'mainParetoZoneChartDivision'
+        paretoDivision.appendChild(mainParetoZoneChartDivision)
+        mainParetoZoneChartDivision.style.width = '80%'
+        mainParetoZoneChartDivision.style.height = '500px'
+        mainParetoZoneChartDivision.style.position = 'relative'
+
+        let mainParetoZoneChartDataset = []
+
+        function defectParetoNavigate(){
+          document.getElementById(`mainParetoDefectChartDivision`).scrollIntoView({ behavior: "smooth" })
+        }
+
+        defectListTemp = ['Surface','Body Fitting','Missing & Wrong Part','Welding','Water Leak']
+        let thirdParetoColorSet = []
+        defectListTemp.map(() => {
+          thirdParetoColorSet.push(generateRandomColor(thirdParetoColorSet));
+        });
+
+        // populating data attribute for main Pareto Visualization
+        defectListTemp.map( (defect) => {
+          let dataPoints = []
+          Object.keys(zoneCountProvider).map( (zone) => {
+            let yValue
+            if(zoneDefectCountProvider[zone][defect]){
+              yValue = zoneDefectCountProvider[zone][defect]
+            }
+            dataPoints.push({label: zone.replace('_',''), y: yValue, click: defectParetoNavigate})
+          })
+          mainParetoZoneChartDataset.push({
+            type:'stackedColumn',
+            showInLegend: true,
+            // indexLabel: "{y}",
+            // indexLabelPlacement: "inside",
+            // indexLabelOrientation: "horizontal",
+            name: defect.split('_')[0],
+            dataPoints: dataPoints
+          })
+        })
+
+        // console.log('mainParetoZoneChartDataset: ',mainParetoZoneChartDataset)
+
+        CanvasJS.addColorSet("thirdParetoColorSet", thirdParetoColorSet);
+
+        // chart configuration
+        var mainParetoZoneChart= new CanvasJS.Chart("mainParetoZoneChartDivision", {
+          animationEnabled: true,
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          colorSet: 'thirdParetoColorSet',
+          theme: "dark1",
+          title:{
+            text: "Zone Pareto Visualization",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+          },
+          dataPointWidth: 30,
+          axisY: {
+            title: "No of Defects",
+            lineColor: "#4F81BC",
+            tickColor: "#4F81BC",
+            labelFontFamily: 'tahoma',
+            labelFontSize: 12,
+            minimum: 0,
+            gridThickness: 0,
+            stripLines: [
+              {
+                value: 0,
+                showOnTop: true,
+                color: "gray",
+                thickness: 2
+              }
+            ]
+          },
+          axisX:{
+            title: 'Zones',
+            labelFontFamily: 'tahoma',
+            labelFontSize: 18,
+            gridThickness: 0,
+            tickLength: 0,
+            lineThickness: 0,
+          },
+          toolTip: {
+            content: '{name} : {y}'
+          },
+          data: mainParetoZoneChartDataset
+        });
+        mainParetoZoneChart.render();
+
+
+        // fourth Pareto chart
+        const mainParetoDefectChartDivision = document.createElement('div')
+        mainParetoDefectChartDivision.id = 'mainParetoDefectChartDivision'
+        paretoDivision.appendChild(mainParetoDefectChartDivision)
+        mainParetoDefectChartDivision.style.width = '80%'
+        mainParetoDefectChartDivision.style.height = '500px'
+        mainParetoDefectChartDivision.style.position = 'relative'
+
+        let mainParetoDefectChartDataset = []
+
+        let fourthParetoColorSet = []
+        subDefectList.map(() => {
+          fourthParetoColorSet.push(generateRandomColor(fourthParetoColorSet));
+        });
+
+        // const subDefectList = ['Dent','Bump','Burrs','Spatters','Others','Body Fitting 1','Body Fitting 2', 'Body Fitting Others','Missing Part','Wrong Part','Welding Part 1', 'Welding Part 2', 'Welding Part 3','Welding Part Others', 'Water Leak 1', 'Water Leak 2', 'Water Leak Others']
+
+        // populating data attribute for main Pareto Visualization
+        subDefectList.map( (subDefect) => {
+          let dataPoints = []
+          Object.keys(defectCountProvider).map( (defect) => {
+            let yValue
+            if(defectSubDefectCountProvider[defect][subDefect]){
+              yValue = defectSubDefectCountProvider[defect][subDefect]
+            }
+            dataPoints.push({label: defect, y:yValue})
+          })
+          mainParetoDefectChartDataset.push({
+            type:'stackedColumn',
+            // showInLegend: true,
+            // indexLabel: "{y}",
+            // indexLabelPlacement: "inside",
+            // indexLabelOrientation: "horizontal",
+            name: subDefect,
+            dataPoints: dataPoints
+          })
+        })
+
+        CanvasJS.addColorSet("fourthParetoColorSet", fourthParetoColorSet);
+
+        // chart configuration
+        var mainParetoDefectChart= new CanvasJS.Chart("mainParetoDefectChartDivision", {
+          animationEnabled: true,
+          colorSet: 'fourthParetoColorSet',
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          theme: "dark1",
+          title:{
+            text: "Defect Pareto Visualization",
+            fontFamily: 'tahoma',
+            fontSize: 18,
+          },
+          dataPointWidth: 30,
+          axisY: {
+            title: "No of Defects",
+            lineColor: "#4F81BC",
+            tickColor: "#4F81BC",
+            labelFontFamily: 'tahoma',
+            labelFontSize: 18,
+            minimum: 0,
+            gridThickness: 0,
+            stripLines: [
+              {
+                value: 0,
+                showOnTop: true,
+                color: "gray",
+                thickness: 2
+              }
+            ]
+          },
+          axisX:{
+            title: 'Defect',
+            gridThickness: 0,
+            tickLength: 0,
+            lineThickness: 0,
+          },
+          toolTip: {
+            content: '{name} : {y}'
+          },
+          data: mainParetoDefectChartDataset
+        });
+        mainParetoDefectChart.render();
+      }
+
+      async function individualSummary(defectName, subDefectList){
+        document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+        console.log(defectName,'Summary');
+
+        var fromDate = document.getElementById('from-date-condition-input').value
+        var toDate = document.getElementById('to-date-condition-input').value
+
+        const response = await fetch('/individualSummaryReport',{
+          method: 'POST',
+          headers:{
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            defectName,
+            subDefectList,
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+
+        const data = await response.json()
+
+        console.log('data: ',data.data)
+
+        const defectID = {
+           'Surface' : 'surface',
+           'Body Fitting': 'bodyFitting',
+           'Missing & Wrong Part': 'missingWrongPart',
+           'Welding': 'welding',
+           'Water Leak': 'waterLeak'
+        }
+
+        const reportContentData = document.getElementsByClassName('report-content-data')[0]
+
+        const summaryTable = document.createElement('table')
+        summaryTable.id = `${defectID[defectName]}SummaryTable`
+        summaryTable.style.margin = '2% 5%'
+        summaryTable.style.border = '1px solid #64666a'
+        summaryTable.style.borderCollapse = 'collapse'
+        // summaryTable.style.fontSize = '63%'
+        reportContentData.appendChild(summaryTable)
+
+        // side heading row
+        const sideHeadingRow = document.createElement('tr')
+        sideHeadingRow.style.position = 'sticky'
+        sideHeadingRow.style.top = '124px'
+        sideHeadingRow.style.zIndex = '2%'
+        sideHeadingRow.id = `${defectID[defectName]}SideHeadingRow`
+        summaryTable.appendChild(sideHeadingRow)
+
+        // cells for side heading row
+        const sideHeadingList = ['','Right Side','Left Side']
+        sideHeadingList.map( (side) => {
+          let sideHeadingCell = document.createElement('th')
+          sideHeadingCell.style.backgroundColor = '#242323'
+          sideHeadingCell.id = `${defectID[defectName]}${side}HeadingCell`
+          if(side != ''){
+            sideHeadingCell.style.width = '20%'
+            sideHeadingCell.colSpan = `${2 + subDefectList.length}`
+          }else{
+            sideHeadingCell.style.width = '5%'
+          }
+          sideHeadingCell.innerHTML = side
+          sideHeadingRow.appendChild(sideHeadingCell)
+        })
+
+        // second row heading
+          // main heading
+        const secondRowMainHeading = document.createElement('tr')
+        secondRowMainHeading.id = `${defectID[defectName]}secondRowMainHeading`
+        secondRowMainHeading.style.position = 'sticky'
+        secondRowMainHeading.style.top = '148px'
+        summaryTable.appendChild(secondRowMainHeading)
+        const secondRowHeadingList = ['Location','Nature of Defect','Total']
+
+          // sub heading
+        const secondRowSubHeading = document.createElement('tr')
+        secondRowSubHeading.id = `${defectID[defectName]}secondRowSubHeading`
+        secondRowSubHeading.style.position = 'sticky'
+        secondRowSubHeading.style.top = '171px'
+        summaryTable.appendChild(secondRowSubHeading)
+
+          // printing category alone
+        const categoryCell = document.createElement('th')
+        categoryCell.style.backgroundColor = '#242323'
+        categoryCell.id = 'CategoryCell'
+        categoryCell.innerHTML = 'Category'
+        categoryCell.rowSpan = 2
+        secondRowMainHeading.appendChild(categoryCell)
+
+        // cells for second heading row
+        sideHeadingList.map( (side) => {
+          if(side != ''){
+            // second rows main heading
+            secondRowHeadingList.map( (singleHeading) => {
+              const singleHeadingCell = document.createElement('th')
+              singleHeadingCell.style.backgroundColor = '#242323'
+              singleHeadingCell.id = `${singleHeading}Cell`
+              singleHeadingCell.innerHTML = singleHeading
+              if(singleHeading == 'Nature of Defect'){
+                singleHeadingCell.colSpan = `${subDefectList.length}`
+              }else{
+                singleHeadingCell.rowSpan = `2`
+              }
+              secondRowMainHeading.appendChild(singleHeadingCell)
+            })
+
+            // cells for the corresponding subDefectList
+            subDefectList.map( (singleSubHeading) => {
+              let singleSubHeadingCell = document.createElement('th')
+              singleSubHeadingCell.style.backgroundColor = '#242323'
+              singleSubHeadingCell.id = `${singleSubHeading}`
+              singleSubHeadingCell.innerHTML = singleSubHeading
+              secondRowSubHeading.appendChild(singleSubHeadingCell)
+            })
+          }
+        })
+
+        // loop to create row for entire defect list... all rest things from title row
+        for(let category = 0; category < Object.keys(data.data).length; category++){
+          // category loop
+          let categoryName = Object.keys(data.data)[category]
+
+          // row for each category
+          let categoryRow = document.createElement('tr')
+          categoryRow.id = `${categoryName}Row`
+          summaryTable.appendChild(categoryRow)
+
+          // categoryName cell
+          let categoryNameCell = document.createElement('td')
+          categoryNameCell.id = `${categoryName}Cell`
+          categoryNameCell.innerHTML = categoryName
+          categoryNameCell.style.backgroundColor = '#242323'
+          categoryNameCell.style.textAlign = 'center'
+          categoryNameCell.rowSpan = `${Object.keys(data.data[categoryName]['LH']).length}`
+          categoryRow.appendChild(categoryNameCell)
+
+          let correspondingLHRowDOM = [categoryRow]
+          for(let side = 0; side < Object.keys(data.data[categoryName]).length; side++){
+            //side name loop
+            let sideName = Object.keys(data.data[categoryName])[side]
+
+            for(let subCategory = 0; subCategory < Object.keys(data.data[categoryName][sideName]).length; subCategory++){
+              // subCategory loop
+              let subCategoryName = Object.keys(data.data[categoryName][sideName])[subCategory]
+
+              let subCategoryCell = document.createElement('td')
+              subCategoryCell.style.backgroundColor = '#f5f0f0'
+              subCategoryCell.style.color = '#242323'
+              subCategoryCell.id = `${subCategoryName}Cell`
+              subCategoryCell.innerHTML = subCategoryName
+
+              let newRowForDataFilling = document.createElement('tr')
+              newRowForDataFilling.id = `${subCategoryName}NewRow`
+              if(sideName == 'LH'){
+                if(subCategory == 0){
+                  // only for the first subCategory in LH
+                  categoryRow.appendChild(subCategoryCell)
+                }else{
+                  // appending in new row in table, inside new row appending emptycell,then subcategoryName
+                  // rest of the subCategory in LH
+                  summaryTable.appendChild(newRowForDataFilling)
+                  newRowForDataFilling.appendChild(subCategoryCell)
+                  // saving for RH
+                  correspondingLHRowDOM.push(newRowForDataFilling)
+                }
+              }else{
+                // appending into corresponding row saved in Row DOM Array
+                correspondingLHRowDOM[subCategory].appendChild(subCategoryCell)
+              }
+
+              let subCategoryDefectTotal = 0
+              for(let subDefect = 0; subDefect < Object.keys(data.data[categoryName][sideName][subCategoryName]).length; subDefect++){
+                // subDefect loop
+                let subDefectName = Object.keys(data.data[categoryName][sideName][subCategoryName])[subDefect]
+
+                // subDefectDataCell
+                let subDefectDataCell = document.createElement('td')
+                subDefectDataCell.id = `${sideName}${categoryName}_${subCategoryName}-${subDefectName}`
+                subDefectDataCell.style.backgroundColor = '#f5f0f0'
+                subDefectDataCell.style.color = '#242323'
+                subDefectDataCell.style.textAlign = 'center'
+                subDefectDataCell.innerHTML = data.data[categoryName][sideName][subCategoryName][subDefectName]
+
+                // counting no of defects in subCategory's Total Defect
+                subCategoryDefectTotal += data.data[categoryName][sideName][subCategoryName][subDefectName]
+                // append this one into corresponding row..
+                if(side == 'LH'){
+                  if(subCategory == 0){
+                    categoryRow.appendChild(subDefectDataCell)
+                  }else{
+                    newRowForDataFilling.appendChild(subDefectDataCell)
+                  }
+                }else{
+                  correspondingLHRowDOM[subCategory].appendChild(subDefectDataCell)
+                }
+              }
+
+              // Total cell
+              let subCategoryTotalCell = document.createElement('td')
+              subCategoryTotalCell.id = `${subCategoryName}TotalCell`
+              subCategoryTotalCell.style.textAlign = 'center'
+              subCategoryTotalCell.style.backgroundColor = '#f5f0f0'
+              subCategoryTotalCell.style.color = '#242323'
+              subCategoryTotalCell.innerHTML = subCategoryDefectTotal
+
+              if(side == 'LH'){
+                if(subCategory == 0){
+                  categoryRow.appendChild(subCategoryTotalCell)
+                }else{
+                  newRowForDataFilling.appendChild(subCategoryTotalCell)
+                }
+              }else{
+                correspondingLHRowDOM[subCategory].appendChild(subCategoryTotalCell)
+              }
+            }
+          }
+        }
+
+        // styling table rule
+        const tdTags = document.getElementsByTagName('td')
+        Object.keys(tdTags).map( (td) => {
+          tdTags[td].style.border = '1px solid #64666a'
+          tdTags[td].style.borderCollapse = 'collapse'
+        })
+
+        const thTags = document.getElementsByTagName('th')
+        Object.keys(thTags).map( (th) => {
+          thTags[th].style.border = '1px solid #64666a'
+          thTags[th].style.borderCollapse = 'collapse'
+        })
+
+        const trTags = document.getElementsByTagName('tr')
+        Object.keys(trTags).map( (tr) => {
+          trTags[tr].style.border = '1px solid #64666a'
+          trTags[tr].style.borderCollapse = 'collapse'
+        })
+      }
+
+      async function colorMap(){
+        document.getElementById('report-topic-data').innerHTML = document.getElementById('chart-condition-input').value
+        console.log(document.getElementById('chart-condition-input').value);
+
+        const reportContentData = document.getElementsByClassName('report-content-data')[0]
+        var fromDate = document.getElementById('from-date-condition-input').value
+        var toDate = document.getElementById('to-date-condition-input').value
+
+        const response = await fetch('/colorMap',{
+          method:'POST',
+          headers:{
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            fromDate,
+            toDate,
+            mode,
+          })
+        })
+
+        const data = await response.json()
+
+        console.log('data: ',data.data)
+
+        const categoryAbbreviation = {
+          'UB': 'Under Body',
+          'MB': 'Main Body',
+          'SBSA': 'Shell Body Sub-Line',
+          'SBML': 'Shell Body Main-Line',
+          'SM': 'Side Member'
+        }
+
+        // function changeSubDefectOptions
+        function changeSubDefectOptions(event, category, subCategory,sideCode,categoryCode) {
+          let selectedDefect = event.target.value
+
+          // filling subDefect option with dynamic options
+          let SubCategorySubDefectSelect = document.getElementById(`${subCategory.replace(`${category}`,'')}SubDefectSelect`)
+            // deleting existing subDefect options
+          var firstElement = SubCategorySubDefectSelect.firstElementChild
+          while(firstElement){
+            firstElement.remove()
+            firstElement = SubCategorySubDefectSelect.firstElementChild
+          }
+            // adding new subDefect Options
+          Object.keys(data.data[category][subCategory][selectedDefect]).map( (subDefect) => {
+            let subDefectOption = document.createElement('option')
+            subDefectOption.value = subDefect
+            subDefectOption.innerHTML = subDefect
+            SubCategorySubDefectSelect.appendChild(subDefectOption)
+          })
+
+          // updating zone Details in image
+          const visualPresentationNode = document.getElementById(`${subCategory.replace(` ${category}`,'')}_Image_Visual_Presentation`)
+            // deleting exiting zone Details
+          var firstElement = visualPresentationNode.firstElementChild
+          while(firstElement){
+            firstElement.remove()
+            firstElement = visualPresentationNode.firstElementChild
+          }
+            // updating zone Details
+          const firstSubDefect = Object.keys(data.data[category][subCategory][selectedDefect])[0]
+          Object.keys(data.data[category][subCategory][selectedDefect][firstSubDefect]).map( (singleZone) => {
+            let zoneDefectCountData = document.createElement('p')
+            if(data.data[category][subCategory][selectedDefect][firstSubDefect][singleZone] > 5){
+              zoneDefectCountData.style.backgroundColor = '	#d4120f90'
+            }else if (data.data[category][subCategory][selectedDefect][firstSubDefect][singleZone] > 3 && data.data[category][subCategory][selectedDefect][firstSubDefect][singleZone] <= 5 ){
+              zoneDefectCountData.style.backgroundColor = '	#fcf93590'
+            }else{
+              zoneDefectCountData.style.backgroundColor = '	#87cfeb90'
+            }
+            zoneDefectCountData.className = `${sideCode}${categoryCode}${subCategory.replaceAll(' ','')}${singleZone.replace('_','')}`
+            zoneDefectCountData.innerHTML = ` ${singleZone.replace('_','')}: ${data.data[category][subCategory][selectedDefect][firstSubDefect][singleZone]}`
+            zoneDefectCountData.style.display = 'flex'
+
+            visualPresentationNode.appendChild(zoneDefectCountData)
+          })
+        }
+
+        function changeSubDefectZones(event, category, subCategory,selectedDefect,sideCode,categoryCode) {
+          let selectedSubDefect = event.target.value
+
+          // updating zone Details in image
+          const visualPresentationNode = document.getElementById(`${subCategory.replace(` ${category}`,'')}_Image_Visual_Presentation`)
+            // deleting exiting zone Details
+          var firstElement = visualPresentationNode.firstElementChild
+          while(firstElement){
+            firstElement.remove()
+            firstElement = visualPresentationNode.firstElementChild
+          }
+            // updating zone Details
+          Object.keys(data.data[category][subCategory][selectedDefect][selectedSubDefect]).map( (singleZone) => {
+            let zoneDefectCountData = document.createElement('p')
+            if(data.data[category][subCategory][selectedDefect][selectedSubDefect][singleZone] > 5){
+              zoneDefectCountData.style.backgroundColor = '	#d4120f90'
+            }else if (data.data[category][subCategory][selectedDefect][selectedSubDefect][singleZone] > 3 && data.data[category][subCategory][selectedDefect][selectedSubDefect][singleZone] <= 5 ){
+              zoneDefectCountData.style.backgroundColor = '	#fcf93590'
+            }else{
+              zoneDefectCountData.style.backgroundColor = '	#87cfeb90'
+            }
+            zoneDefectCountData.className = `${sideCode}${categoryCode}${subCategory.replaceAll(' ','')}${singleZone.replace('_','')}`
+            zoneDefectCountData.innerHTML = `${singleZone.replace('_','')}: ${data.data[category][subCategory][selectedDefect][selectedSubDefect][singleZone]}`
+            zoneDefectCountData.style.display = 'flex'
+
+            visualPresentationNode.appendChild(zoneDefectCountData)
+          })
+        }
+
+        //Color Map Navigator
+        const colorMapNavigatorDivision = document.createElement('div')
+        colorMapNavigatorDivision.id = 'colorMapNavigator'
+        // colorMapNavigatorDivision.style.display = 'flex'
+        // colorMapNavigatorDivision.style.justifyContent = 'space-evenly'
+        // colorMapNavigatorDivision.style.width = '100%'
+        // colorMapNavigatorDivision.style.position = 'sticky'
+        // colorMapNavigatorDivision.style.top = '16.3%'
+        // colorMapNavigatorDivision.style.zIndex = '2'
+        // colorMapNavigatorDivision.style.backgroundColor = '#222831'
+        // colorMapNavigatorDivision.style.padding = '0.5% 0%'
+        reportContentData.appendChild(colorMapNavigatorDivision)
+
+        // categoryNavigator Division
+        const categoryNavigatorDiv = document.createElement('div')
+        categoryNavigatorDiv.id = 'selectCategoryDivision'
+        categoryNavigatorDiv.style.display = 'flex'
+        categoryNavigatorDiv.style.gap = '1rem'
+        colorMapNavigatorDivision.appendChild(categoryNavigatorDiv)
+
+        // categorySelect Name and drop-down list box
+        const categorySelectName = document.createElement('p')
+        categorySelectName.innerHTML = 'Category :'
+        categorySelectName.style.fontSize = '120%'
+        categoryNavigatorDiv.appendChild(categorySelectName)
+
+        const categorySelect = document.createElement('select')
+        categorySelect.id = 'colorMapCategorySelectTag'
+        categorySelect.style.color = 'black'
+        categorySelect.addEventListener('click', () => subCategoryGenerator(event))
+        //categorySelect.addEventListener('change', () => subCategoryGenerator(event))
+        categoryNavigatorDiv.appendChild(categorySelect)
+
+        // function to make the smooth scroll to selected category & subCategory
+        function subCategorySmoothScroll(event){
+          let clickedSubCategory = event.target.value
+          console.log('clickedSubCategory :', clickedSubCategory)
+
+          document.getElementById(`${clickedSubCategory} ColorMap`).scrollIntoView({ behavior: "smooth" })
+        }
+
+        // function to generate corresponding subCategories based on selected category
+        function subCategoryGenerator(event){
+          let clickedCategory = event.target.value
+          console.log('clickedCategory: ',clickedCategory)
+
+          const subCategorySelectNode = document.getElementById('selectSubCategory')
+
+          var firstElement = subCategorySelectNode.firstElementChild
+          while(firstElement){
+            firstElement.remove()
+            firstElement = subCategorySelectNode.firstElementChild
+          }
+
+          Object.keys(data.data[clickedCategory]).map( (subCategory) => {
+            let subCategoryOption = document.createElement('option')
+            subCategoryOption.value = subCategory.replace(` ${clickedCategory}`,'')
+            subCategoryOption.innerHTML = subCategory.replace(` ${clickedCategory}`,'')
+            subCategorySelectNode.appendChild(subCategoryOption)
+          })
+
+          // smooth scroll to the category
+          document.getElementById(`${clickedCategory}ColorMap`).scrollIntoView({ behavior: "smooth" })
+        }
+
+        // generating options for category
+        Object.keys(data.data).map( (category) => {
+          let singleCategoryOption = document.createElement('option')
+          singleCategoryOption.value = category
+          singleCategoryOption.innerHTML = categoryAbbreviation[category]
+          categorySelect.appendChild(singleCategoryOption)
+        })
+
+        // SubCategoryNavigator Division
+        const subCategoryNavigatorDiv = document.createElement('div')
+        subCategoryNavigatorDiv.id = 'selectSubCategoryDivision'
+        subCategoryNavigatorDiv.style.gap = '1rem'
+        subCategoryNavigatorDiv.style.display = 'flex'
+        colorMapNavigatorDivision.appendChild(subCategoryNavigatorDiv)
+
+
+        // categorySelect Name and drop-down list box
+        const subCategorySelectName = document.createElement('p')
+        subCategorySelectName.innerHTML = 'Sub-Category :'
+        subCategorySelectName.style.fontSize = '120%'
+        subCategoryNavigatorDiv.appendChild(subCategorySelectName)
+
+        const subCategorySelect = document.createElement('select')
+        subCategorySelect.id = 'selectSubCategory'
+        subCategorySelect.style.color = 'black'
+
+        subCategorySelect.addEventListener('click', () => subCategorySmoothScroll(event))
+        subCategoryNavigatorDiv.appendChild(subCategorySelect)
+
+        let defaultFirstCategory = Object.keys(data.data)[0]
+        // generating options for the select subCategory of the first category
+        Object.keys(data.data[defaultFirstCategory]).map( (subCategory) => {
+          let subCategoryOption = document.createElement('option')
+          subCategoryOption.value = subCategory.replace(` ${defaultFirstCategory}`,'')
+          subCategoryOption.innerHTML = subCategory.replace(` ${defaultFirstCategory}`,'')
+          subCategorySelect.appendChild(subCategoryOption)
+        })
+
+        // Color Map Main Content
+        const colorMapReportContentDivision = document.createElement('div')
+        colorMapReportContentDivision.id = 'colorMapData'
+        reportContentData.appendChild(colorMapReportContentDivision)
+
+        Object.keys(data.data).map( (category) => {
+          //  division for main Category
+          const categoryDivision = document.createElement('div')
+          categoryDivision.id = `${category}ColorMap`
+          categoryDivision.style.clear = 'left'
+          categoryDivision.style.position = 'relative'
+          categoryDivision.style.margin = '2rem 0'
+          colorMapReportContentDivision.appendChild(categoryDivision)
+
+          // category name
+          const categoryName = document.createElement('p')
+          categoryName.id =  `${category}TopicElement`
+          categoryName.innerHTML = categoryAbbreviation[category]
+          categoryName.style.color = '#ffffff'
+          // Changed this fontSize
+          categoryName.style.fontSize = '2rem'
+          categoryName.style.marginLeft = '4%'
+          categoryName.style.textDecoration = 'underline'
+          // categoryName.style.height = '44rem'
+          categoryDivision.appendChild(categoryName)
+
+          // division for all subCategories inside a category
+          let subCategoriesContainer = document.createElement('div')
+          subCategoriesContainer.id = `${category}_SubCategory_Holder`
+          // subCategoriesContainer.style.display = 'grid'
+          // subCategoriesContainer.style.gridTemplateColumns = '1fr 1fr'
+          categoryDivision.appendChild(subCategoriesContainer)
+
+          Object.keys(data.data[category]).map( (subCategory) => {
+            // division for sub Category
+            const subCategoryDivision = document.createElement('div')
+            subCategoryDivision.id = `${subCategory.replace(` ${category}`,'')} ColorMap`
+            subCategoryDivision.style.clear = 'left'
+            subCategoryDivision.style.margin = '1rem'
+            subCategoryDivision.style.backgroundColor = '#2b323c'
+            subCategoryDivision.style.height = '95%'
+            subCategoriesContainer.appendChild(subCategoryDivision)
+
+            // subCategory name
+            const subCategoryName = document.createElement('p')
+            subCategoryName.id = `${subCategory}TopicElement`
+            subCategoryName.innerHTML = subCategory.replace(`${category}`,'')
+            subCategoryName.style.color = '#ffffff'
+            subCategoryName.style.fontSize = '145%'
+            subCategoryName.style.marginLeft = '3%'
+            subCategoryName.style.marginTop = '2%'
+            // subCategoryName.style.textAlign = 'center'
+            subCategoryDivision.appendChild(subCategoryName)
+
+            // defining sides
+            let subCategoryArray = subCategory.split(' ').reverse()
+            let categoryCodeSplit = subCategoryArray[0]
+            let categoryCode = ''
+            let sideCodeSplit = subCategoryArray[1]
+            let sideCode = ''
+            if(Object.keys(categoryAbbreviation).includes(categoryCodeSplit)){
+              categoryCode = categoryAbbreviation[categoryCodeSplit].toUpperCase().replaceAll(' ','_')+'_'
+            }else{
+              categoryCode = 'UNDER_BODY_'
+            }
+            if((sideCodeSplit == 'LH' || sideCodeSplit == 'RH') && (subCategoryArray.indexOf(sideCodeSplit) != subCategoryArray.length-1)){
+              sideCode = sideCodeSplit+'_'
+            }
+
+            // division for defects
+            const defectDivision = document.createElement('div')
+            defectDivision.id = `${subCategory.replace(`${category}`,'')}DefectDivision`
+            defectDivision.style.clear = 'left'
+            // defectDivision.style.marginTop = '9rem'
+            // defectDivision.style.marginBottom = '1%'
+            //! Added extra styles
+            subCategoryDivision.appendChild(defectDivision)
+
+            // defect select
+            const defectSelect= document.createElement('select')
+            defectSelect.className = 'defectStyle'
+            defectSelect.id = `${subCategory.replace(`${category}`,'')}DefectSelect`
+            defectSelect.addEventListener('change', () => changeSubDefectOptions(event,category,subCategory,sideCode,categoryCode))
+            // defectSelect.style.color = '#808080'
+            // defectSelect.style.backgroundColor = '#eeeeee'
+            // defectSelect.style.fontSize = '120%'
+            // defectSelect.style.marginLeft = '6%'
+            // defectSelect.style.marginTop = '2%'
+            // defectSelect.style.borderRadius = '5px'
+            // defectName.className = 'mt-7'
+            defectDivision.appendChild(defectSelect)
+
+            let fistDefect = Object.keys(data.data[category][subCategory])[0]
+            //defectSelect Option
+            Object.keys(data.data[category][subCategory]).map( (defectName, index) => {
+              let defectOption = document.createElement('option')
+              defectOption.value = defectName
+              defectOption.innerHTML = defectName
+              defectSelect.appendChild(defectOption)
+            })
+
+            // subDefect Container
+            const subDefectContainer = document.createElement('div')
+            subDefectContainer.id = `${subCategory.replace(`${category}`,'')}_SubDefect_Container`
+            subDefectContainer.style.clear = 'left'
+            // subDefectContainer.style.margin = '0 8%'
+            // subDefectContainer.style.display = 'flex'
+            defectDivision.style.height = 'auto'
+            // defectDivision.style.margin = '12rem 0'
+            defectDivision.appendChild(subDefectContainer)
+
+            //subDefect select
+            const subDefectSelect = document.createElement('select')
+            subDefectSelect.id = `${subCategory.replace(`${category}`,'')}SubDefectSelect`
+            subDefectSelect.className = 'subDefectStyle'
+            // subDefectSelect.style.borderRadius = '5px'
+            // subDefectSelect.style.backgroundColor = '#eeeeee'
+            // subDefectSelect.style.color = '#808080'
+            subDefectSelect.addEventListener('change', () => changeSubDefectZones(event, category, subCategory,defectSelect.value,sideCode,categoryCode))
+            // subDefectSelect.style.fontSize = '120%'
+            // subDefectSelect.style.position = 'relative'
+            // subDefectSelect.style.top = '-27px'
+            // subDefectSelect.style.left = '22%'
+            subDefectContainer.appendChild(subDefectSelect)
+
+            // division for subDefects
+            const subDefectDivision = document.createElement('div')
+            subDefectDivision.id = `${subCategory.replace(`${category}`,'')}SubDefectColorMap`
+            subDefectDivision.className = 'colorMapSubDefects'
+            // subDefectDivision.style.marginLeft = '1%'
+            // subDefectDivision.style.display = 'flex'
+            // subDefectDivision.style.justifyContent = 'center'
+            // subDefectDivision.style.alignItems = 'center'
+            // subDefectDivision.style.flexDirection = 'column'
+            // subDefectDivision.style.height = '60vh'
+            // subDefectDivision.style.width = '100%'
+            // subDefectDivision.style.position = 'relative'
+            subDefectContainer.appendChild(subDefectDivision)            
+
+            let fistSubDefect = Object.keys(data.data[category][subCategory][fistDefect])[0]
+            // subDefect Option
+            Object.keys(data.data[category][subCategory][fistDefect]).map( (subDefect) => {
+              let subDefectOption = document.createElement('option')
+              subDefectOption.value = subDefect
+              subDefectOption.innerHTML = subDefect
+              subDefectSelect.appendChild(subDefectOption)
+            })
+
+            // division for defect visual presentation
+            const visualPresentation = document.createElement('div')
+            visualPresentation.id = `${subCategory.replace(` ${category}`,'')}_Image_Visual_Presentation`
+            // console.log(subCategory);
+            // visualPresentation.style.display = 'inline-block'
+            // visualPresentation.style.width = '100%'
+            // visualPresentation.style.height = '21rem'
+            visualPresentation.style.color = 'black'
+            visualPresentation.className = 'zone_division'
+            subDefectDivision.appendChild(visualPresentation)
+
+            visualPresentation.style.backgroundImage = `url(./bodyParts/${sideCode}${categoryCode}${subCategory.replaceAll(' ','')}.jpg)`
+            // console.log(`url(${sideCode}${categoryCode}${subCategory.replaceAll(' ','')}.jpg)`)
+            visualPresentation.style.backgroundRepeat = 'no-repeat'
+            visualPresentation.style.backgroundImage = 'contain'
+            visualPresentation.style.backgroundPosition = 'center'
+            visualPresentation.style.backgroundSize = 'contain'
+            visualPresentation.style.position = 'absolute'
+
+            // console.log('category: ',category)
+            // console.log('sub category: ',subCategoryArray)
+            // console.log('categoryCodeSplit: ', categoryCodeSplit)
+            // console.log('sideCodeSplit: ', sideCodeSplit)
+            // console.log('Image name: ',`url(${sideCode}${categoryCode}${subCategory.replaceAll(' ','')}.jpg)`)
+
+            //displaying zones with defect count
+            Object.keys(data.data[category][subCategory][fistDefect][fistSubDefect]).map( (singleZone) => {
+              let zoneDefectCountData = document.createElement('div')
+              let zoneCounter = document.createElement('p')
+
+              if(data.data[category][subCategory][fistDefect][fistSubDefect][singleZone] > 5){
+                zoneDefectCountData.style.backgroundColor = '	#d4120f90'
+              }else if (data.data[category][subCategory][fistDefect][fistSubDefect][singleZone] > 3 && data.data[category][subCategory][fistDefect][fistSubDefect][singleZone] <= 5 ){
+                zoneDefectCountData.style.backgroundColor = '	#fcf93590'
+              }else{
+                zoneDefectCountData.style.backgroundColor = '	#87cfeb90'
+              }
+              zoneDefectCountData.appendChild(zoneCounter)
+              zoneDefectCountData.className = `${sideCode}${categoryCode}${subCategory.replaceAll(' ','')}${singleZone.replace('_','')}`
+              zoneCounter.innerHTML = `${singleZone.replace('_','')}: ${data.data[category][subCategory][fistDefect][fistSubDefect][singleZone]}`
+              visualPresentation.appendChild(zoneDefectCountData)
+            })
+          })
+        })
+      }
+
+      function UniPdf(){
+        document.getElementsByTagName('body')[0].scrollIntoView({ behavior: "auto" })
+
+        // Method to print the pdf of whole page
+        var height=document.body.scrollHeight;
+        console.log("height",height)
+        // console.log('scrollY', window.scrollY);
+
+        html2canvas(document.getElementsByTagName('html'), {
+          // windowHeight:height,
+          allowTaint: true,
+          useCORS: true,
+          logging: false,
+          height: window.outerHeight + window.innerHeight,
+          windowHeight: window.outerHeight + window.innerHeight,
+          onrendered:function(canvas) {
+            var contentWidth = canvas.width;
+            var contentHeight = canvas.height;
+            console.log("contentHeight",contentHeight)
+
+            var img = canvas.toDataURL();
+
+
+            var pageHeight = contentWidth / 592.28 * 841.89;
+
+            var leftHeight = contentHeight;
+
+            var position = 0;
+
+            var imgWidth = 595.28;
+            // var imgHeight = imgWidth/contentWidth * contentHeight;
+            var imgHeight = (contentHeight * imgWidth) / contentWidth
+
+            var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+            var pdf = new jsPDF('', 'pt', 'a4');
+
+
+
+            if (leftHeight < pageHeight) {
+              pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+            } else {
+              while(leftHeight > 0) {
+                pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                leftHeight -= pageHeight;
+                position -= 841.89;
+
+                if(leftHeight > 0) {
+                  pdf.addPage();
+                }
+              }
+            }
+            // console.log(img);
+            // window.open(img)
+            // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+            pdf.save('content.pdf');
+          }
+    })
+        console.log("PDF generated")
+   }
+
+      function logout() {
+        localStorage.removeItem('token');
+        Object.values(tokenElements).map((tokenElement) => {
+          tokenElement.value = '';
+        });
+        document.getElementsByClassName('logoutButton')[0].submit();
+      }
+    </script>
+</html>

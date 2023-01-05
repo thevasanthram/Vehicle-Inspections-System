@@ -1,0 +1,1065 @@
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #222831;
+  color: #eeeeee;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  margin-bottom: 2%;
+}
+.main_container {
+  width: 100%;
+  height: auto;
+}
+/* Style for header part which contain user_name App_Name and LOGOUT btn  */
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #f0e3e3;
+  position: relative;
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 8%;
+  text-align: center;
+  line-height: initial;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.button-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  margin: 5%;
+  width: 8rem;
+  font-weight: 600;
+  font-size: medium;
+  height: 2.5rem;
+  border-radius: 5px;
+  color: #eeeeee;
+  border-color: rgb(91, 97, 166);
+}
+.button-logout:hover {
+  border-right-color: rgb(45, 56, 184);
+}
+
+/* ! ...........SIDE NAV BAR MENU............... */
+
+#navBarDivision {
+  position: absolute;
+  display: none;
+  width: 17%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 89.9%;
+  z-index: 5;
+  color: #eeeeee;
+  background-color: #4ca1af;
+  animation-name: side_bar;
+  animation-duration: 0.7s;
+}
+.category {
+  font-size: 140%;
+  font-weight: 500;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  transition: background 0.25s ease;
+  animation-name: show;
+  animation-duration: 1s;
+}
+#UserProfileDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  background-color: #075154;
+}
+#ReportGenerationDiv,
+#AdministrationDiv,
+#AdminLogDiv,
+#DashboardDiv,
+#DataEntryDiv,
+#UpdateSectionDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+/*!.....................Animation for Nav Side Bar.................. */
+
+@keyframes show {
+  0% {
+    font-size: 1%;
+  }
+  50% {
+    font-size: 140%;
+  }
+}
+@keyframes side_bar {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 17%;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+* {
+  --webkit-box-sizing: border-box;
+  --moz-box-sizing: border-box;
+  --webkit-box-sizing: border-box;
+}
+.card_container {
+  min-height: 100%;
+  max-width: 100%;
+}
+.center {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #105469;
+  height: 70vh;
+  width: 90%;
+  border-radius: 10px;
+}
+.container {
+  border-radius: 10px;
+  width: 90%;
+  background: #d4d5e0;
+  display: flex;
+  box-shadow: 3px 5px 20px 2px rgba(0, 0, 0, 0.4);
+}
+.left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  transition: all 0.5s ease-in-out;
+}
+.photo {
+  position: relative;
+  cursor: pointer;
+  margin: 2%;
+}
+.photo img {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+}
+.photo:hover .circle,
+.photo:hover .circle2 {
+  animation: circlespin 1s ease-in-out;
+}
+.photo:hover .circle2 {
+  animation: circlespin 1s ease-in-out;
+}
+.circle,
+.circle2 {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black transparent black black;
+  animation: circlespinout 1s ease-in-out;
+}
+.circle2 {
+  top: -10px;
+  left: -10px;
+  width: 120px;
+  height: 120px;
+  border-color: black black black transparent;
+}
+.title__contain {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.3em;
+  font-weight: 500;
+  gap: 0.5em;
+  margin: 20px auto 20px;
+}
+.vehicle_count {
+  text-align: center;
+}
+.user_access_section {
+  display: flex;
+  width: 100%;
+  height: 60%;
+  justify-content: space-around;
+}
+.user_details {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0%;
+  transition: all 0.5s ease-in-out;
+  background-color: #9c9db4;
+}
+.user_details_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1%;
+}
+.details_container {
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+  gap: 5px;
+}
+.password_section:hover {
+  color: rgb(3, 3, 69);
+}
+.payment_container {
+  width: 48%;
+  border-radius: 10px;
+  padding: 1%;
+  background-color: #9c9db4;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+.btn_title {
+  color: #987618;
+
+  font-weight: 500;
+}
+.btn_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 5px;
+}
+.title {
+  font-size: 0.9em;
+  font-weight: 400;
+}
+.right {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  gap: 5px;
+  margin: 1%;
+}
+.rightbox {
+  background: #7479ac;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+}
+.rightbox:nth-child(2) {
+  margin: 1px 0;
+}
+.rightbox:hover {
+  background: #5b6093;
+}
+.user_details:hover {
+  background: #7479ac;
+}
+.payment_container:hover {
+  background: #7479ac;
+}
+@keyframes circlespin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes circlespinout {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* ! report Access Denied popup */
+#reportGenerationDeniedDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+.reportGenerationDeniedDivisionModalContent {
+  background-color: #84a9ac;
+  color: black;
+  margin: auto;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 40%;
+  height: 24%;
+}
+
+#reportGenerationDeniedDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 25%;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+/* ! admin Access Denied popup */
+#adminAccessDeniedDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.adminAccessDeniedDivisionModalContent {
+  align-items: center;
+  background-color: #ca0b00;
+  color: #eeeeee;
+  margin: auto;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  width: 40%;
+  height: 24%;
+}
+#adminAccessDeniedDivisionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  /* top: 10%; */
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* ! Change Password Popup */
+#password_container {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 0; /* Sit on top */
+  left: 0;
+  top: 5px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+.main{
+  width: 40%;
+  height: 70%;
+  position: absolute;
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+.password_content {
+  background-color: transparent;
+}
+.message_title {
+  color: #000000;
+  background-color: #f87b7b;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ! update Password Final Division popup */
+#updatePasswordFinalDivision {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+.updatePasswordFinalModalContent {
+  background-color: #00ab41;
+  color: black;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 30%;
+  height: 24%;
+}
+#updatePasswordFinalContentHolder{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/*! CSS for Responsive Design  */
+
+@media screen and (max-width: 1280px) {
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 25%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    z-index: 5;
+    color: #eeeeee;
+    background-color: #4ca1af;
+    animation-name: side_bar;
+    animation-duration: 0.7s;
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 25%;
+    }
+  }
+  .main {
+    width: 45%;
+    height: 60%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 130%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 130%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 30%;
+    }
+  }
+  .center {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #105469;
+    height: 80vh;
+    width: 95%;
+  }
+  .payment_container {
+    text-align: center;
+    width: 48%;
+    border-radius: 10px;
+    padding: 2%;
+    margin: 0%;
+    background-color: #9c9db4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  .btn_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 1%;
+    gap: 0.5em;
+    top: 5px;
+  }
+  /* !.............. Update Password Popup ...............*/
+  .main {
+    width: 60%;
+    height: 60%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .center {
+    height: 85vh;
+    width: 95%;
+  }
+  .title__contain {
+    margin: 15px auto 15px;
+  }
+  .user_access_section {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.25em;
+  }
+  .user_details {
+    width: 95%;
+    height: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 2%;
+    background-color: #9c9db4;
+  }
+  .details_container {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    width: 90%;
+    gap: 3px;
+    height: auto;
+  }
+  .payment_container {
+    width: 95%;
+    height: 49%;
+    border-radius: 10px;
+    margin: 1%;
+    background-color: #9c9db4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  .btn_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 1%;
+    gap: 0.5em;
+    top: 5px;
+  }
+  /* !.............. Update Password Popup ...............*/
+  .main {
+    width: 60%;
+    height: 65%;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .admin {
+    color: #00adb5;
+    margin-right: 5%;
+    font-weight: 500;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    text-align: center;
+  }
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 35%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    background-color: #4ca1af;
+    animation-name: side_bar;
+    animation-duration: 0.7s;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    transition: background 0.25s ease;
+    animation-name: show;
+    animation-duration: 1s;
+  }
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 35%;
+    }
+  }
+  .center {
+    height: 84vh;
+    width: 95%;
+  }
+  .photo {
+    margin: 1%;
+  }
+  .title__contain {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: 500;
+    gap: 0.25em;
+    margin: 10px auto 10px;
+  }
+  .user_access_section {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25em;
+  }
+  .user_details {
+    width: 95%;
+    height: 49%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0%;
+    background-color: #9c9db4;
+  }
+  .details_container {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    width: 90%;
+    gap: 3px;
+    height: auto;
+  }
+  .payment_container {
+    width: 95%;
+    height: 49%;
+    border-radius: 10px;
+    margin: 1%;
+    background-color: #9c9db4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+  .btn_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 1%;
+    gap: 0.5em;
+    top: 5px;
+  }
+
+  .reportGenerationDeniedDivisionModalContent {
+    /* background-color: #fefefe; */
+    color: black;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 20%;
+  }
+  /* !.............. Update Password Popup ...............*/
+  .main {
+    width: 70%;
+    height: 50%;
+  }
+  #reportGenerationDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 20%;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+
+  .adminAccessDeniedDivisionModalContent {
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    width: 60%;
+    height: 20%;
+  }
+
+  #adminAccessDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .updatePasswordFinalModalContent {
+    width: 40%;
+    height: 25%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .header {
+    width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+    position: relative;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(20px, 0.8vw, 1.5rem);
+    /* width: 26px; */
+  }
+
+  #btn {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    line-height: 28px;
+    right: 2%;
+  }
+  .admin {
+    color: #00adb5;
+    margin-right: 0%;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    text-align: center;
+  }
+
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  #navBarDivision {
+    position: absolute;
+    display: none;
+    width: 50%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 90%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 50%;
+    }
+  }
+  .center {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #105469;
+    min-height: 110vh;
+    max-width: 95%;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3px;
+  }
+  .photo {
+    position: relative;
+    top: 1%;
+    cursor: pointer;
+    margin: 2%;
+  }
+  .title__contain {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: 500;
+    gap: 0.25em;
+    margin: 15px auto 15px;
+  }
+  .user_access_section {
+    display: flex;
+    width: 100%;
+    height: 65%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75em;
+  }
+  .user_details {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0%;
+    background-color: #9c9db4;
+  }
+  .details_container {
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    width: 100%;
+    gap: 4px;
+    padding: 1%;
+    height: auto;
+  }
+  .payment_container {
+    width: 100%;
+    height: 49%;
+    border-radius: 10px;
+    margin: 0%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25em;
+  }
+  .btn_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 1%;
+    gap: 0.5em;
+    top: 5px;
+  }
+
+  .reportGenerationDeniedDivisionModalContent {
+    /* background-color: #fefefe; */
+    color: black;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 20%;
+  }
+
+  #reportGenerationDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 20%;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+
+  .adminAccessDeniedDivisionModalContent {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    width: 60%;
+    height: 26%;
+  }
+  #adminAccessDeniedDivisionHolder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    justify-content: center;
+  }
+  .updatePasswordFinalModalContent {
+    width: 50%;
+    height: 25%;
+  }
+  #updatePasswordFinalContentHolder{
+    gap: 1rem;
+  }
+  /* !.............. Update Password Popup ...............*/
+  #password_container {
+    padding-top: 5%;
+  }
+  .main {
+    width: 90%;
+    height: 60%;
+  }
+}
+@media (max-height: 1400px) {
+  .main {
+    height:45% ;
+  }
+}
+@media (max-height: 1050px) {
+  .main {
+    height: 62%;
+  }
+}
+@media (max-height: 750px) {
+  .main {
+    height: 75%;
+  }
+}
+@media (max-height: 601px) {
+  .main {
+    height: 85%;
+  }
+}
+@media screen and (max-width:390px) {
+  .main {
+    width: 90%;
+    height: 70%;
+  }
+}

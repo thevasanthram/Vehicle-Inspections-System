@@ -1,0 +1,465 @@
+* {
+  margin: 0px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #222831;
+  color: #eeeeee;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+/* Styling for header part which contain user_name App_Name and LOGOUT btn  */
+.header {
+  width: 100%;
+  display: flex;
+  min-height: 4.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #393e46;
+  color: #f0e3e3;
+  position: relative;
+}
+#btn {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.admin {
+  color: #00adb5;
+  margin-right: 8%;
+  text-align: center;
+  line-height: initial;
+  font-weight: 500;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+}
+.heading {
+  padding-left: 1%;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.button-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+  margin: 5%;
+  width: 8rem;
+  font-weight: 600;
+  font-size: medium;
+  height: 2.5rem;
+  border-radius: 5px;
+  color: #eeeeee;
+  border-color: rgb(91, 97, 166);
+}
+.button-logout:hover {
+  border-right-color: rgb(45, 56, 184);
+}
+
+/* TODO ...........SIDE NAV BAR MENU................................................................ */
+
+#navBarDivision {
+  position: absolute;
+  display: none;
+  width: 17%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 89.9%;
+  z-index: 5;
+  color: #eeeeee;
+  background-color: #4ca1af;
+  animation-name: side_bar;
+  animation-duration: 0.7s;
+}
+.category {
+  font-size: 140%;
+  font-weight: 500;
+  min-height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  transition: background 0.25s ease;
+  animation-name: show;
+  animation-duration: 1s;
+}
+/*!.....................Animation for Nav Side Bar.................. */
+
+@keyframes show {
+  0% {
+    font-size: 1%;
+  }
+  50% {
+    font-size: 140%;
+  }
+}
+@keyframes side_bar {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 17%;
+  }
+}
+
+#ReportGenerationDiv,#AdministrationDiv,
+#AdminLogDiv ,#DataEntryDiv,#UserProfileDiv{
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+#DashboardDiv {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  background-color: #075154;
+}
+/* ! End of Nav Side Bar Menu */
+
+/*! Info Card Styles  */
+.mode{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2b842;
+  font-size: large;
+  font-weight: 600;
+}
+
+
+.mainTable {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+
+#stats {
+  background-color: #1f2937;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.tableContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.tableContainer {
+  -ms-overflow-style: none; /* IE and Edge */
+  --scrollbar-width: none; /* Firefox */
+}
+
+.dataCard {
+  width: 180px;
+  column-gap: 10px;
+  animation: zoom-in-zoom-out 0.25s ease-out;
+}
+
+.liveIcon {
+  position: fixed;
+  right: 10px;
+  /* top: 10px; */
+  /* float: right; */
+}
+
+/* .liveImage {
+  position: relative;
+  left: 89%;
+  bottom: 52%;
+  position: relative;
+  left: 97%;
+  bottom: 35%;
+} */
+
+#notificationContainer {
+  position: fixed;
+  top: 11%;
+  right: 1%;
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+  width: 20%;
+  /* background-color: black; */
+}
+
+.notificationDiv {
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: auto;
+  height: 10vh;
+  opacity: 0.9;
+  background-color: #eeeeee;
+  overflow-y: scroll;
+  --scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+}
+
+.notificationDiv::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+
+.notificationContent {
+  color: black;
+  font-size: large;
+  font-weight: 500;
+  text-align: center;
+}
+
+@media screen and (max-width: 1280px) {
+  #stats {
+    background-color: #1f2937;
+    height: 193px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .liveImage {
+    position: relative;
+    left: 75%;
+    bottom: 52%;
+  }
+
+  .dataCard img {
+    width: 40px;
+    column-gap: auto;
+    animation: zoom-in-zoom-out 0.25s ease-out;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  #stats {
+    background-color: #1f2937;
+    height: 283px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .liveImage {
+    position: relative;
+    left: 846px;
+    bottom: 52%;
+  }
+
+  #navBarDivision {
+    position: fixed;
+    display: none;
+    width: 30%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 130%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 130%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 30%;
+    }
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .liveImage {
+    position: relative;
+    left: 752px;
+    bottom: 52%;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .liveImage {
+    position: relative;
+    left: 698px;
+    bottom: 52%;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .admin {
+    margin-right: 5%;
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+  }
+  #navBarDivision {
+    display: none;
+    width: 35%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100%;
+    background-color: #4ca1af;
+    animation-name: side_bar;
+    animation-duration: 0.7s;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    transition: background 0.25s ease;
+    animation-name: show;
+    animation-duration: 1s;
+  }
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 35%;
+    }
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .liveImage {
+    position: relative;
+    left: 698px;
+    display: none;
+    bottom: 52%;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  #stats {
+    background-color: #1f2937;
+    height: 388px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .liveImage {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #stats {
+    background-color: #1f2937;
+    height: 425px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .liveImage {
+    display: none;
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+    position: relative;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(20px, 0.8vw, 1.5rem);
+    /* width: 26px; */
+  }
+
+  #btn {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    line-height: 28px;
+    right: 2%;
+  }
+  .admin {
+    margin-right: 0%;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+  }
+
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 70px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  #navBarDivision {
+    display: none;
+    width: 50%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #4ca1af;
+  }
+  .category {
+    font-size: 120%;
+    font-weight: 500;
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+  }
+  .dataCard {
+    width: 150px;
+    column-gap: 10px;
+    animation: zoom-in-zoom-out 0.25s ease-out;
+}
+  /* !........................Animation Style for Side Menu Bar.................... */
+
+  @keyframes show {
+    0% {
+      font-size: 1%;
+    }
+    50% {
+      font-size: 120%;
+    }
+  }
+  @keyframes side_bar {
+    0% {
+      width: 0%;
+    }
+    50% {
+      width: 50%;
+    }
+  }
+}

@@ -1,0 +1,115 @@
+* {
+  margin: 0px;
+}
+
+body {
+  background-color: #282c34;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+.nav-bar {
+  width: 100%;
+  height: 30%;
+  background-color: rgb(29, 23, 23);
+}
+
+.app-name-div {
+  padding: 10px;
+}
+
+#app-name {
+  font-size: 250%;
+  color: white;
+}
+
+.user-mode {
+  float: right;
+  padding: 10px;
+}
+
+#user-mode-name {
+  float: left;
+  font-size: 200%;
+  color: #61dafb;
+}
+
+.button-logout-content {
+  float: right;
+}
+
+.button-logout {
+  color: white;
+  background-color: black;
+  border: 1px solid #64666a;
+  border-radius: 4px;
+  margin-top: 25%;
+}
+
+#title-name-content {
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+#title-name {
+  font-size: 200%;
+  color: white;
+}
+
+.table-content {
+  width: 80%;
+  height: 70%;
+  position: absolute;
+  margin-left: 10%;
+  margin-top: 2%;
+  background-color: #47494d;
+  overflow-y: scroll;
+  scrollbar-color: black white;
+}
+
+#table-data {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table-data td,
+#table-data th {
+  color: white;
+  border: 1px solid #000000;
+  text-align: center;
+  padding: 8px;
+}
+
+#table-data tr:nth-child(even) {
+  background-color: #454545;
+}
+
+#table-data tr:nth-child(odd) {
+  background-color: rgb(50, 49, 49);
+}
+
+#table-data tr:hover {
+  background-color: black;
+  color: #61dafb;
+}
+
+#table-data th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: black;
+  color: #61dafb;
+  position: sticky;
+  top: 0.01%;
+}
+
+#button-delete {
+  color: white;
+  background-color: #000000;
+  border: 1px solid #64666a;
+  border-radius: 5px;
+  padding: 5%;
+}
+
+#button-delete:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,1103 @@
+/* !CSS for REsponsive Design */
+@media screen and (max-height: 1280px) {
+  .update_subContainer {
+    min-height: 14vh;
+  }
+}
+
+@media screen and (max-height: 1000px) {
+  .update_subContainer {
+    min-height: 18vh;
+  }
+}
+
+@media screen and (max-height: 680px) {
+  .update_subContainer {
+    min-height: 22vh;
+  }
+}
+
+@media screen and (max-width: 1281px) {
+  .save_reset_container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    margin-left: 5%;
+  }
+  .zones-title-name {
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+    color: #eeeeee;
+    position: relative;
+  }
+  .save-reset-content {
+    font-size: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    gap: 1%;
+  }
+  .reset-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  .save-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  #zone-division1,
+  #zone-division2,
+  #zone-division3,
+  #zone-division4,
+  #zone-division5 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    /* margin-top: 5%; */
+    /* margin-left: 12%; */
+    width: 900px;
+    height: 335px;
+    position: absolute;
+  }
+}
+
+/* !....................... Media Screen (1024)............................*/
+
+@media screen and (max-width: 1025px) {
+  #home-icon {
+    margin-left: 1%;
+    min-width: 30px;
+    min-height: 30px;
+    margin-right: 2%;
+    min-height: 3%;
+  }
+  #go-back-icon {
+    max-width: 7.5%;
+  }
+  /* !.........Remove Defect-Category Popup.......... */
+  .removeDefectsModalContent {
+    width: 45%;
+    min-height: 24%;
+    border-radius: 10px;
+  }
+  #removeDefectsInput {
+    gap: 0.75rem;
+    width: 95%;
+  }
+  /* !.........Update Defect-Category Popup.......... */
+  .UpdateDefectsModalContent {
+    width: 45%;
+    min-height: 24%;
+    border-radius: 10px;
+  }
+  #UpdateDefectsInput {
+    gap: 0.75rem;
+    width: 95%;
+  }
+  /* !.........Add Defect-Category Popup.......... */
+  .addDefectsModalContent {
+    width: 50%;
+    min-height: 24%;
+    border-radius: 10px;
+  }
+  #addDefectsInput {
+    gap: 0.75rem;
+    width: 95%;
+  }
+  /* !............... */
+  .save_reset_container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    margin-left: 3%;
+  }
+  .zones-title-name {
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+    color: #eeeeee;
+    position: relative;
+  }
+  .save-reset-content {
+    font-size: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    gap: 1%;
+  }
+  .reset-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  .save-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  #zone-division1,
+  #zone-division2,
+  #zone-division3,
+  #zone-division4,
+  #zone-division5 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    /* margin-top: 5%; */
+    /* margin-left: 10%; */
+    height: auto;
+    width: 700px;
+    height: 303px;
+    position: absolute;
+  }
+
+  .Zone_Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 285px;
+    width: 100%;
+    margin: 40px auto;
+  }
+
+  input[type='number'] {
+    width: 35px !important;
+    position: absolute;
+    z-index: 0;
+    border: 1px solid #000000;
+  }
+
+  /*TODO: RH SIDE MEMBER (Media Query 1024) */
+
+  /*!...................... BACK DOOR OPENING..........................  */
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM851 {
+    margin-top: 29%;
+    width: 80px;
+    margin-left: 49%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM851:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM852 {
+    margin-top: 29%;
+    margin-left: 55%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM852:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM853 {
+    margin-top: 29%;
+    margin-left: 61%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM853:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM854 {
+    margin-top: 29%;
+    width: 15%;
+    margin-left: 66%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM854:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM855 {
+    margin-top: 29%;
+    margin-left: 72%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM855:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM856 {
+    margin-top: 20%;
+    margin-left: 72%;
+    padding: 1rem 2rem 1rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM856:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM857 {
+    margin-top: 20%;
+    width: 15%;
+    margin-left: 66%;
+    padding: 1rem 3rem 1rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM857:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM858 {
+    margin-top: 13%;
+    width: 15%;
+    margin-left: 66%;
+    padding: 1rem 3rem 1rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM858:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM859 {
+    margin-top: 13%;
+    width: 15%;
+    margin-left: 72%;
+    padding: 1rem 3rem 1rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM859:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM860 {
+    margin-top: 5.5%;
+    margin-left: 72%;
+    padding: 1rem 3rem 1rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM860:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM861 {
+    margin-top: 5.5%;
+    width: 15%;
+    margin-left: 66%;
+    padding: 1rem 2rem 1rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM861:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM862 {
+    margin-top: -0.5%;
+    width: 15%;
+    margin-left: 68%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM862:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM863 {
+    margin-top: -1%;
+    margin-left: 61%;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM863:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM864 {
+    margin-top: -3%;
+    margin-left: 54%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM864:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865 {
+    margin-top: -3%;
+    margin-left: 48%;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .admin {
+    color: #00adb5;
+    margin-right: 3%;
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    text-align: center;
+  }
+  #home-icon {
+    margin-left: 2%;
+    min-width: 30px;
+    min-height: 30px;
+    margin-right: 2%;
+    min-height: 3%;
+  }
+  #go-back-icon {
+    max-width: 7.5%;
+  }
+  /* ! Update Section */
+  .update_subContainer {
+    width: 80%;
+  }
+  /* !..........Remove Sub Category Popup........... */
+
+  .removeDefectsModalContent {
+    width: 65%;
+    min-height: 24%;
+  }
+  #removeDefectsInput {
+    width: 95%;
+  }
+
+/* !..........Update Sub Category Popup........... */
+
+  .UpdateDefectsModalContent {
+    width: 65%;
+    min-height: 24%;
+  }
+  #UpdateDefectsInput {
+    width: 95%;
+  }
+
+/* !..........Add Sub Category Popup........... */
+
+  .addDefectsModalContent {
+    width: 65%;
+    min-height: 24%;
+  }
+  #addDefectsInput {
+    width: 95%;
+  }
+/* !........................................... */
+  .defect-category-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 80%;
+    position: relative;
+    left: 10%;
+  }
+  .defect-category {
+    align-items: center;
+    justify-content: center;
+    font-size: 100%;
+    padding: 2%;
+    margin: 3%;
+    margin-left: 10%;
+    border-radius: 5px;
+  }
+  .sub-defects-category-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 80%;
+    position: relative;
+    left: 10%;
+  }
+
+  .sub-defect-category {
+    align-items: center;
+    justify-content: center;
+    font-size: 100%;
+    background-color: black;
+    color: #eeeeee;
+    padding: 3%;
+    margin: 3%;
+    margin-left: 10%;
+    border-radius: 5px;
+  }
+  .save_reset_container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    margin-left: 3%;
+  }
+  .zones-title-name {
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+    color: #eeeeee;
+    position: relative;
+  }
+  .save-reset-content {
+    font-size: 100%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    gap: 1%;
+  }
+  .reset-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  .save-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  #zone-division1,
+  #zone-division2,
+  #zone-division3,
+  #zone-division4,
+  #zone-division5 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 560px;
+    height: 250px;
+    position: absolute;
+    /* margin-left: 5%; */
+  }
+  input[type='number'] {
+    width: 35px !important;
+    height: 20px !important;
+    position: absolute;
+    z-index: 0;
+    border: 1px solid #000000;
+  }
+  .zone-number {
+    margin-top: 14px;
+  }
+  /*TODO:..............RH SIDE MEMBER (Media Query 768px)................ */
+
+  /*! BACK DOOR OPENING  */
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM851 {
+    margin-top: 170px;
+    margin-left: 285px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM851:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM852 {
+    margin-top: 170px;
+    margin-left: 325px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM852:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM853 {
+    margin-top: 170px;
+    margin-left: 365px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM853:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM854 {
+    margin-top: 170px;
+    margin-left: 402px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM854:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM855 {
+    margin-top: 170px;
+    margin-left: 440px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM855:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM856 {
+    margin-top: 130px;
+    margin-left: 445px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM856:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM857 {
+    margin-top: 130px;
+    margin-left: 410px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM857:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM858 {
+    margin-top: 90px;
+    margin-left: 410px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM858:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM859 {
+    margin-top: 90px;
+    margin-left: 445px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM859:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM860 {
+    margin-top: 50px;
+    margin-left: 445px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM860:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM861 {
+    margin-top: 50px;
+    margin-left: 410px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM861:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM862 {
+    margin-top: 5px;
+    margin-left: 420px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM862:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM863 {
+    margin-top: -5px;
+    margin-left: 380px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM863:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM864 {
+    margin-top: -20px;
+    margin-left: 338px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM864:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865 {
+    margin-top: -20px;
+    margin-left: 295px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+}
+@media screen and (max-width : 560px) {
+  #zone-division1, #zone-division2, #zone-division3, #zone-division4, #zone-division5 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 525px;
+    height: 215px;
+    position: absolute;
+  }
+  .zone-number {
+    margin-top: 10px;
+    font-size: 0.6rem;
+    font-weight: 500;
+  }
+/* !..........edit/remove/update............. */
+  #UpdateDefectsInput {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #UpdateDefectsInput {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #removeDefectsInput {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+@media screen and (max-width:540px) {
+  .update_subContainer {
+    width: 85%;
+  }
+}
+/* *.......................Media Query for width 30rem..................... */
+@media screen and (max-width: 500px) {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    min-width: 100%;
+    height: 100%;
+  }
+  body {
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: #282c34;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  }
+  .header {
+    position: sticky;
+    top: 0%;
+    min-width: 100%;
+    display: flex;
+    min-height: 4.5rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 1%;
+    justify-content: space-between;
+    background-color: #393e46;
+    color: #f0e3e3;
+  }
+
+  .heading {
+    padding-left: 1%;
+    font-weight: 700;
+    font-size: clamp(19px, 0.8vw, 1.5rem);
+  }
+
+  #btn {
+    width: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    line-height: 28px;
+  }
+  .admin {
+    color: #00adb5;
+    margin-right: 0%;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    text-align: center;
+  }
+  .button-logout {
+    background: linear-gradient(to right, #0f0c29, #302b63, #0f0c29);
+    width: 65px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+  #home-icon {
+    margin-left: 2%;
+    min-width: 25px;
+    min-height: 25px;
+    margin-right: 1%;
+    min-height: 3%;
+  }
+  .selected-message {
+    text-align: center;
+    line-height: 1.1;
+    margin: 2%;
+    padding: 5px;
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    color: #eeeeee;
+  }
+  #title-name-content {
+    position: relative;
+    margin: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #go-back-icon {
+    min-width: 25px;
+    margin-left: 25%;
+  }
+  #title-name {
+    padding: 2px;
+    line-height: 1;
+    font-size: clamp(16px, 1.2vw, 1.5rem);
+    color: #f0e3e3;
+  }
+  /* ! ............Update Section........... */
+
+  .update_btn_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 5px;
+    margin: 2%;
+    gap: 0.5rem;
+  }
+  /* !.............Popup for remove Defects category.............. */
+  #remove_sub_category{
+    width: 95%;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+  #removeDefectsInput {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #removeDefectsButton {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+  .removeDefectsModalContent {
+    width: 75%;
+    min-height: 24%;
+  }
+
+/* !.............Popup for updating Defects category.............. */
+  .UpdateDefectsModalContent {
+    width: 75%;
+    min-height: 24%;
+  }
+  #update_sub_category{
+    width: 90%;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+  #UpdateDefectsInput {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #UpdateDefectsButton {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+
+/* !.............Popup for Adding Defects category.............. */
+ 
+  .addDefectsModalContent {
+    width: 75%;
+    min-height: 24%;
+  }
+  #add_sub_category{
+    width: 90%;
+    border-radius: 5px;
+    background-color: #eeeeee;
+  }
+  #addDefectsInput {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  #addDefectsButton {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+  /* !................................................ */
+  .defect-category-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 90%;
+    position: relative;
+    left: 5%;
+  }
+  .defect-category {
+    align-items: center;
+    justify-content: center;
+    font-size: 80%;
+    font-weight: 400;
+    padding: 2%;
+    margin: 3%;
+    margin-left: 10%;
+    border-radius: 5px;
+  }
+  .sub-defects-category-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 90%;
+    position: relative;
+    left: 5%;
+  }
+
+  .sub-defect-category {
+    align-items: center;
+    justify-content: center;
+    font-size: 80%;
+    font-weight: 400;
+    background-color: black;
+    color: #eeeeee;
+    padding: 3%;
+    margin: 3%;
+    margin-left: 10%;
+    border-radius: 5px;
+  }
+  .save_reset_container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    margin-left: 5%;
+  }
+  .zones-title-name {
+    font-size: clamp(1.3rem, 2.2vw, 2rem);
+    color: #eeeeee;
+    position: relative;
+  }
+  .save-reset-content {
+    font-size: 90%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    gap: 1%;
+    margin-right: 10%;
+  }
+  .reset-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+  .save-button {
+    border: 1px solid #b6cbf5;
+    border-radius: 5px;
+    padding: 8px 16px 8px 16px;
+  }
+
+  .zone-number {
+    margin-top: 10px;
+    font-size: 0.6rem;
+    font-weight: 500;
+  }
+  #zone-division1,
+  #zone-division2,
+  #zone-division3,
+  #zone-division4,
+  #zone-division5 {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: auto;
+    width: 320px;
+    height: 155px;
+    position: absolute;
+    font-size: 10px;
+  }
+
+  input[type='number'] {
+    width: 25px !important;
+    height: 15px !important;
+    position: absolute;
+    z-index: 0;
+    border: 1px solid darkslategray;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865 {
+    margin-top: 1%;
+    margin-left: 6rem;
+    top: 70px;
+    padding: 1rem 4rem 0rem 2rem;
+    position: absolute;
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+  /*TODO:................RH SIDE MEMBER (Media Query 480px)............ */
+
+  /*! BACK DOOR OPENING  */
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM851 {
+    margin-top: 90px;
+    margin-left: 115px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM851:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM852 {
+    margin-top: 90px;
+    margin-left: 139px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM852:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM853 {
+    margin-top: 90px;
+    margin-left: 163px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM853:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM854 {
+    margin-top: 90px;
+    margin-left: 187px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM854:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM855 {
+    margin-top: 90px;
+    margin-left: 211px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM855:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM856 {
+    margin-top: 64px;
+    margin-left: 212px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM856:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM857 {
+    margin-top: 64px;
+    margin-left: 187px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM857:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM858 {
+    margin-top: 38px;
+    margin-left: 187px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM858:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM859 {
+    margin-top: 38px;
+    margin-left: 212px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM859:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM860 {
+    margin-top: 12px;
+    margin-left: 212px;
+    padding: 1rem 3rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM860:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM861 {
+    margin-top: 12px;
+    margin-left: 187px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM861:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM862 {
+    margin-top: -7px;
+    margin-left: 200px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM862:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM863 {
+    margin-top: -10px;
+    margin-left: 172px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM863:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM864 {
+    margin-top: -15px;
+    margin-left: 145px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865 {
+    margin-top: -80px;
+    margin-left: 120px;
+    padding: 1rem 2rem 1rem 1rem;
+    position: absolute;
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM865:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+  .RH_SIDE_MEMBER_BACKDOOROPENING-RHSM864:hover {
+    background-color: rgba(135, 207, 235, 0.563);
+  }
+}
