@@ -50,7 +50,7 @@
         >
           <div id="user_Profile" class="category">User Profile</div>
         </div>
-        <div
+        <!-- <div
           id="DataEntryDiv"
           onmouseover="onmouseoverBGColor(event)"
           onmouseout="onmouseoutBGColor(event)"
@@ -65,7 +65,7 @@
           onclick="handleFormSubmit(event)"
         >
           <div id="reportGeneration" class="category">Report Generation</div>
-        </div>
+        </div> -->
         <div
           id="AdministrationDiv"
           onmouseover="onmouseoverBGColor(event)"
@@ -99,9 +99,53 @@
           <div id="update" class="category">Update Section</div>
         </div>
       </div>
-      <!-- ! -->
+          <!-- !............  Vehicle Inspection System  Dashboard........... -->
+      <div class="Dashboard_container">
+        <div class="charts_container">
+          <div class="pie_charts_container">
+              <div id="pi_chart_1" class="pi_chart">               
+                  <div class="vehicle_title">TOTAL INSPECTION</div>
+                  <div echarts [options]="option1"
+                  style="display: flex; align-items: center;justify-content: center;"
+                  ></div>               
+              </div>
+              <div id="pi_chart_2" class="pi_chart" >
+                  <div class="vehicle_title">INNOVA</div>
+                  <div echarts [options]="option2"  ></div>               
+              </div>
+              <div id="pi_chart_3" class="pi_chart">
+                  <div class="vehicle_title">FORTUNER</div>
+                  <div echarts [options]="option3" ></div>
+              </div>
+          </div>
+          <div class="detail_container">
+              <div class="container">
+                  <div class="content">
+                      Total Vehicle : 200
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="content">
+                      Total Checks : 200
+                  </div>
+              </div>
+              <div class="container">
+                  <div class="content">
+                      Avg Check Time : 90s
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="graph_container">
+          <div class="bar_graph_container"  >
+            <div echarts [options]="option4" style="width:100%"></div>
+          </div>
+          <div class="line_graph_container" >
+            <div echarts [options]="option5" style="width:100%"></div>
+          </div>
+        </div>
+      </div>
     </div>
-
     <!-- Denial of Access for AdminPage -->
     <div id="adminAccessDeniedDivision">
       <div class="adminAccessDeniedDivisionModalContent">
