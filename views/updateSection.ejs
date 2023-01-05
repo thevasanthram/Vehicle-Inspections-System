@@ -76,25 +76,21 @@
     <div class="Dashboard_container">
       <div class="charts_container">
         <div class="pie_charts_container">
-          <div class="pi_chart">
-            <div class="vehicle_title">TOTAL INSPECTION</div>
-            <div id="pi_chart_1" style="height:500px ;padding:10px;"></div>
+          <div id="pi_chart_1" class="pi_chart">               
+              <div class="vehicle_title">TOTAL INSPECTION</div>
+              <div echarts [options]="option1"
+              style="display: flex; align-items: center;justify-content: center;"
+              ></div>               
           </div>
-          <div class="Individual_chart_container">
-            <div class="fortuner_chart" style="height: 50%;">
-              <div class="vehicle_title">FORTUNER</div>
-              <div id="pi_chart_2" style="height:115px;padding:5px;"></div>
-            </div>
-            <div class="innova_chart" style="height: 50%;">
+          <div id="pi_chart_2" class="pi_chart" >
               <div class="vehicle_title">INNOVA</div>
-              <div id="pi_chart_3" style="height:115px; padding:5px;"></div>
-            </div>
+              <div echarts [options]="option2"  ></div>               
           </div>
-          <div class="pi_chart">
-            <div class="vehicle_title">TOTAL DEFECTS OVERVIEW</div>
-            <div id="pie_graph" [options]="option6" style="height:500px ;padding:10px;"></div>
+          <div id="pi_chart_3" class="pi_chart">
+              <div class="vehicle_title">FORTUNER</div>
+              <div echarts [options]="option3" ></div>
           </div>
-        </div>
+      </div>
         <div class="detail_container">
           <div class="container">
             <div class="content">
@@ -187,14 +183,18 @@
 
     async function dataFetcher() {
       //  fetching data
-      const response = fetch('http://localhost:2000/senddata', {
+      const response= await fetch('http://localhost:5500/senddata/', {
         method: 'GET',
         headers: {
           'Content-type': 'application/json'
-        },
+        }
+        //mode: 'no-cors'
       })
 
       const data = await response.json()
+      console.log('response: ',response)
+
+      console.log('data: ',data )
 
       document.getElementById('TotalVehicle').innerHTML = data.total_no_of_vehicle
       document.getElementById('TotalChecks').innerHTML = data.total_no_of_inspections
@@ -260,8 +260,8 @@
               show: false
             },
             data: [
-              { value: data.total_ok_vehicle, name: 'Ok', itemStyle: { color: '#6495ed' } },
-              { value: data.total_ng_vehicle, name: 'Problematic', itemStyle: { color: '#e47248' } },
+              { value: data.total_ok_vehicle, name: `Cleared: ${data.total_ok_vehicle}`, itemStyle: { color: '#6495ed' } },
+              { value: data.total_ng_vehicle, name: `Uncleared: ${data.total_ng_vehicle}`, itemStyle: { color: '#e47248' } },
             ]
           }
         ]
@@ -280,14 +280,14 @@
           trigger: 'item'
         },
         legend: {
-          top: '5%',
+          top: '-3%',
           left: 'center'
         },
         series: [
           {
             name: 'Total Inspection',
             type: 'pie',
-            radius: ['40%', '70%'],
+            radius: ['30%', '60%'],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
@@ -301,7 +301,7 @@
             emphasis: {
               label: {
                 show: true,
-                fontSize: 40,
+                fontSize: 20,
                 fontWeight: 'bold'
               }
             },
@@ -309,8 +309,8 @@
               show: false
             },
             data: [
-              { value: data.fortuner_ok_vehicle, name: 'Ok', itemStyle: { color: '#6495ed' } },
-              { value: data.fortuner_ng_vehicle, name: 'Problematic', itemStyle: { color: '#e47248' } },
+              { value: data.fortuner_ok_vehicle, name: `Cleared: ${data.fortuner_ok_vehicle}`, itemStyle: { color: '#6495ed' } },
+              { value: data.fortuner_ng_vehicle, name: `Uncleared: ${data.fortuner_ng_vehicle}`, itemStyle: { color: '#e47248' } },
             ]
           }
         ]
@@ -329,14 +329,14 @@
           trigger: 'item'
         },
         legend: {
-          top: '5%',
+          top: '-3%',
           left: 'center'
         },
         series: [
           {
             name: 'Total Inspection',
             type: 'pie',
-            radius: ['40%', '70%'],
+            radius: ['30%', '60%'],
             avoidLabelOverlap: false,
             itemStyle: {
               borderRadius: 10,
@@ -350,7 +350,7 @@
             emphasis: {
               label: {
                 show: true,
-                fontSize: 40,
+                fontSize: 20,
                 fontWeight: 'bold'
               }
             },
@@ -358,13 +358,94 @@
               show: false
             },
             data: [
-              { value: data.innova_ok_vehicle, name: 'Ok', itemStyle: { color: '#6495ed' } },
-              { value: data.innova_ng_vehicle, name: 'Problematic', itemStyle: { color: '#e47248' } },
+              { value: data.innova_ok_vehicle, name: `Cleared: ${data.innova_ok_vehicle}`, itemStyle: { color: '#6495ed' } },
+              { value: data.innova_ng_vehicle, name: `Uncleared: ${data.innova_ng_vehicle}`, itemStyle: { color: '#e47248' } },
             ]
           }
         ]
       };
       myChart3.setOption(myChart3option);
+
+
+      //Dummy Chart
+      // var dom = document.getElementById('chart-container');
+      // var myChart = echarts.init(dom, null, {
+      //   renderer: 'canvas',
+      //   useDirtyRect: false
+      // });
+      // var app = {};
+
+      // var option;
+
+      // const data = genData(50);
+      // option = {
+      //   title: {
+      //     text: '同名数量统计',
+      //     subtext: '纯属虚构',
+      //     left: 'center'
+      //   },
+      //   tooltip: {
+      //     trigger: 'item',
+      //     formatter: '{a} <br/>{b} : {c} ({d}%)'
+      //   },
+      //   legend: {
+      //     type: 'scroll',
+      //     orient: 'vertical',
+      //     right: 10,
+      //     top: 20,
+      //     bottom: 20,
+      //     data: data.legendData
+      //   },
+      //   series: [
+      //     {
+      //       name: '姓名',
+      //       type: 'pie',
+      //       radius: '55%',
+      //       center: ['40%', '50%'],
+      //       data: data.seriesData,
+      //       emphasis: {
+      //         itemStyle: {
+      //           shadowBlur: 10,
+      //           shadowOffsetX: 0,
+      //           shadowColor: 'rgba(0, 0, 0, 0.5)'
+      //         }
+      //       }
+      //     }
+      //   ]
+      // };
+      // function genData(count) {
+      //   // prettier-ignore
+      //   const nameList = [
+      //     'Left Indicator', 'Right Indicator', 'Speedometer', ''
+      //     ];
+      //   const legendData = [];
+      //   const seriesData = [];
+      //   for (var i = 0; i < count; i++) {
+      //     var name =
+      //       Math.random() > 0.65
+      //         ? makeWord(4, 1) + '·' + makeWord(3, 0)
+      //         : makeWord(2, 1);
+      //     legendData.push(name);
+      //     seriesData.push({
+      //       name: name,
+      //       value: Math.round(Math.random() * 100000)
+      //     });
+      //   }
+      //   return {
+      //     legendData: legendData,
+      //     seriesData: seriesData
+      //   };
+      //   function makeWord(max, min) {
+      //     const nameLen = Math.ceil(Math.random() * max + min);
+      //     const name = [];
+      //     for (var i = 0; i < nameLen; i++) {
+      //       name.push(nameList[Math.round(Math.random() * nameList.length - 1)]);
+      //     }
+      //     return name.join('');
+      //   }
+      // }
+      // myChart.setOption(option);
+
 
 
       //Bar Chart
@@ -541,7 +622,8 @@
 
       option = {
         title: {
-          text: "Historical Overview "
+          text: "Historical Overview",
+          fontSize: 8,
         },
         tooltip: {
           trigger: 'axis',
@@ -553,7 +635,7 @@
           }
         },
         legend: {
-          data: ['Cleared Vehicle', 'Unleared Vehicle', 'Total Vehicle']
+          data: ['Cleared Vehicle', 'Unleared Vehicle', 'Tot Vehicle']
         },
         toolbox: {
           feature: {
@@ -561,8 +643,8 @@
           }
         },
         grid: {
-          left: '3%',
-          right: '4%',
+          left: '15%',
+          right: '1%',
           bottom: '3%',
           containLabel: true
         },
